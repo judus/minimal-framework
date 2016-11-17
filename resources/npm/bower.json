@@ -1,0 +1,22 @@
+{
+  "name": "minimal",
+  "description": "",
+  "main": "gruntfile.js",
+  "authors": [
+    "Julien Duseyau <julien.duseyau@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "codemirror": "~5.3.0",
+    "jquery": "~2.1.4"
+  }
+}
