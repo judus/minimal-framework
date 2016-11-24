@@ -1,23 +1,23 @@
 <?php
 
-/**
- *  Route examples
- */
+/** @var \Maduser\Minimal\Base\Core\Router $route */
+
 // Direct output
 $route->get('/', function () {
-    return 'Welcome!';
+    return 'Hello from Minimal!';
 });
 
 // Using controller and method
 $route->get('contact', 'Maduser\Minimal\\Base\\Controllers\\PagesController@contact');
+$route->get('welcome/(:any)', 'Maduser\Minimal\\Base\\Controllers\\PagesController@welcome');
+$route->get('welcome', 'Maduser\Minimal\\Base\\Controllers\\PagesController@welcome');
+$route->get('page/welcome/(:any)/(:any)', 'Maduser\Minimal\\Base\\Controllers\\PagesController@welcome');
+$route->get('page/welcome/(:any)', 'Maduser\Minimal\\Base\\Controllers\\PagesController@welcome');
+$route->get('page/(:any)', 'Maduser\Minimal\\Base\\Controllers\\PagesController@getStaticPage');
+$route->get('page/info', 'Maduser\Minimal\\Base\\Controllers\\PagesController@info');
 
 // Display dev info
 $route->get('info', 'Maduser\Minimal\\Base\\Controllers\\PagesController@info');
-
-// Display page for url (:any)
-// if you declare this here other routes won't be accessible
-// $route->get('(:any)', 'Maduser\Minimal\\Base\\Controllers\\PagesController@getPage');
-// See bottom of this file
 
 /**
  * Grouped routes example
@@ -50,7 +50,7 @@ $route->group([
 
         $route->get('users/create', [
             'controller' => 'UsersController',
-            'action' => 'createUser' // Show a empty user form
+            'action' => 'create' // Show a empty user form
         ]);
 
         $route->post('users', [
@@ -60,7 +60,7 @@ $route->group([
 
         $route->get('users/edit/(:num)', [
             'controller' => 'UsersController',
-            'action' => 'editUser' // Show a form with user id = (:num)
+            'action' => 'edit' // Show a form with user id = (:num)
         ]);
 
         $route->put('users/(:num)', [
@@ -123,7 +123,7 @@ $route->get('huge/data/table', [
 
 
 // Catch all
-$route->get('(:any)', 'Maduser\Minimal\\Base\\Controllers\\PagesController@getPage');
+//$route->get('(:any)', 'Maduser\Minimal\\Base\\Controllers\\PagesController@getPage');
 
 // TODO: Catch all in Closure
 /* Problem: Closure are executed in registration, before the uri matching loop
@@ -145,3 +145,4 @@ $route->get('(:any)', function ($one) use ($view, $response) {
     return $view->render(null, ['content' => $one]);
 });
 */
+
