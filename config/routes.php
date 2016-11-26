@@ -8,6 +8,9 @@ $route->get('/', function () {
 });
 
 // Using controller and method
+$route->get('pages/(:any)', 'Acme\\Pages\\Controllers\\PagesController@getStaticPage');
+$route->get('pages/info', 'Acme\\Pages\\Controllers\\PagesController@info');
+
 $route->get('contact', 'Maduser\Minimal\\Base\\Controllers\\PagesController@contact');
 $route->get('welcome/(:any)', 'Maduser\Minimal\\Base\\Controllers\\PagesController@welcome');
 $route->get('welcome', 'Maduser\Minimal\\Base\\Controllers\\PagesController@welcome');

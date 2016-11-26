@@ -1,4 +1,4 @@
-<?php namespace Maduser\Minimal\Pages\Controllers;
+<?php namespace Acme\Pages\Controllers;
 
 use Maduser\Minimal\Base\Core\Controller;
 use Maduser\Minimal\Base\Interfaces\ConfigInterface;
@@ -8,11 +8,12 @@ use Maduser\Minimal\Base\Interfaces\RouteInterface;
 use Maduser\Minimal\Base\Interfaces\ViewInterface;
 use Maduser\Minimal\Base\Interfaces\AssetInterface;
 use Maduser\Minimal\Base\Interfaces\ResponseInterface;
+use Maduser\Minimal\Base\Interfaces\ModulesInterface;
 
 /**
  * Class PagesController
  *
- * @package Maduser\Minimal\Base\Controllers
+ * @package Acme\Pages\Controllers
  */
 class PagesController extends Controller
 {
@@ -46,55 +47,59 @@ class PagesController extends Controller
     protected $asset;
 
     /**
+     * @var AssetInterface
+     */
+    protected $modules;
+    protected $module;
+
+    /**
      * PageController constructor.
      *
      * @param ConfigInterface   $config
      * @param RequestInterface  $request
      * @param RouterInterface   $router
-     * @param RouteInterface    $route
      * @param ResponseInterface $response
-     * @param ViewInterface     $template
+     * @param ViewInterface     $view
      * @param AssetInterface    $asset
      */
     public function __construct(
         ConfigInterface $config,
         RequestInterface $request,
         RouterInterface $router,
-        RouteInterface $route,
         ResponseInterface $response,
         ViewInterface $view,
-        AssetInterface $asset
+        AssetInterface $asset,
+        ModulesInterface $modules
     ) {
+        /** @var \Maduser\Minimal\Base\Core\Config $config */
+        /** @var \Maduser\Minimal\Base\Core\Request $request */
+        /** @var \Maduser\Minimal\Base\Core\Router $router */
+        /** @var \Maduser\Minimal\Base\Core\Response $response */
+        /** @var \Maduser\Minimal\Base\Core\View $view */
+        /** @var \Maduser\Minimal\Base\Core\Asset $asset */
+        /** @var \Maduser\Minimal\Base\Core\Modules $modules */
         $this->config = $config;
         $this->request = $request;
         $this->router = $router;
-        $this->route = $route;
         $this->response = $response;
         $this->view = $view;
         $this->asset = $asset;
+        $this->modules = $modules;
 
-        $this->view->setBaseDir('../resources/views/');
+        $this->view->setBaseDir('../app/Pages/resources/views/');
         $this->view->setTheme('my-theme');
         $this->view->setViewDir('main/');
-
     }
 
 
     /**
      * @return string
      */
-    public function index()
+    public function welcome($name = null)
     {
-        return 'Module PagesController index';
-    }
+        $name = $name ? ' ' . ucfirst($name) : '';
 
-    /**
-     * @return string
-     */
-    public function welcome()
-    {
-        return 'Module PagesController welcome';
-
+        return 'Welcome' . $name . '!';
     }
 
     /**
@@ -102,15 +107,7 @@ class PagesController extends Controller
      */
     public function contact()
     {
-        return 'Module PagesController contact';
-    }
-
-    /**
-     * @return string
-     */
-    public function create()
-    {
-        return 'Module PagesController create';
+        return 'Imagine a contact form here';
     }
 
     /**
@@ -118,10 +115,12 @@ class PagesController extends Controller
      *
      * @return string
      */
-    public function getPage($uri)
+    public function getStaticPage($uri)
     {
+        $this->view->getPath();
         return $this->view->render('sample.php', [
-            'content' => 'Would load page for ' . $uri
+            'content' => 'Would load page ' . "'" . str_replace('/', '-',
+                    $uri) . "'"
         ]);
     }
 
@@ -133,7 +132,8 @@ class PagesController extends Controller
         show($this->config, 'Config');
         show($this->request, 'Request');
         show($this->router, 'Router');
-        show($this->route, 'Route');
+        show($this->router->getRoute(), 'Route');
+        show($this->modules, 'Modules');
         show($this->response, 'Response');
         show($this->view, 'View');
         show($this->asset, 'Asset');
