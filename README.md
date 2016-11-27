@@ -34,6 +34,9 @@ $route->get('hello/(:any)/(:any)', function($firstname, $lastname) {
 // $route->put() ...you get it
 // $route->patch()
 // $route->delete()
+
+// (:any) match letters and integer
+// (:num) match integer only
 ```
 http://localhost/hello/julien/duseyau
 -> Hello Julien Duseyau
