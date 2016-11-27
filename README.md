@@ -37,9 +37,12 @@ http://localhost/hello/julien/duseyau
 ##### Using controllers
 ```php
 // in config/routes.php 
-$route->get('hello/(:any)', 'Acme\\Controllers\\YourController@yourmethod')
 
+$route->get('hello/(:any)', 'Acme\\Controllers\\YourController@yourmethod')
+```
+```php
 // in framework/app/Controllers/YourController.php
+
 class Acme\Controllers\YourController
 {
 	public function yourmethod($name, $lastname)
@@ -51,6 +54,49 @@ class Acme\Controllers\YourController
 http://localhost/hello/julien/duseyau
 -> Hello Julien Duseyau
 
+##### Route groups
+```php
+// in config/routes.php
+
+$route->group([
+    // Define the class namespace for all routes in this group
+    // Will be prefixed to the controllers
+    'namespace' => 'Acme\\Controllers\\'
+], function () use ($route) {
+
+    /**
+     * Subgroup with url prefix and middleware
+     */
+    $route->group([
+        // Prefixes all urls in the group with 'auth/'
+        'uriPrefix' => 'auth',
+        // What should be done when accessing these routes
+        'middleware' => [
+            // Check if the client is authorized to access this routes
+            'Acme\\Middlewares\\checkPermission',
+            // Send a email to the administrator
+            'Acme\\Middlewares\\ReportAccess',
+        ]
+    ], function () use ($route) {
+
+        $route->get('users', [
+            'controller' => 'UsersController',
+            'action' => 'listUsers' // Show a list of users
+        ]); 
+        // Uri is: 'auth/users'
+        // Controller is 'Acme\\Controllers\UsersController
+
+        $route->get('users/create', [
+            'controller' => 'UsersController',
+            'action' => 'create' // Show a empty user form
+        ]);
+        // Uri is: 'auth/users/create'
+        // Controller is 'Acme\\Controllers\UsersController
+	
+	// etc...
+	});
+});
+```
 
 ### Providers
 See config/providers.php
