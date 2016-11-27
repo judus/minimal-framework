@@ -248,9 +248,9 @@ Assets::getJs()
 #### Modular structure
 See config/modules.php and example module in framework/app/Pages.
 
-1. Create a folder <your-module> in the framework/app directory 
-2. Copy & Paste framework/config to framework/app/<your-module>
-3. Copy & Paste framework/resources to framework/app/<your-module>
+1. Create a folder your-module in the framework/app directory 
+2. Copy & Paste framework/config to framework/app/your-module
+3. Copy & Paste framework/resources to framework/app/your-module
 4. Register the new module in framework/config/modules.php: 
 
 
