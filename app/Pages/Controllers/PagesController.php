@@ -117,7 +117,7 @@ class PagesController extends Controller
      */
     public function getStaticPage($uri)
     {
-        $this->view->getPath();
+        // replace 'sample.php' with $uri
         return $this->view->render('sample.php', [
             'content' => 'Would load page ' . "'" . str_replace('/', '-',
                     $uri) . "'"
