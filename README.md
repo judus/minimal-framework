@@ -2,6 +2,9 @@
 
 Minimal is a web application framework.
 
+This repo contains only the required directories for a new project. The framework core is here: 
+https://github.com/judus/maduser-minimal
+
 ## Requirements
 
 1. PHP version 7.*
