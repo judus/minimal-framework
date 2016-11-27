@@ -256,11 +256,9 @@ Assets::getJs()
 See config/modules.php and example module in framework/app/Pages.
 
 1. Create a folder your-module in the framework/app directory 
-2. Copy & Paste framework/config to framework/app/your-module
-3. Copy & Paste framework/resources to framework/app/your-module
+2. Copy & Paste framework/config and  framework/resources to framework/app/your-module
+3. Modify the config files accordingly or just empty them (you can't register the same route twice, it would throw a exception)
 4. Register the new module in framework/config/modules.php: 
-
-
 ```php
 // in framework/config/modules.php
 
