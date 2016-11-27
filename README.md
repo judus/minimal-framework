@@ -38,7 +38,7 @@ http://localhost/hello/julien/duseyau
 ```php
 // in config/routes.php 
 
-$route->get('hello/(:any)', 'Acme\\Controllers\\YourController@yourmethod')
+$route->get('hello/(:any)/(:any)', 'Acme\\Controllers\\YourController@yourmethod')
 ```
 ```php
 // in framework/app/Controllers/YourController.php
@@ -97,19 +97,46 @@ $route->group([
 	});
 });
 ```
+##### File download
+```php
+$route->get('download/pdf', function () use ($response) {
+    $response->addHeader('Content-Type: application/pdf');
+    $response->addHeader('Content-Disposition: attachment; filename="downloaded.pdf"');
+    $response->setContent(readfile('original.pdf'));
+    $response->send();
+});
+```
+
+##### Route cache
+```php
+$route->get('huge/data/table', [
+    // keep in cache for day: (60*60*24)
+    // keep in cache forever: -1
+    // disable cache: 0 or null
+    'cache' => (60 * 60 * 24),
+    'namespace' => 'Acme\\Controllers',
+    'controller' => 'UsersController',
+    'action' => 'timeConsumingAction'
+]);
+```
+
 
 ### Providers
 See config/providers.php
 
 ```php
 // in config/providers.php
+
 return [
 	'Acme\\MyClass' => Acme\MyClassProvider::class, 
 	'Acme\\MyOtherClassA' => Acme\MyClassProvider::class, 
 	'Acme\\MyOtherClassB' => Acme\MyClassProvider::class, 
-]
+];
+```
 
+```php
 // in app/MyClassProvider.php
+
 class MyClassProvider extends Provider
 {
 	public function resolve()
@@ -133,7 +160,7 @@ class MyClassProvider extends Provider
 }
 ```
 
-#### Dependency injection
+### Dependency injection
 See config/bindings.php
 
 Binding a interface implementation to a controller
