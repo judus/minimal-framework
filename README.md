@@ -2,7 +2,8 @@
 
 Minimal is a web application framework.
 
-This repo contains only the required directories for a new project. The framework core is here: 
+This repo contains only the required directories for a new project. Composer will download the framework core 
+
 https://github.com/judus/maduser-minimal
 
 ## Requirements
