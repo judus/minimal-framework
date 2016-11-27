@@ -9,7 +9,7 @@ Minimal is a web application framework.
 
 ## Install
 ```bash
-composer create-project minimal/framework
+$ composer create-project minimal/framework
 ```
 
 ## Usage
@@ -87,7 +87,7 @@ class MyClassProvider extends Provider
 }
 ```
 
-#### Dependency Injection
+#### Dependency injection
 See config/bindings.php
 
 Binding a interface implementation to a controller
@@ -108,15 +108,17 @@ return [
 
 #### Views
 ```php
-$view = new View();
+// anywhere in your code
+...
+$view = new Maduser\Minimal\Base\Core\View();
 $view->setPath('../resources/views/'); // Path from index.php
 $view->setTheme('my-theme'); // Set a subdir (optional)
 
-
 $view->render('main/my-view', [
-	'viewValue1 => 'SomeValue1',
-	'viewValue2 => 'SomeValue2'
+	'viewValue1' => 'SomeValue1',
+	'viewValue2' => 'SomeValue2'
 ]);
+
 
 // resources/views/my-theme/main/my-view.php
 ...
@@ -125,8 +127,10 @@ $view->render('main/my-view', [
 ...
 ```
 ```
-// You could inject the View class in a controller
-...
+// You also could inject the View class in a controller
+// For this yoou would have to register a binding, see above 'Dependency injection'
+class SomeController
+{
 	public function __construct(ViewInterface $view)
 	{
 		$this->view = $view;		
@@ -137,6 +141,7 @@ $view->render('main/my-view', [
 	{
 		return $this->view->render('my-view');
 	}
+}
 ...
 ```
 #### Assets
@@ -171,11 +176,11 @@ See config/modules.php and example module in framework/app/Pages.
 ```php
 // in framework/config/modules.php
 
-$modules->register('your-module', [
+$modules->register('your-module-dirname', [
 	// optional config array
-	'path' => 'app/YourModule',
+	'path' => 'app', // location of the module dir
 	'routesFile' => 'app/YourModule/Http/routes.php,
-	...
+	// ...more options
 ]);
 ```
 
