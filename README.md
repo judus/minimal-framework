@@ -108,6 +108,7 @@ $route->get('download/pdf', function () use ($response) {
 ```
 
 ##### Route cache
+Not implemented yet
 ```php
 $route->get('huge/data/table', [
     // keep in cache for day: (60*60*24)
