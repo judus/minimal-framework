@@ -8,7 +8,7 @@ Minimal is a web application framework.
 2. composer
 
 ## Install
-```
+```bash
 composer create-project minimal/framework
 ```
 
@@ -18,7 +18,7 @@ composer create-project minimal/framework
 See config/routes.php
 
 ##### Direct output:
-```
+```php
 // in config/routes.php
 
 $route->get('hello/(:any)/(:any)', function($firstname, $lastname) {
@@ -35,7 +35,7 @@ http://localhost/hello/julien/duseyau
 -> Hello Julien Duseyau
 
 ##### Using controllers
-```
+```php
 // in config/routes.php 
 $route->get('hello/(:any)', 'Acme\\Controllers\\YourController@yourmethod)
 
@@ -55,7 +55,7 @@ http://localhost/hello/julien/duseyau
 ### Providers
 See config/providers.php
 
-```
+```php
 // in config/providers.php
 return [
 	'Acme\\MyClass' => Acme\MyClassProvider::class, 
@@ -91,7 +91,7 @@ class MyClassProvider extends Provider
 See config/bindings.php
 
 Binding a interface implementation to a controller
-```
+```php
 // in config/bindings.php
 return [
 	'Acme\\InterfaceA' => Acme\ClassA::class,
@@ -107,7 +107,7 @@ return [
 ```
 
 #### Views
-```
+```php
 $view = new View();
 $view->setPath('../resources/views/'); // Path from index.php
 $view->setTheme('my-theme'); // Set a subdir (optional)
@@ -142,7 +142,7 @@ $view->render('main/my-view', [
 #### Assets
 Not implemented yet.
 
-```
+```php
 Assets::setCssPath('/assets/css');
 Assets::setJsPath('/assets/js');
 Assets::addCss('bootstrap.css', 'my-theme.css');
@@ -168,7 +168,7 @@ See config/modules.php and example module in framework/app/Pages.
 4. Register the new module in framework/config/modules.php: 
 
 
-```
+```php
 // in framework/config/modules.php
 
 $modules->register('your-module', [
