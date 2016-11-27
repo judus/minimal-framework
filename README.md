@@ -37,7 +37,7 @@ http://localhost/hello/julien/duseyau
 ##### Using controllers
 ```php
 // in config/routes.php 
-$route->get('hello/(:any)', 'Acme\\Controllers\\YourController@yourmethod)
+$route->get('hello/(:any)', 'Acme\\Controllers\\YourController@yourmethod')
 
 // in framework/app/Controllers/YourController.php
 class Acme\Controllers\YourController
@@ -93,23 +93,31 @@ See config/bindings.php
 Binding a interface implementation to a controller
 ```php
 // in config/bindings.php
+
 return [
 	'Acme\\InterfaceA' => Acme\ClassA::class,
 	'Acme\\InterfaceB' => Acme\ClassB::class',
-]
-
+];
+```
+```php
 // in a controller
-...
+
+class MyController
+{
+	private $classA;
+	private $classB;
+	
 	public function __construct(InterfaceA $classA, InterfaceB $classB) {
-		...
+		$this->classA = $classA;
+		$this->classB = $classB;
 	}
-...
+}
 ```
 
 #### Views
 ```php
 // anywhere in your code
-...
+
 $view = new Maduser\Minimal\Base\Core\View();
 $view->setPath('../resources/views/'); // Path from index.php
 $view->setTheme('my-theme'); // Set a subdir (optional)
@@ -118,17 +126,17 @@ $view->render('main/my-view', [
 	'viewValue1' => 'SomeValue1',
 	'viewValue2' => 'SomeValue2'
 ]);
+```
 
+```html
+<!-- resources/views/my-theme/main/my-view.php -->
 
-// resources/views/my-theme/main/my-view.php
-...
 <p><?= $viewValue1 ?></p>
 <p><?= $viewValue2 ?></p>
-...
 ```
-```
+```php
 // You also could inject the View class in a controller
-// For this yoou would have to register a binding, see above 'Dependency injection'
+
 class SomeController
 {
 	public function __construct(ViewInterface $view)
@@ -142,7 +150,6 @@ class SomeController
 		return $this->view->render('my-view');
 	}
 }
-...
 ```
 #### Assets
 Not implemented yet.
