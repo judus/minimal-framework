@@ -127,7 +127,8 @@ $route->get('huge/data/table', [
     'action' => 'timeConsumingAction'
 ]);
 ```
-
+### Middleware
+Not implemented yet
 
 ### Providers
 See config/providers.php
