@@ -266,7 +266,7 @@ See config/modules.php and example module in framework/app/Pages.
 $modules->register('your-module-dirname', [
 	// optional config array
 	'path' => 'app', // location of the module dir
-	'routes' => 'app/YourModule/Http/routes.php,
+	'routes' => 'app/YourModule/Http/routes.php',
 	// ...more options
 ]);
 ```
