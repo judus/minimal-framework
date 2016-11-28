@@ -2,10 +2,10 @@
 
 return [
     'app.path' => 'app',
-    'app.configFile' => 'boot/config.php',
-    'app.bindingsFile' => 'boot/bindings.php',
-    'app.providersFile' => 'boot/providers.php',
-    'app.routesFile' => 'boot/routes.php',
+    'app.configFile' => 'config/config.php',
+    'app.bindingsFile' => 'config/bindings.php',
+    'app.providersFile' => 'config/providers.php',
+    'app.routesFile' => 'config/routes.php',
 
     'modules.path' => 'app',
     'modules.configFile' => 'Config/config.php',

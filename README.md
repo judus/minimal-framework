@@ -2,6 +2,10 @@
 
 Minimal is a web application framework.
 
+This repo contains only the required directories for a new project. Composer will install the framework core.
+
+https://github.com/judus/maduser-minimal
+
 ## Requirements
 
 1. PHP version 7.*
@@ -30,6 +34,9 @@ $route->get('hello/(:any)/(:any)', function($firstname, $lastname) {
 // $route->put() ...you get it
 // $route->patch()
 // $route->delete()
+
+// (:any) match letters and integer
+// (:num) match integer only
 ```
 http://localhost/hello/julien/duseyau
 -> Hello Julien Duseyau
@@ -108,6 +115,7 @@ $route->get('download/pdf', function () use ($response) {
 ```
 
 ##### Route cache
+Not implemented yet
 ```php
 $route->get('huge/data/table', [
     // keep in cache for day: (60*60*24)
@@ -247,19 +255,17 @@ Assets::getJs()
 #### Modular structure
 See config/modules.php and example module in framework/app/Pages.
 
-1. Create a folder <your-module> in the framework/app directory 
-2. Copy & Paste framework/config to framework/app/<your-module>
-3. Copy & Paste framework/resources to framework/app/<your-module>
+1. Create a folder your-module in the framework/app directory 
+2. Copy & Paste framework/config and  framework/resources to framework/app/your-module
+3. Modify the config files accordingly or just empty them (you can't register the same route twice, it would throw a exception)
 4. Register the new module in framework/config/modules.php: 
-
-
 ```php
 // in framework/config/modules.php
 
 $modules->register('your-module-dirname', [
 	// optional config array
 	'path' => 'app', // location of the module dir
-	'routesFile' => 'app/YourModule/Http/routes.php,
+	'routes' => 'app/YourModule/Http/routes.php,
 	// ...more options
 ]);
 ```
