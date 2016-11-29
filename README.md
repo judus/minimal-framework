@@ -203,14 +203,31 @@ class MyController
 $view = new Maduser\Minimal\Base\Core\View();
 $view->setPath('../resources/views/'); // Path from index.php
 $view->setTheme('my-theme'); // Set a subdir (optional)
+$view->setLayout('layouts/my-layout') // View wrapper
+$view->share('title', 'My title'); // Share a value across all views 
 
-$view->render('main/my-view', [
+// The values are only available in this view
+$view->render('pages/my-view', [
 	'viewValue1' => 'SomeValue1',
 	'viewValue2' => 'SomeValue2'
 ]);
 ```
 
 ```html
+<!-- resources/views/my-theme/layouts/my-layout.php -->
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title><?=$title?></title>	
+</head>
+<body>
+	<!-- Get the view -->
+	<?=$this->yield()?>	
+</body>
+</html>
+
+
 <!-- resources/views/my-theme/main/my-view.php -->
 
 <p><?= $viewValue1 ?></p>

@@ -86,9 +86,10 @@ class PagesController extends Controller
         $this->asset = $asset;
         $this->modules = $modules;
 
-        $this->view->setBaseDir('../app/Pages/resources/views/');
+        $this->view->setBase('../app/Pages/resources/views/');
         $this->view->setTheme('my-theme');
-        $this->view->setViewDir('main/');
+        $this->view->setLayout('layouts/my-layout');
+        $this->view->share('title', 'My title');
     }
 
 
@@ -118,7 +119,7 @@ class PagesController extends Controller
     public function getStaticPage($uri)
     {
         // replace 'sample.php' with $uri
-        return $this->view->render('sample.php', [
+        return $this->view->render('pages/my-view', [
             'content' => 'Would load page ' . "'" . str_replace('/', '-',
                     $uri) . "'"
         ]);

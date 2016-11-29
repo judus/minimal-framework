@@ -10,6 +10,7 @@ return [
     'ModelFactory'      => Maduser\Minimal\Base\Providers\ModelFactoryProvider::class,
     'ModuleFactory'     => Maduser\Minimal\Base\Providers\ModuleFactoryProvider::class,
     'Module'            => Maduser\Minimal\Base\Providers\ModuleProvider::class,
+    'Presenter'         => Maduser\Minimal\Base\Providers\PresenterProvider::class,
     'Request'           => Maduser\Minimal\Base\Providers\RequestProvider::class,
     'Response'          => Maduser\Minimal\Base\Providers\ResponseProvider::class,
     'Route'             => Maduser\Minimal\Base\Providers\RouteProvider::class,

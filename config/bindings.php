@@ -19,6 +19,9 @@ return [
     'Maduser\Minimal\Base\Interfaces\ModulesInterface' =>
         Maduser\Minimal\Base\Core\Modules::class,
 
+    'Maduser\Minimal\Base\Interfaces\PresenterInterface' =>
+        Maduser\Minimal\Base\Core\Presenter::class,
+
     'Maduser\Minimal\Base\Interfaces\ResponseInterface' =>
         Maduser\Minimal\Base\Core\Response::class,
 

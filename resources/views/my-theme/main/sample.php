@@ -27,7 +27,7 @@
 <!-- Add your site or application content here -->
 <p>Hello world! This is HTML5 Boilerplate.</p>
 
-<div class="content"><?=$content?></div>
+<div class="content"><?=$this->yield()?></div>
 
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.1.0.min.js"><\/script>')</script>
