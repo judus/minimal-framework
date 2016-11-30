@@ -19,7 +19,7 @@ $ composer create-project minimal/framework
 ## Usage
 
 ### Routing
-See config/routes.php
+See also config/routes.php
 
 ##### Direct output:
 ```php
@@ -196,7 +196,7 @@ class MyController
 }
 ```
 
-#### Views
+### Views
 ```php
 // anywhere in your code
 
@@ -250,8 +250,13 @@ class SomeController
 	}
 }
 ```
-#### Assets
-Not implemented yet.
+
+#### Presenters
+Partially implemented.
+
+
+### Assets
+Partially implemented.
 
 ```php
 Assets::setCssPath('/assets/css');
@@ -270,7 +275,7 @@ Assets::getJs()
 // <script src="/assets/my-script.js"></script>
 ```
 
-#### Modular structure
+### Modular structure
 See config/modules.php and example module in framework/app/Pages.
 
 1. Create a folder your-module in the framework/app directory 
@@ -287,6 +292,28 @@ $modules->register('your-module-dirname', [
 	// ...more options
 ]);
 ```
+
+### Frontend tools
+Partially implemented
+
+   ---
+#### TODOs
+- Route caching
+- Route model/viewModel biding
+- Middleware
+- Presenters
+- Assets class
+- Configure directories and tasks for npm, bower, grunt and/or gulp
+- Demos
+- Unit tests
+- Documentation
+
+---
+
+### About
+
+It was too cold for outdoor activities. 
+
 
 ### License
 
