@@ -258,7 +258,7 @@ Partially implemented.
 
 ### Assets
 ```php
-$assets = new new Maduser\Minimal\Base\Core\Asset();
+$assets = new Maduser\Minimal\Base\Core\Asset();
 $assets->setBase('../app/Pages/resources/assets'); // Set base dir of assets
 $assets->setTheme('my-theme'); // Optional subdirectory
 $assets->setCssDir('css'); // Directory for the css
