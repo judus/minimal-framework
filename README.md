@@ -150,7 +150,7 @@ class MyClassProvider extends Provider
 {
 	public function resolve()
 	{
-		// Do something before the class is instanciated
+		// Do something before the class is instantiated
 		$time = time();
 		Assets::setPath()
 		$settings = Config::item('settings');
