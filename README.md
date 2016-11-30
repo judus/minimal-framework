@@ -296,7 +296,7 @@ The Asset class injected into the View class
 ```
 Outputs:
 ```html
-<html class="no-js" lang="">
+<html>
 <head>
 	<title>My title</title>
 	
