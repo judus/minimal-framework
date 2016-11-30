@@ -266,7 +266,7 @@ $assets->setJsDir('js'); // Directory for the js
 $assets->addCss(['normalize.css', 'main.css']); // Register css files
 $assets->addJs(['vendor/modernizr-2.8.3.min.js'], 'top'); //Register js files with keyword
 $assets->addJs(['plugins.js', 'js/main.js'], 'bottom'); // Register more js files with another keyword
-$assets->addExternalJs(['https://code.jquery.com/jquery-3.1.0.min.js'], 'bottom'); Js from CDN
+$assets->addExternalJs(['https://code.jquery.com/jquery-3.1.0.min.js'], 'bottom'); // Js from CDN
 $assets->addInlineScripts('jQueryFallback', function () {
 	return $this->view->render('scripts/jquery-fallback', [], true);
 });
