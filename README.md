@@ -342,10 +342,9 @@ Partially implemented
    ---
 #### TODOs
 - Route caching
-- Route model/viewModel biding
+- Route model/viewModel binding
 - Middleware
 - Presenters
-- Assets class
 - Configure directories and tasks for npm, bower, grunt and/or gulp
 - Demos
 - Unit tests
