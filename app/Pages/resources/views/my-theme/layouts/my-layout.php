@@ -13,27 +13,29 @@
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <!-- Place favicon.ico in the root directory -->
 
-    <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/main.css">
-    <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+    <?=$this->asset->getCss()?>
+    <?=$this->asset->getJs('top')?>
 </head>
 <body>
-<!--[if lte IE 9]>
-<p class="browserupgrade">You are using an <strong>outdated</strong> browser.
-    Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve
-    your experience and security.</p>
-<![endif]-->
+    <!--[if lte IE 9]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser.
+        Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve
+        your experience and security.</p>
+    <![endif]-->
 
-<!-- Add your site or application content here -->
-<p>Hello world! This is HTML5 Boilerplate. (Module)</p>
-<p><?= $this->sayHi() ?></p>
+    <!-- Add your site or application content here -->
+    <p>Hello world! This is HTML5 Boilerplate. (Module)</p>
+    <p><?= $this->sayHi() ?></p>
 
-<div class="content"><?= $this->yield() ?></div>
+    <div class="content">
+        <?= $this->yield() ?>
+    </div>
 
-<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
-<script>window.jQuery || document.write('<script src="js/vendor/jquery-3.1.0.min.js"><\/script>')</script>
-<script src="js/plugins.js"></script>
-<script src="js/main.js"></script>
+    <?= $this->asset->getExternalJs('bottom') ?>
+    <?= $this->asset->getInlineScripts('jQueryFallback') ?>
+    <?= $this->asset->getJs('bottom') ?>
+    <?= $this->asset->getInlineScripts() ?>
+
 
 </body>
 </html>

@@ -86,10 +86,28 @@ class PagesController extends Controller
         $this->asset = $asset;
         $this->modules = $modules;
 
-        $this->view->setBase('../app/Pages/resources/views/');
+        $this->view->setBase('../app/Pages/resources/views');
         $this->view->setTheme('my-theme');
+        //$this->view->setDir('views');
         $this->view->setLayout('layouts/my-layout');
         $this->view->share('title', 'My title');
+
+        $this->asset->setBase('../app/Pages/resources');
+        $this->asset->setTheme('my-theme');
+        $this->asset->setCssDir('assets/css');
+        $this->asset->setJsDir('assets/js');
+        $this->asset->addCss(['normalize.css', 'main.css']);
+        $this->asset->addJs(['vendor/modernizr-2.8.3.min.js'], 'top');
+        $this->asset->addJs(['plugins.js', 'js/main.js'], 'bottom');
+        $this->asset->addExternalJs(['https://code.jquery.com/jquery-3.1.0.min.js'], 'bottom');
+        $this->asset->addInlineScripts('jQueryFallback', function () {
+            return $this->view->render('scripts/jquery-fallback', [], true);
+        });
+
+
+
+
+
     }
 
 
