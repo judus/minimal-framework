@@ -310,7 +310,7 @@ Outputs:
 	</div>
 
 	<script src="https://code.jquery.com/jquery-3.1.0.min.js" ></script>
-	<script>window.jQuery || document.wr [... blablabla ...] ')</script>
+	<script>window.jQuery || document.write('...blablabla...')</script>
 	
 	<script src="assets/my-theme/js/plugins.js" ></script>
 	<script src="assets/my-theme/js/main.js" ></script>
