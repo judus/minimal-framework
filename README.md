@@ -201,8 +201,9 @@ class MyController
 // anywhere in your code
 
 $view = new Maduser\Minimal\Base\Core\View();
-$view->setPath('../resources/views/'); // Path from index.php
+$view->setBase('../resources/views/'); // Path from index.php
 $view->setTheme('my-theme'); // Set a subdir (optional)
+$view->setDir('my-theme'); // Set a subdir (optional)
 $view->setLayout('layouts/my-layout') // View wrapper
 $view->share('title', 'My title'); // Share a value across all views 
 
@@ -256,23 +257,65 @@ Partially implemented.
 
 
 ### Assets
-Partially implemented.
-
 ```php
-Assets::setCssPath('/assets/css');
-Assets::setJsPath('/assets/js');
-Assets::addCss('bootstrap.css', 'my-theme.css');
-Assets::addCss('IE.css');
-Assets::addJs('bootstrap.js', 'my-script.js');
+$assets = new new Maduser\Minimal\Base\Core\Asset();
+$assets->setBase('../app/Pages/resources/assets'); // Set base dir of assets
+$assets->setTheme('my-theme'); // Optional subdirectory
+$assets->setCssDir('css'); // Directory for the css
+$assets->setJsDir('js'); // Directory for the js
+$assets->addCss(['normalize.css', 'main.css']); // Register css files
+$assets->addJs(['vendor/modernizr-2.8.3.min.js'], 'top'); Register js files with keyword
+$assets->addJs(['plugins.js', 'js/main.js'], 'bottom'); Register more js files with another keyword
+$assets->addExternalJs(['https://code.jquery.com/jquery-3.1.0.min.js'], 'bottom');
+$assets->addInlineScripts('jQueryFallback', function () {
+	return $this->view->render('scripts/jquery-fallback', [], true);
+});
+```
 
-Assets::getCss();
-// <link rel="stylesheet" href="/assets/css/bootstrap.css">
-// <link rel="stylesheet" href="/assets/css/my-theme.css">
-// <link rel="stylesheet" href="/assets/css/IE.css">
+The Asset class injected into the View class
+```html
+<!-- resources/views/my-theme/layouts/my-layout.php -->
+<html>
+<head>
+    <title><?=$title?></title>
 
-Assets::getJs()
-// <script src="/assets/bootstrap.js"></script>
-// <script src="/assets/my-script.js"></script>
+    <?= $this->asset->getCss() ?>
+    <?= $this->asset->getJs('top') ?>
+</head>
+<body>
+    <div class="content">
+        ...
+    </div>
+
+    <?= $this->asset->getExternalJs('bottom') ?>
+    <?= $this->asset->getInlineScripts('jQueryFallback') ?>
+    <?= $this->asset->getJs('bottom') ?>
+    <?= $this->asset->getInlineScripts() ?>
+</body>
+</html>
+```
+Outputs:
+```html
+<html class="no-js" lang="">
+<head>
+	<title>My title</title>
+	
+	<link rel="stylesheet" href="assets/my-theme/css/normalize.css">
+	<link rel="stylesheet" href="assets/my-theme/css/main.css">
+	<script src="assets/my-theme/js/vendor/modernizr-2.8.3.min.js" ></script>
+</head>
+<body>
+    <div class="content">
+        ...
+	</div>
+
+	<script src="https://code.jquery.com/jquery-3.1.0.min.js" ></script>
+	<script>window.jQuery || document.write('<script src="js/vendor/jquery-3.1.0.min.js"><\/script>')</script>
+	
+	<script src="assets/my-theme/js/plugins.js" ></script>
+	<script src="assets/my-theme/js/main.js" ></script>
+</body>
+</html>
 ```
 
 ### Modular structure
