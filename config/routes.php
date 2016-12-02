@@ -38,9 +38,9 @@ $route->group([
         // Prefixes all urls in the group with 'auth/'
         'uriPrefix' => 'auth',
         // What should be done when accessing these routes
-        'middleware' => [
+        'middlewares' => [
             // Check if the client is authorized to access this routes
-            'Maduser\Minimal\\Base\\Middlewares\\checkPermission',
+            'Maduser\Minimal\\Base\\Middlewares\\CheckPermission',
             // Send a email to the administrator
             'Maduser\Minimal\\Base\\Middlewares\\ReportAccess',
         ]

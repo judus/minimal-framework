@@ -78,7 +78,7 @@ $route->group([
         // Prefixes all urls in the group with 'auth/'
         'uriPrefix' => 'auth',
         // What should be done when accessing these routes
-        'middleware' => [
+        'middlewares' => [
             // Check if the client is authorized to access this routes
             'Acme\\Middlewares\\checkPermission',
             // Send a email to the administrator
@@ -127,11 +127,93 @@ $route->get('huge/data/table', [
     'action' => 'timeConsumingAction'
 ]);
 ```
+
 ### Middleware
-Not implemented yet
+Partially implemented, for now the usage is
+```php
+// in config/routes.php
+
+$route->post('users/save', [
+	'controller' => 'UsersController',
+	'action' => 'save', // Save new user
+	'middlewares' => [
+		// Check if the client is authorized to access this route
+		'Acme\\Middlewares\\checkPermission',
+		// Send a email to the administrator
+		'Acme\\Middlewares\\ReportAccess',
+		// Clear cache
+		'Acme\\Middlewares\\ClearCache',
+	]
+]);
+```
+```php
+// in app/Middlewares/CheckPermission.php
+
+class CheckPermission extends Middleware
+{
+    private $request;
+    private $response;
+    private $route;
+    
+    // Inject what you want
+    public function __construct(
+        RequestInterface $request,
+        ResponseInterface $response,
+        RouteInterface $route
+    ) {
+        $this->request = $request;
+        $this->response = $response;
+        $this->route = $route;
+    }
+
+    // Executed before MVC dispatch
+    public function before() {
+        // If not authorised...
+                
+        // ... send appropriate response ...
+        $this->response->addHeader();
+        $this->response->setContent();
+        $this->response->send()->exit();
+
+        // ... or redirect to login page
+        $this->response->redirect('login');
+
+        // ... or set error and cancel dispatch
+        $this->request->setError();
+        return false;
+    }
+}
+```
+```php
+// in app/Middlewares/ReportAccess.php
+
+class ClearCache extends Middleware
+{
+	...
+	
+    // Executed after MVC dispatch
+    public function after() {
+        // Log or email message
+    }
+}
+```
+
+```php
+// in app/Middlewares/ClearCache.php
+
+class ClearCache extends Middleware
+{
+	...
+	
+    // Executed after MVC dispatch
+    public function after() {
+        // Log or send message
+        // Clear cache
+    }
+}
+```
 
 ### Providers
-See config/providers.php
 
 ```php
 // in config/providers.php
@@ -170,9 +252,8 @@ class MyClassProvider extends Provider
 ```
 
 ### Dependency injection
-See config/bindings.php
 
-Binding a interface implementation to a controller
+Binding a interface implementation
 ```php
 // in config/bindings.php
 
@@ -181,10 +262,9 @@ return [
 	'Acme\\InterfaceB' => Acme\ClassB::class',
 ];
 ```
-```php
-// in a controller
 
-class MyController
+```php
+class MyClass
 {
 	private $classA;
 	private $classB;
@@ -343,7 +423,7 @@ Partially implemented
 #### TODOs
 - Route caching
 - Route model/viewModel binding
-- Middleware
+- Better middleware implementation, maybe.
 - Presenters
 - Configure directories and tasks for npm, bower, grunt and/or gulp
 - Demos

@@ -35,7 +35,7 @@ $router = $minimal->getRouter();
 $uriString = $request->getUriString();
 $route = $router->getRoute($uriString);
 $frontController = $minimal->getFrontController();
-$frontController->execute($route);
+$frontController->dispatch($route);
 $minimal->setResult($frontController->getControllerResult());
 $minimal->respond();
 $minimal->exit();
