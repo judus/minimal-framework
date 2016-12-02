@@ -18,7 +18,7 @@ $ composer create-project minimal/framework
 
 ## Usage
 
-[Routing](#routing) | [Middleware](#middleware) | [Providers](#providers) | [Dependency Injection](#dependency-injection) | [Views](#views) | [Assets](#assets) | [Modules](#modules)
+[Routing](#routing) | [Middlewares](#middlewares) | [Providers](#providers) | [Dependency Injection](#dependency-injection) | [Views](#views) | [Assets](#assets) | [Modules](#modules)
 
 ### Routing
 See also config/routes.php
@@ -130,7 +130,7 @@ $route->get('huge/data/table', [
 ]);
 ```
 
-### Middleware
+### Middlewares
 Partially implemented, for now the usage is
 ```php
 // in config/routes.php
