@@ -18,6 +18,8 @@ $ composer create-project minimal/framework
 
 ## Usage
 
+[Routing](#routing) | [Middleware](#middleware) | [Providers](#providers) | [Dependency Injection](#dependency-injection) | [Views](#views) | [Assets](#assets) | [Modules](#modules)
+
 ### Routing
 See also config/routes.php
 
@@ -398,7 +400,7 @@ Outputs:
 </html>
 ```
 
-### Modular structure
+### Modules
 See config/modules.php and example module in framework/app/Pages.
 
 1. Create a folder your-module in the framework/app directory 
