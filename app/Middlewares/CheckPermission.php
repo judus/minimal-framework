@@ -27,16 +27,16 @@ class CheckPermission extends Middleware
         // If not authorised...
 
         // ... send appropriate response ...
-        $this->response->addHeader();
-        $this->response->setContent();
-        $this->response->send()->exit();
+        //$this->response->addHeader();
+        //$this->response->setContent();
+        //$this->response->send()->exit();
 
         // ... or redirect to login page
-        $this->response->redirect('login');
+        //$this->response->redirect('login');
 
         // ... or set error and cancel dispatch
-        $this->request->setError();
-        return false;
+        //$this->request->setError();
+        //return false;
     }
 
     // Executed after MVC dispatch
