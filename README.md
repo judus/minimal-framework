@@ -187,7 +187,7 @@ class CheckPermission extends Middleware
 ```php
 // in app/Middlewares/ReportAccess.php
 
-class ClearCache extends Middleware
+class ReportAccess extends Middleware
 {
 	...
 	
