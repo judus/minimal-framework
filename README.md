@@ -50,7 +50,7 @@ http://localhost/hello/julien/duseyau
 $route->get('hello/(:any)/(:any)', 'Acme\\Controllers\\YourController@yourmethod')
 ```
 ```php
-// in framework/app/Controllers/YourController.php
+// in app/Controllers/YourController.php
 
 class Acme\Controllers\YourController
 {
@@ -116,47 +116,31 @@ $route->get('download/pdf', function () use ($response) {
 });
 ```
 
-##### Route cache
-Not implemented yet
-```php
-$route->get('huge/data/table', [
-    // keep in cache for day: (60*60*24)
-    // keep in cache forever: -1
-    // disable cache: 0 or null
-    'cache' => (60 * 60 * 24),
-    'namespace' => 'Acme\\Controllers',
-    'controller' => 'UsersController',
-    'action' => 'timeConsumingAction'
-]);
-```
-
 ### Middlewares
-Partially implemented, for now the usage is
+
 ```php
 // in config/routes.php
 
-$route->post('users/save', [
+$route->get('users', [
 	'controller' => 'UsersController',
-	'action' => 'save', // Save new user
+	'action' => 'list',
 	'middlewares' => [
 		// Check if the client is authorized to access this route
 		'Acme\\Middlewares\\checkPermission',
 		// Send a email to the administrator
 		'Acme\\Middlewares\\ReportAccess',
-		// Clear cache
-		'Acme\\Middlewares\\ClearCache',
+		// Cache for x seconds
+		'Acme\\Middlewares\\Cache' => [(1*1*10)]
 	]
 ]);
 ```
 ```php
 // in app/Middlewares/CheckPermission.php
 
-class CheckPermission extends Middleware
+class CheckPermission implements MiddlewareInterface
 {
-    private $request;
-    private $response;
-    private $route;
-    
+    ...
+	    
     // Inject what you want
     public function __construct(
         RequestInterface $request,
@@ -186,32 +170,24 @@ class CheckPermission extends Middleware
     }
 }
 ```
-```php
-// in app/Middlewares/ReportAccess.php
-
-class ReportAccess extends Middleware
-{
-	...
-	
-    // Executed after MVC dispatch
-    public function after() {
-        // Log or email message
-    }
-}
-```
 
 ```php
-// in app/Middlewares/ClearCache.php
+// in app/Middlewares/Cache.php
 
-class ClearCache extends Middleware
+class Cache implements MiddlewareInterface
 {
 	...
+
+	// Executed before task
+	public function before() {
+		// return cached contents
+	}
 	
-    // Executed after MVC dispatch
-    public function after() {
-        // Log or send message
-        // Clear cache
-    }
+	// Executed after task
+	public function after() {
+		// delete old cache
+		// create new cache
+	}
 }
 ```
 
@@ -334,10 +310,6 @@ class SomeController
 }
 ```
 
-### Presenters
-Partially implemented.
-
-
 ### Assets
 ```php
 $assets = new Maduser\Minimal\Base\Core\Asset();
@@ -423,10 +395,7 @@ Partially implemented
 
    ---
 #### TODOs
-- Route caching
 - Route model/viewModel binding
-- Better middleware implementation, maybe.
-- Presenters
 - Configure directories and tasks for npm, bower, grunt and/or gulp
 - Demos
 - Unit tests
