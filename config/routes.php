@@ -17,7 +17,12 @@ $route->get('welcome', 'Maduser\Minimal\\Base\\Controllers\\PagesController@welc
 $route->get('page/welcome/(:any)/(:any)', 'Maduser\Minimal\\Base\\Controllers\\PagesController@welcome');
 $route->get('page/welcome/(:any)', 'Maduser\Minimal\\Base\\Controllers\\PagesController@welcome');
 $route->get('page/(:any)', 'Maduser\Minimal\\Base\\Controllers\\PagesController@getStaticPage');
-$route->get('page/info', 'Maduser\Minimal\\Base\\Controllers\\PagesController@info');
+
+$route->get('page/info', [
+    'controller' => 'Maduser\Minimal\\Base\\Controllers\\PagesController',
+    'action' => 'info',
+    'middlewares' => ['Maduser\Minimal\\Base\\Middlewares\\Cache' => [8]]
+]);
 
 // Display dev info
 $route->get('info', 'Maduser\Minimal\\Base\\Controllers\\PagesController@info');
@@ -83,7 +88,7 @@ $route->group([
             // Override namespace for this route
             'namespace' => 'Maduser\\Minimal\\Modules\\Auth\\',
             // Disable the middleware for this route
-            'middleware' => null,
+            'middlewares' => null,
             // Add a custom value
             'module-path' => 'modules/auth',
             // Use controller

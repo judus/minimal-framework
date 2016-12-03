@@ -7,6 +7,7 @@ return [
     'Config'            => Maduser\Minimal\Base\Providers\ConfigProvider::class,
     'ControllerFactory' => Maduser\Minimal\Base\Providers\ControllerFactoryProvider::class,
     'FrontController'   => Maduser\Minimal\Base\Providers\FrontControllerProvider::class,
+    'Middleware'        => Maduser\Minimal\Base\Providers\MiddlewareProvider::class,
     'ModelFactory'      => Maduser\Minimal\Base\Providers\ModelFactoryProvider::class,
     'ModuleFactory'     => Maduser\Minimal\Base\Providers\ModuleFactoryProvider::class,
     'Module'            => Maduser\Minimal\Base\Providers\ModuleProvider::class,

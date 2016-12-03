@@ -136,6 +136,8 @@ class PagesController extends Controller
      */
     public function getStaticPage($uri)
     {
+        usleep(2000000);
+
         // replace 'sample.php' with $uri
         return $this->view->render('pages/my-view', [
             'content' => 'Would load page ' . "'" . str_replace('/', '-',

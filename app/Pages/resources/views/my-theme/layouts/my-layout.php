@@ -25,7 +25,6 @@
 
     <!-- Add your site or application content here -->
     <p>Hello world! This is HTML5 Boilerplate. (Module)</p>
-    <p><?= $this->sayHi() ?></p>
 
     <div class="content">
         <?= $this->yield() ?>

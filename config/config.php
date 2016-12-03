@@ -12,4 +12,6 @@ return [
     'modules.bindingsFile' => 'Config/bindings.php',
     'modules.providersFile' => 'Config/providers.php',
     'modules.routesFile' => 'Config/routes.php',
+
+    'cache.path' => 'storage/cache'
 ];

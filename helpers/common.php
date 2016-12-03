@@ -9,7 +9,7 @@ if ( ! function_exists('show'))
 	 *
 	 * @return string
 	 */
-	function show($data = NULL, $heading = NULL, $print = true) {
+	function show($data = NULL, $heading = NULL, $getContents = false) {
 		!is_null($data) OR $data = 'Hi from '. debug_backtrace()[0]['file'] .
 			' at line '. debug_backtrace()[0]['line'];
 
@@ -21,7 +21,7 @@ if ( ! function_exists('show'))
 		$html.= '</pre>';
 		$html.= '</div>';
 
-		if (!$print)
+		if ($getContents)
 			return $html;
 		echo $html;
 	}

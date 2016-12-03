@@ -30,3 +30,4 @@ Thumbs.db
 composer.lock
 /resources/npm/bower_components
 /resources/npm/node_modules
+/storage/cache/*.cache
