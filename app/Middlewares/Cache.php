@@ -118,6 +118,7 @@ class Cache implements MiddlewareInterface
             $cache = str_replace('</body>',
                 '<p><small>Cached</small></p></body>', $cache);
         }
+
         return $cache;
     }
 
