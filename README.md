@@ -152,7 +152,7 @@ class CheckPermission implements MiddlewareInterface
         $this->route = $route;
     }
 
-    // Executed before MVC dispatch
+	// Executed before task
     public function before() {
         // If not authorised...
                 
