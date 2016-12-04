@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'Asset'             => Maduser\Minimal\Base\Providers\AssetProvider::class,
+    'Assets'            => Maduser\Minimal\Base\Providers\AssetsProvider::class,
     'CollectionFactory' => Maduser\Minimal\Base\Providers\CollectionFactoryProvider::class,
     'Collection'        => Maduser\Minimal\Base\Providers\CollectionProvider::class,
     'Config'            => Maduser\Minimal\Base\Providers\ConfigProvider::class,

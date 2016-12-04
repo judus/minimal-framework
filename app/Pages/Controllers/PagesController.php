@@ -6,7 +6,7 @@ use Maduser\Minimal\Base\Interfaces\RequestInterface;
 use Maduser\Minimal\Base\Interfaces\RouterInterface;
 use Maduser\Minimal\Base\Interfaces\RouteInterface;
 use Maduser\Minimal\Base\Interfaces\ViewInterface;
-use Maduser\Minimal\Base\Interfaces\AssetInterface;
+use Maduser\Minimal\Base\Interfaces\AssetsInterface;
 use Maduser\Minimal\Base\Interfaces\ResponseInterface;
 use Maduser\Minimal\Base\Interfaces\ModulesInterface;
 
@@ -42,12 +42,12 @@ class PagesController extends Controller
      */
     protected $view;
     /**
-     * @var AssetInterface
+     * @var AssetsInterface
      */
-    protected $asset;
+    protected $assets;
 
     /**
-     * @var AssetInterface
+     * @var ModulesInterface
      */
     protected $modules;
     protected $module;
@@ -60,7 +60,8 @@ class PagesController extends Controller
      * @param RouterInterface   $router
      * @param ResponseInterface $response
      * @param ViewInterface     $view
-     * @param AssetInterface    $asset
+     * @param AssetsInterface   $assets
+     * @param ModulesInterface  $modules
      */
     public function __construct(
         ConfigInterface $config,
@@ -68,7 +69,7 @@ class PagesController extends Controller
         RouterInterface $router,
         ResponseInterface $response,
         ViewInterface $view,
-        AssetInterface $asset,
+        AssetsInterface $assets,
         ModulesInterface $modules
     ) {
         /** @var \Maduser\Minimal\Base\Core\Config $config */
@@ -83,7 +84,7 @@ class PagesController extends Controller
         $this->router = $router;
         $this->response = $response;
         $this->view = $view;
-        $this->asset = $asset;
+        $this->assets = $assets;
         $this->modules = $modules;
 
         $this->view->setBase('../app/Pages/resources/views');
@@ -92,21 +93,20 @@ class PagesController extends Controller
         $this->view->setLayout('layouts/my-layout');
         $this->view->share('title', 'My title');
 
-        $this->asset->setBase('../app/Pages/resources');
-        $this->asset->setTheme('my-theme');
-        $this->asset->setCssDir('assets/css');
-        $this->asset->setJsDir('assets/js');
-        $this->asset->addCss(['normalize.css', 'main.css']);
-        $this->asset->addJs(['vendor/modernizr-2.8.3.min.js'], 'top');
-        $this->asset->addJs(['plugins.js', 'js/main.js'], 'bottom');
-        $this->asset->addExternalJs(['https://code.jquery.com/jquery-3.1.0.min.js'], 'bottom');
-        $this->asset->addInlineScripts('jQueryFallback', function () {
+        $this->assets->setBase('assets');
+        $this->assets->setTheme('my-theme');
+        $this->assets->setCssDir('css');
+        $this->assets->setJsDir('js');
+        $this->assets->addCss(['bootstrap.min.css', 'bootstrap-theme.min.css']);
+        $this->assets->addCss(['main.css']);
+        $this->assets->addJs(['vendor/modernizr-2.8.3-respond-1.4.2.min.js'], 'top');
+        $this->assets->addJs(['vendor/bootstrap.min.js', 'main.js'], 'bottom');
+        $this->assets->addExternalJs([
+            '//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js'
+        ], 'bottom');
+        $this->assets->addInlineScripts('jQueryFallback', function () {
             return $this->view->render('scripts/jquery-fallback', [], true);
         });
-
-
-
-
 
     }
 
@@ -136,7 +136,10 @@ class PagesController extends Controller
      */
     public function getStaticPage($uri)
     {
-        usleep(2000000);
+        for ($i = 0; $i < 10000000; $i++)
+        {
+            $foo = 1 + 1;
+        }
 
         // replace 'sample.php' with $uri
         return $this->view->render('pages/my-view', [
@@ -157,6 +160,6 @@ class PagesController extends Controller
         show($this->modules, 'Modules');
         show($this->response, 'Response');
         show($this->view, 'View');
-        show($this->asset, 'Asset');
+        show($this->assets, 'Assets');
     }
 }

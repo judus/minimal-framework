@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'Maduser\Minimal\Base\Interfaces\AssetInterface' =>
-        Maduser\Minimal\Base\Core\Asset::class,
+    'Maduser\Minimal\Base\Interfaces\AssetsInterface' =>
+        Maduser\Minimal\Base\Core\Assets::class,
 
     'Maduser\Minimal\Base\Interfaces\BaseModelInterface' =>
         Maduser\Minimal\Base\Models\BaseModel::class,

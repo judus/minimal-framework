@@ -13,8 +13,8 @@
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <!-- Place favicon.ico in the root directory -->
 
-    <?=$this->asset->getCss()?>
-    <?=$this->asset->getJs('top')?>
+    <?=$this->assets->getCss()?>
+    <?=$this->assets->getJs('top')?>
 </head>
 <body>
     <!--[if lt IE 8]>
@@ -93,14 +93,13 @@
         <hr>
         <footer>
             <p>&copy; Acme 2016</p>
-            <p class="text-center text-muted small"><small>{execution-time}</small></p>
         </footer>
     </div>
 
-    <?= $this->asset->getExternalJs('bottom') ?>
-    <?= $this->asset->getInlineScripts('jQueryFallback') ?>
-    <?= $this->asset->getJs('bottom') ?>
-    <?= $this->asset->getInlineScripts() ?>
+    <?= $this->assets->getExternalJs('bottom') ?>
+    <?= $this->assets->getInlineScripts('jQueryFallback') ?>
+    <?= $this->assets->getJs('bottom') ?>
+    <?= $this->assets->getInlineScripts() ?>
 
 </body>
 </html>
