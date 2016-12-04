@@ -111,8 +111,7 @@ $route->group([
 $route->get('download/pdf', function () use ($response) {
     $response->addHeader('Content-Type: application/pdf');
     $response->addHeader('Content-Disposition: attachment; filename="downloaded.pdf"');
-    $response->setContent(readfile('original.pdf'));
-    $response->send();
+    readfile('original.pdf');
 });
 ```
 
