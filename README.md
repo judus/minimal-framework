@@ -326,25 +326,25 @@ $assets->addInlineScripts('jQueryFallback', function () {
 });
 ```
 
-The Asset class injected into the View class
+The Assets class injected into the View class
 ```html
 <!-- resources/views/my-theme/layouts/my-layout.php -->
 <html>
 <head>
     <title><?=$title?></title>
 
-    <?= $this->asset->getCss() ?>
-    <?= $this->asset->getJs('top') ?>
+    <?= $this->assets->getCss() ?>
+    <?= $this->assets->getJs('top') ?>
 </head>
 <body>
     <div class="content">
         ...
     </div>
 
-    <?= $this->asset->getExternalJs('bottom') ?>
-    <?= $this->asset->getInlineScripts('jQueryFallback') ?>
-    <?= $this->asset->getJs('bottom') ?>
-    <?= $this->asset->getInlineScripts() ?>
+    <?= $this->assets->getExternalJs('bottom') ?>
+    <?= $this->assets->getInlineScripts('jQueryFallback') ?>
+    <?= $this->assets->getJs('bottom') ?>
+    <?= $this->assets->getInlineScripts() ?>
 </body>
 </html>
 ```
