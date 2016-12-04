@@ -1,0 +1,15 @@
+// min-width
+$screen-xs-min:              480px !default;
+$screen-sm-min:              768px !default;
+$screen-md-min:              992px !default;
+$screen-ml-min:              1024px !default;
+$screen-lg-min:              1200px !default;
+$screen-xl-min:              1440px !default;
+$screen-xxl-min:             1920px !default;
+
+// max-width
+$screen-sm-max:              ($screen-md-min - 1) !default;
+$screen-md-max:              ($screen-lg-min - 1) !default;
+$screen-lg-max:              ($screen-xl-min - 1) !default;
+$screen-xl-max:              ($screen-xxl-min - 1) !default;
+

@@ -1,4 +1,10 @@
 {
+  "name": "The Minimal Framework.",
+  "description": "The Minimal Framework.",
+  "url": "https://github.com/judus/minimal-framework",
+  "author": "Julien Duseyau",
+  "copyright": "Julien Duseyau",
+  "license": "MIT license",
   "private": true,
   "devDependencies": {
     "gulp": "^3.8.8",

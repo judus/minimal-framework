@@ -1,0 +1,22 @@
+CACHE MANIFEST
+# The Minimal Framework. 
+# Time: Sun Dec 04 2016 23:47:06 GMT+0100 (CET)
+
+CACHE:
+../../public/assets/js/fallback.js
+../../public/assets/js/main.js
+../../public/assets/js/main.min.js
+../../public/assets/js/main.min.js.map
+../../public/assets/css/main.css
+../../public/assets/css/main.css.diff
+../../public/assets/css/main.min.css
+../../public/assets/img/006.jpg
+../../public/assets/img/013.jpg
+../../public/assets/fonts/glyphicons-halflings-regular.eot
+../../public/assets/fonts/glyphicons-halflings-regular.svg
+../../public/assets/fonts/glyphicons-halflings-regular.ttf
+../../public/assets/fonts/glyphicons-halflings-regular.woff
+humans.txt
+
+NETWORK:
+*

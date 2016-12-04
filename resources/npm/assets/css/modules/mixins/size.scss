@@ -1,0 +1,24 @@
+// Sizing shortcuts
+
+@mixin size($width, $height) {
+  width: $width;
+  height: $height;
+}
+
+@mixin square($size) {
+  @include size($size, $size);
+}
+
+@mixin view-padding($width: 780px) {
+  padding-left: calc(50% - #{$width/2});
+  padding-right: calc(50% - #{$width/2});
+}
+
+@mixin view-paddings() {
+  @media (min-width: $screen-sm-min) {
+    @include view-padding(560px);
+  }
+  @media (min-width: $screen-ml-min) {
+    @include view-padding(780px);
+  }
+}

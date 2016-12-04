@@ -1,0 +1,18 @@
+{
+  "Development": [
+    {
+      "Lead": "Julien Duseyau <julien.duseyau@gmail.com>",
+      "Site": "https://github.com/judus/minimal-framework",
+      "Location": "Basel, Switzerland"
+    }
+  ],
+  "site": [
+    {
+      "Project": "<%= package.name %>",
+      "Last update": "<%= grunt.template.today('yyyy-mm-dd') %>",
+      "Standard": "HTML5, CSS3",
+      "Components": "Modernizr, JSON, jQuery, Bootstrap",
+      "Software": "Grunt, Sass, Git, PHP, Minimal Framework"
+    }
+  ]
+}

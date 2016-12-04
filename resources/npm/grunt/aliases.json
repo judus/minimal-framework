@@ -1,0 +1,45 @@
+{
+  "default": [
+    "dist",
+    "watch"
+  ],
+  "css": [
+    "sass",
+    "autoprefixer",
+    "csscomb",
+    "cssmin",
+    "bless",
+    "usebanner:css",
+    "modernizr",
+    "manifest",
+    "notify:css"
+  ],
+  "js": [
+    "jshint",
+    "concat",
+    "uglify",
+    "usebanner:js",
+    "modernizr",
+    "manifest",
+    "notify:js"
+  ],
+  "dist": [
+    "sass",
+    "autoprefixer",
+    "csscomb",
+    "jshint",
+    "copy",
+    "concat",
+    "uglify",
+    "cssmin",
+    "bless",
+    "modernizr",
+    "imagemin",
+    "svgmin",
+    "humans_txt",
+    "htmlmin",
+    "usebanner",
+    "manifest",
+    "notify:all"
+  ]
+}

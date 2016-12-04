@@ -8,8 +8,12 @@ https://github.com/judus/maduser-minimal
 
 ## Requirements
 
-1. PHP version 7.*
+1. PHP version 7
 2. composer
+
+Optional
+
+3. npm for bower, grunt and gulp
 
 ## Install
 ```bash
@@ -21,7 +25,6 @@ $ composer create-project minimal/framework
 [Routing](#routing) | [Middlewares](#middlewares) | [Providers](#providers) | [Dependency Injection](#dependency-injection) | [Views](#views) | [Assets](#assets) | [Modules](#modules)
 
 ### Routing
-See also config/routes.php
 
 ##### Direct output:
 ```php
@@ -114,6 +117,7 @@ $route->get('download/pdf', function () use ($response) {
     readfile('original.pdf');
 });
 ```
+
 
 ### Middlewares
 
@@ -260,14 +264,17 @@ class MyClass
 $view = new Maduser\Minimal\Base\Core\View();
 $view->setBase('../resources/views/'); // Path from index.php
 $view->setTheme('my-theme'); // Set a subdir (optional)
-$view->setDir('my-theme'); // Set a subdir (optional)
 $view->setLayout('layouts/my-layout') // View wrapper
-$view->share('title', 'My title'); // Share a value across all views 
 
-// The values are only available in this view
+// Share a variable $title across all views
+$view->share('title', 'My title');  
+
+// Set variables only for this view
+$view->set('viewValue1', 'someValue1')
+
 $view->render('pages/my-view', [
-	'viewValue1' => 'SomeValue1',
-	'viewValue2' => 'SomeValue2'
+	'viewValue2' => 'someValue2', // Same as $view->set()
+	'viewValue3' => 'someValue3'  // Same as $view->set()
 ]);
 ```
 
@@ -292,7 +299,7 @@ $view->render('pages/my-view', [
 <p><?= $viewValue2 ?></p>
 ```
 ```php
-// You also could inject the View class in a controller
+// Example of injection
 
 class SomeController
 {
@@ -320,8 +327,10 @@ $assets->addCss(['normalize.css', 'main.css']); // Register css files
 $assets->addJs(['vendor/modernizr-2.8.3.min.js'], 'top'); //Register js files with keyword
 $assets->addJs(['plugins.js', 'main.js'], 'bottom'); // Register more js files with another keyword
 $assets->addExternalJs(['https://code.jquery.com/jquery-3.1.0.min.js'], 'bottom'); // Js from CDN
-$assets->addInlineScripts('jQueryFallback', function () {
-	return $this->view->render('scripts/jquery-fallback', [], true);
+
+/** @var Maduser\Minimal\Base\Core\View $view */
+$assets->addInlineScripts('jQueryFallback', function () use ($view) {
+	return $view->render('scripts/jquery-fallback', [], true);
 });
 ```
 
@@ -390,15 +399,39 @@ $modules->register('your-module-dirname', [
 ```
 
 ### Frontend tools
-Partially implemented
+
+Install packages
+```bash
+$ cd resources/npm
+$ npm install
+```
+Adjust paths.json
+```json
+{
+  "source": "../assets", 
+  "destination": "../../public/assets"
+}
+```
+Run grunt and grunt watch
+```bash
+$ grunt
+```
+Run gulp and gulp watch (not implemented yet)
+```bash
+$ gulp
+```
+Both Grunt and Gulp will compile (sass), concat, minify, uglify, copy from source to destination
+
+See resources/npm/grunt for Grunt setup options
+
+See resources/npm/gulp for Gulp setup options (not implemented yet)
 
    ---
 #### TODOs
-- Route model/viewModel binding
-- Configure directories and tasks for npm, bower, grunt and/or gulp
-- Demos
+- Route model/view binding
+- ViewModel, Presenter
 - Unit tests
-- Documentation
+- Api documentation
 
 ---
 
