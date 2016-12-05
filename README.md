@@ -137,6 +137,7 @@ $route->get('users', [
 	]
 ]);
 ```
+
 ```php
 // in app/Middlewares/CheckPermission.php
 
@@ -144,7 +145,8 @@ class CheckPermission implements MiddlewareInterface
 {
     ...
 	    
-    // Inject what you want
+    // Inject what you want, instance is created through
+    // IOC::make() which injects any dependencies
     public function __construct(
         RequestInterface $request,
         ResponseInterface $response,
@@ -155,7 +157,7 @@ class CheckPermission implements MiddlewareInterface
         $this->route = $route;
     }
 
-	// Executed before task
+	// Executed before dispatch
     public function before() {
         // If not authorised...
                 
@@ -181,17 +183,37 @@ class Cache implements MiddlewareInterface
 {
 	...
 
-	// Executed before task
+	// Executed before dispatch
 	public function before() {
 		// return cached contents
 	}
 	
-	// Executed after task
+	// Executed after dispatch
 	public function after() {
 		// delete old cache
 		// create new cache
 	}
 }
+```
+
+```php
+// Array of middlewares
+$middlewares = [
+	'Acme\\Middlewares\\checkPermission',
+	'Acme\\Middlewares\\ReportAccess',
+	'Acme\\Middlewares\\Cache' => [(1*1*10)]
+];
+
+// The middleware controller
+$middleware = new Maduser\Minimal\Base\Core\Middleware($middlewares);
+
+// Wrap a task in middleware layers
+$response = $middleware->dispatch(function() {
+	// executes before() on each middleware layer here
+	return 'the actual task'
+	// executes after() on each middleware layer here
+});
+
 ```
 
 ### Providers
