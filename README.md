@@ -201,8 +201,8 @@ class Cache implements MiddlewareInterface
 
 return [
 	'Acme\\MyClass' => Acme\MyClassProvider::class, 
-	'Acme\\MyOtherClassA' => Acme\MyClassProvider::class, 
-	'Acme\\MyOtherClassB' => Acme\MyClassProvider::class, 
+	'Acme\\MyOtherClassA' => Acme\MyOtherClassAProvider::class, 
+	'Acme\\MyOtherClassB' => Acme\MyOtherClassBProvider::class, 
 ];
 ```
 
