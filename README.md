@@ -230,6 +230,9 @@ class MyClassProvider extends Provider
 	   ));
 	}
 }
+
+// IOC::resolve('Acme\\MyOtherClassA')
+// Resolves a class through a provider as defined in config/providers.php
 ```
 
 ### Dependency injection
@@ -255,6 +258,9 @@ class MyClass
 		$this->classB = $classB;
 	}
 }
+
+$MyClass = IOC::make(MyClass::class); 
+// Does a reflection and injects the dependencies as defined in config/bindings.php
 ```
 
 ### Views
