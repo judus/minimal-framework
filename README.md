@@ -31,7 +31,7 @@ $ composer create-project minimal/framework
 // in config/routes.php
 
 $route->get('hello/(:any)/(:any)', function($firstname, $lastname) {
-	return 'Hello ' . ucfirst($name) . ' ' . ucfirst($lastname);
+	return 'Hello ' . ucfirst($firstname) . ' ' . ucfirst($lastname);
 });
 
 // $route->get() responds to GET requests
