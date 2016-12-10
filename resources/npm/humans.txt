@@ -7,8 +7,8 @@
 	Location: Basel, Switzerland
 
 # SITE
-	Project: The Minimal Framework.
-	Last Update: 2016-12-04
+	Project: minimal-framework
+	Last Update: 2016-12-09
 	Standard: HTML5, CSS3
 	Components: Modernizr, JSON, jQuery, Bootstrap
 	Software: Grunt, Sass, Git, PHP, Minimal Framework

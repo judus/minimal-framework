@@ -9,7 +9,7 @@ module.exports = {
   },
   css: {
     files: [
-      '<%= paths.source %>/css/**/*.scss',
+      '<%= paths.source %>/scss/**/*.scss',
     ],
     tasks: ['css']
   },

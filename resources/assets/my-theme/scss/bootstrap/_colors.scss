@@ -1,0 +1,20 @@
+// General variable structure
+//
+// Variable format should follow the `$component-modifier-state-property` order.
+
+// Colors
+//
+// Grayscale and brand colors for use across Bootstrap.
+
+$gray-dark: #373A3C !default;
+$gray: #55595C !default;
+$gray-light: #818A91 !default;
+$gray-lighter: #ECEEEF !default;
+$gray-lightest: #F7F7F9 !default;
+
+$brand-primary: #0275D8 !default;
+$brand-success: #5CB85C !default;
+$brand-info: #5BC0DE !default;
+$brand-warning: #F0AD4E !default;
+$brand-danger: #D9534F !default;
+$brand-inverse: $gray-dark !default;

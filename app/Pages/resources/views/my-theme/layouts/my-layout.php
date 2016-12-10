@@ -22,31 +22,31 @@ $title = isset($title) ? $title : '';
     Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve
     your experience.</p>
 <![endif]-->
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<nav class="navbar navbar-static-top navbar-dark bg-inverse">
     <div class="container">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed"
-                    data-toggle="collapse" data-target="#navbar"
-                    aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">Minimal Project</a>
+            <a class="navbar-brand" href="http://bootbites.com">Minimal</a>
         </div>
-        <div id="navbar" class="navbar-collapse collapse">
-            <form class="navbar-form navbar-right" role="form">
-                <div class="form-group">
-                    <input type="text" placeholder="Email" class="form-control">
-                </div>
-                <div class="form-group">
-                    <input type="password" placeholder="Password"
-                           class="form-control">
-                </div>
-                <button type="submit" class="btn btn-success">Sign in</button>
-            </form>
-        </div><!--/.navbar-collapse -->
+        <button class="navbar-toggler hidden-xs-up pull-xs-right" type="button"
+                data-toggle="collapse" data-target="#exCollapsingNavbar">
+            &#9776;
+        </button>
+        <div class="collapse navbar-toggleable-sm hidden-xs-up" id="exCollapsingNavbar">
+            <ul class="nav navbar-nav pull-sm-right">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Features</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Pricing</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
+                </li>
+            </ul>
+        </div>
     </div>
 </nav>
 
@@ -63,7 +63,7 @@ $title = isset($title) ? $title : '';
                 dapibus, tellus ac cursus commodo, tortor mauris condimentum
                 nibh, ut fermentum massa justo sit amet risus. Etiam porta
                 sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-            <p><a class="btn btn-default" href="#" role="button">View
+            <p><a class="btn btn-primary" href="#" role="button">View
                     details &raquo;</a></p>
         </div>
         <div class="col-md-4">
@@ -72,7 +72,7 @@ $title = isset($title) ? $title : '';
                 dapibus, tellus ac cursus commodo, tortor mauris condimentum
                 nibh, ut fermentum massa justo sit amet risus. Etiam porta
                 sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-            <p><a class="btn btn-default" href="#" role="button">View
+            <p><a class="btn btn-primary" href="#" role="button">View
                     details &raquo;</a></p>
         </div>
         <div class="col-md-4">
@@ -82,7 +82,7 @@ $title = isset($title) ? $title : '';
                 semper. Fusce dapibus, tellus ac cursus commodo, tortor
                 mauris condimentum nibh, ut fermentum massa justo sit amet
                 risus.</p>
-            <p><a class="btn btn-default" href="#" role="button">View
+            <p><a class="btn btn-primary" href="#" role="button">View
                     details &raquo;</a></p>
         </div>
     </div>

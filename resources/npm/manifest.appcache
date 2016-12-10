@@ -1,21 +1,22 @@
 CACHE MANIFEST
-# The Minimal Framework. 
-# Time: Sun Dec 04 2016 23:47:06 GMT+0100 (CET)
+# minimal-framework 
+# Time: Fri Dec 09 2016 21:33:00 GMT+0100 (CET)
 
 CACHE:
-../../public/assets/js/fallback.js
-../../public/assets/js/main.js
-../../public/assets/js/main.min.js
-../../public/assets/js/main.min.js.map
-../../public/assets/css/main.css
-../../public/assets/css/main.css.diff
-../../public/assets/css/main.min.css
-../../public/assets/img/006.jpg
-../../public/assets/img/013.jpg
-../../public/assets/fonts/glyphicons-halflings-regular.eot
-../../public/assets/fonts/glyphicons-halflings-regular.svg
-../../public/assets/fonts/glyphicons-halflings-regular.ttf
-../../public/assets/fonts/glyphicons-halflings-regular.woff
+../../public/build/my-theme/js/fallback.js
+../../public/build/my-theme/js/main.js
+../../public/build/my-theme/js/main.min.js
+../../public/build/my-theme/js/main.min.js.map
+../../public/build/my-theme/css/main.css
+../../public/build/my-theme/css/main.css.diff
+../../public/build/my-theme/css/main.min.css
+../../public/build/my-theme/img/14238363_1094766320606090_4324332156258995262_n.jpg
+../../public/build/my-theme/img/29537152824_eb1f2c859a_k.jpg
+../../public/build/my-theme/img/30246483685_f6e941eda7_o.jpg
+../../public/build/my-theme/fonts/glyphicons-halflings-regular.eot
+../../public/build/my-theme/fonts/glyphicons-halflings-regular.svg
+../../public/build/my-theme/fonts/glyphicons-halflings-regular.ttf
+../../public/build/my-theme/fonts/glyphicons-halflings-regular.woff
 humans.txt
 
 NETWORK:

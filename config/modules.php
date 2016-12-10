@@ -7,3 +7,5 @@ $modules->register('Pages', [
     //'providers' => 'Config/providers.php',
     //'routes' => 'Config/routes.php',
 ]);
+
+$modules->register('Assets', []);

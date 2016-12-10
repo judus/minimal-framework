@@ -14,6 +14,7 @@ $route->get('pages/info', 'Acme\\Pages\\Controllers\\PagesController@info');
 $route->get('contact', 'Maduser\Minimal\\Base\\Controllers\\PagesController@contact');
 $route->get('welcome/(:any)', 'Maduser\Minimal\\Base\\Controllers\\PagesController@welcome');
 $route->get('welcome', 'Maduser\Minimal\\Base\\Controllers\\PagesController@welcome');
+
 $route->get('page/welcome/(:any)/(:any)', 'Maduser\Minimal\\Base\\Controllers\\PagesController@welcome');
 $route->get('page/welcome/(:any)', 'Maduser\Minimal\\Base\\Controllers\\PagesController@welcome');
 $route->get('page/(:any)', 'Maduser\Minimal\\Base\\Controllers\\PagesController@getStaticPage');

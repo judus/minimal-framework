@@ -6,7 +6,6 @@ ini_set('display_errors', true);
 require "../vendor/autoload.php";
 require "../helpers/common.php";
 
-
 /**
  * Example 1
  * /
@@ -47,11 +46,12 @@ $request = $minimal->getRequest();
 /** @var \Maduser\Minimal\Base\Core\Router $router */
 $router = $minimal->getRouter();
 
+
+
 $benchmark->mark('Resolving route');
 
 /** @var \Maduser\Minimal\Base\Core\Route $route */
 $route = $router->getRoute($request->getUriString());
-
 $benchmark->mark('Route resolved');
 
 /** @var \Maduser\Minimal\Base\Core\Middleware $middleware */

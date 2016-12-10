@@ -1,6 +1,5 @@
 <?php namespace Acme\Pages\Controllers;
 
-use Maduser\Minimal\Base\Core\Controller;
 use Maduser\Minimal\Base\Interfaces\ConfigInterface;
 use Maduser\Minimal\Base\Interfaces\RequestInterface;
 use Maduser\Minimal\Base\Interfaces\RouterInterface;
@@ -15,7 +14,7 @@ use Maduser\Minimal\Base\Interfaces\ModulesInterface;
  *
  * @package Acme\Pages\Controllers
  */
-class PagesController extends Controller
+class PagesController
 {
     /**
      * @var ConfigInterface
@@ -93,17 +92,27 @@ class PagesController extends Controller
         $this->view->setLayout('layouts/my-layout');
         $this->view->share('title', 'My title');
 
-        $this->assets->setBase('assets');
+        $this->assets->setBase('assets/pages/resources/assets/build');
         $this->assets->setTheme('my-theme');
         $this->assets->setCssDir('css');
         $this->assets->setJsDir('js');
+        /*
         $this->assets->addCss(['bootstrap.min.css', 'bootstrap-theme.min.css']);
-        $this->assets->addCss(['main.css']);
-        $this->assets->addJs(['vendor/modernizr-2.8.3-respond-1.4.2.min.js'], 'top');
-        $this->assets->addJs(['vendor/bootstrap.min.js', 'main.js'], 'bottom');
+        */
+        $this->assets->addCss(['main.min.css']);
+
+        $this->assets->addJs(['../vendor/modernizr/modernizr.min.js'], 'top');
+
+        $this->assets->addJs([
+            '../vendor/tether/js/tether.min.js',
+            '../vendor/bootstrap/js/bootstrap.min.js',
+            '../vendor/fastclick/lib/fastclick.js',
+            'main.js'], 'bottom');
+
         $this->assets->addExternalJs([
             '//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js'
         ], 'bottom');
+
         $this->assets->addInlineScripts('jQueryFallback', function () {
             return $this->view->render('scripts/jquery-fallback', [], true);
         });
@@ -136,11 +145,12 @@ class PagesController extends Controller
      */
     public function getStaticPage($uri)
     {
+        /*
         for ($i = 0; $i < 10000000; $i++)
         {
             $foo = 1 + 1;
         }
-
+         */
         // replace 'sample.php' with $uri
         return $this->view->render('pages/my-view', [
             'content' => 'Would load page ' . "'" . str_replace('/', '-',
