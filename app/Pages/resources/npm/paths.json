@@ -1,0 +1,4 @@
+{
+  "source": "../assets/my-theme",
+  "destination": "../../public/build/my-theme"
+}

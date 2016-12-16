@@ -1,0 +1,72 @@
+/*!
+ * Bootstrap Custom
+ * Copyright 2016 Julien Duseyau
+ * Licensed under MIT
+ */
+
+@mixin _assert-ascending($map, $map-name) {
+	$prev-key: null;
+	$prev-num: null;
+	@each $key, $num in $map {
+		@if $prev-num == null {
+			// Do nothing
+		} @else if not comparable($prev-num, $num) {
+			@warn "Potentially invalid value for #{$map-name}: This map must be in ascending order, but key '#{$key}' has value #{$num} whose unit makes it incomparable to #{$prev-num}, the value of the previous key '#{$prev-key}' !";
+		} @else if $prev-num >= $num {
+			@warn "Invalid value for #{$map-name}: This map must be in ascending order, but key '#{$key}' has value #{$num} which isn't greater than #{$prev-num}, the value of the previous key '#{$prev-key}' !";
+		}
+		$prev-key: $key;
+		$prev-num: $num;
+	}
+}
+
+@import "custom";
+
+$bt-path: "../../../../npm/bower_components/bootstrap/scss/";
+
+// Core variables and mixins
+@import "../../../../npm/bower_components/bootstrap/scss/variables";
+@import "../../../../npm/bower_components/bootstrap/scss/mixins";
+
+// Reset and dependencies
+@import "../../../../npm/bower_components/bootstrap/scss/normalize";
+@import "../../../../npm/bower_components/bootstrap/scss/print";
+
+// Core CSS
+@import "../../../../npm/bower_components/bootstrap/scss/reboot";
+@import "../../../../npm/bower_components/bootstrap/scss/type";
+@import "../../../../npm/bower_components/bootstrap/scss/images";
+@import "../../../../npm/bower_components/bootstrap/scss/code";
+@import "../../../../npm/bower_components/bootstrap/scss/grid";
+@import "../../../../npm/bower_components/bootstrap/scss/tables";
+@import "../../../../npm/bower_components/bootstrap/scss/forms";
+@import "../../../../npm/bower_components/bootstrap/scss/buttons";
+
+// Components
+@import "../../../../npm/bower_components/bootstrap/scss/animation";
+@import "../../../../npm/bower_components/bootstrap/scss/dropdown";
+@import "../../../../npm/bower_components/bootstrap/scss/button-group";
+@import "../../../../npm/bower_components/bootstrap/scss/input-group";
+@import "../../../../npm/bower_components/bootstrap/scss/custom-forms";
+@import "../../../../npm/bower_components/bootstrap/scss/nav";
+@import "../../../../npm/bower_components/bootstrap/scss/navbar";
+@import "../../../../npm/bower_components/bootstrap/scss/card";
+@import "../../../../npm/bower_components/bootstrap/scss/breadcrumb";
+@import "../../../../npm/bower_components/bootstrap/scss/pagination";
+@import "../../../../npm/bower_components/bootstrap/scss/tags";
+@import "../../../../npm/bower_components/bootstrap/scss/jumbotron";
+@import "../../../../npm/bower_components/bootstrap/scss/alert";
+@import "../../../../npm/bower_components/bootstrap/scss/progress";
+@import "../../../../npm/bower_components/bootstrap/scss/media";
+@import "../../../../npm/bower_components/bootstrap/scss/list-group";
+@import "../../../../npm/bower_components/bootstrap/scss/responsive-embed";
+@import "../../../../npm/bower_components/bootstrap/scss/close";
+
+// Components w/ JavaScript
+@import "../../../../npm/bower_components/bootstrap/scss/modal";
+@import "../../../../npm/bower_components/bootstrap/scss/tooltip";
+@import "../../../../npm/bower_components/bootstrap/scss/popover";
+@import "../../../../npm/bower_components/bootstrap/scss/carousel";
+
+// Utility classes
+@import "../../../../npm/bower_components/bootstrap/scss/utilities";

@@ -1,0 +1,12 @@
+// Options
+//
+// Quickly modify global styling by enabling or disabling optional features.
+
+$enable-flex: false !default;
+$enable-rounded: true !default;
+$enable-shadows: false !default;
+$enable-gradients: false !default;
+$enable-transitions: false !default;
+$enable-hover-media-query: false !default;
+$enable-grid-classes: true !default;
+$enable-print-styles: true !default;

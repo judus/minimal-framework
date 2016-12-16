@@ -115,8 +115,8 @@ class Cache implements MiddlewareInterface
     {
         $cache = $this->getCache($this->getFilename(), $this->getTimeout());
         if ($cache) {
-            $cache = str_replace('</body>',
-                '<p><small>Cached</small></p></body>', $cache);
+            $cache = str_replace('</footer>',
+                '<p><small>Cached contents - FrontController was not executed</small></p></footer>', $cache);
         }
 
         return $cache;

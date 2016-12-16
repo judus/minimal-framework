@@ -28,6 +28,6 @@ Thumbs.db
 .env
 /vendor
 composer.lock
-/resources/npm/bower_components
-/resources/npm/node_modules
 /storage/cache/*.cache
+/**/bower_components
+/**/node_modules

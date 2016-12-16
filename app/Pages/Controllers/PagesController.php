@@ -20,26 +20,32 @@ class PagesController
      * @var ConfigInterface
      */
     protected $config;
+
     /**
      * @var RequestInterface
      */
     protected $request;
+
     /**
      * @var RouterInterface
      */
     protected $router;
+
     /**
      * @var RouteInterface
      */
     protected $route;
+
     /**
      * @var ResponseInterface
      */
     protected $response;
+
     /**
      * @var ViewInterface
      */
     protected $view;
+
     /**
      * @var AssetsInterface
      */
@@ -49,7 +55,6 @@ class PagesController
      * @var ModulesInterface
      */
     protected $modules;
-    protected $module;
 
     /**
      * PageController constructor.
@@ -72,42 +77,53 @@ class PagesController
         ModulesInterface $modules
     ) {
         /** @var \Maduser\Minimal\Base\Core\Config $config */
-        /** @var \Maduser\Minimal\Base\Core\Request $request */
-        /** @var \Maduser\Minimal\Base\Core\Router $router */
-        /** @var \Maduser\Minimal\Base\Core\Response $response */
-        /** @var \Maduser\Minimal\Base\Core\View $view */
-        /** @var \Maduser\Minimal\Base\Core\Asset $asset */
-        /** @var \Maduser\Minimal\Base\Core\Modules $modules */
         $this->config = $config;
+        /** @var \Maduser\Minimal\Base\Core\Request $request */
         $this->request = $request;
+        /** @var \Maduser\Minimal\Base\Core\Router $router */
         $this->router = $router;
+        /** @var \Maduser\Minimal\Base\Core\Response $response */
         $this->response = $response;
+        /** @var \Maduser\Minimal\Base\Core\View $view */
         $this->view = $view;
+        /** @var \Maduser\Minimal\Base\Core\Assets $assets */
         $this->assets = $assets;
+        /** @var \Maduser\Minimal\Base\Core\Modules $modules */
         $this->modules = $modules;
 
+        // Setup views
         $this->view->setBase('../app/Pages/resources/views');
         $this->view->setTheme('my-theme');
-        //$this->view->setDir('views');
         $this->view->setLayout('layouts/my-layout');
         $this->view->share('title', 'My title');
 
-        $this->assets->setBase('assets/pages/resources/assets/build');
+        // Setup assets
+        $this->assets->setSource('../app/Pages/public/build');
+        $this->assets->setBase('assets/pages/public/build');
         $this->assets->setTheme('my-theme');
         $this->assets->setCssDir('css');
         $this->assets->setJsDir('js');
-        /*
-        $this->assets->addCss(['bootstrap.min.css', 'bootstrap-theme.min.css']);
-        */
-        $this->assets->addCss(['main.min.css']);
+        $this->assets->setVendorDir('vendor');
 
-        $this->assets->addJs(['../vendor/modernizr/modernizr.min.js'], 'top');
+        // Register assets
+        $this->assets->addCss([
+            'main.css'
+        ], 'top');
+
+        $this->assets->addVendorJs([
+            'modernizr/modernizr.min.js'
+        ], 'top');
+
+        $this->assets->addVendorJs([
+            'tether/js/tether.min.js',
+            'bootstrap/js/bootstrap.min.js',
+            'fastclick/lib/fastclick.js'
+        ], 'bottom');
 
         $this->assets->addJs([
-            '../vendor/tether/js/tether.min.js',
-            '../vendor/bootstrap/js/bootstrap.min.js',
-            '../vendor/fastclick/lib/fastclick.js',
-            'main.js'], 'bottom');
+            'main.min.js',
+            'fallback.js'
+        ], 'bottom');
 
         $this->assets->addExternalJs([
             '//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js'
@@ -116,11 +132,11 @@ class PagesController
         $this->assets->addInlineScripts('jQueryFallback', function () {
             return $this->view->render('scripts/jquery-fallback', [], true);
         });
-
     }
 
-
     /**
+     * @param null $name
+     *
      * @return string
      */
     public function welcome($name = null)
@@ -145,13 +161,6 @@ class PagesController
      */
     public function getStaticPage($uri)
     {
-        /*
-        for ($i = 0; $i < 10000000; $i++)
-        {
-            $foo = 1 + 1;
-        }
-         */
-        // replace 'sample.php' with $uri
         return $this->view->render('pages/my-view', [
             'content' => 'Would load page ' . "'" . str_replace('/', '-',
                     $uri) . "'"
@@ -163,6 +172,7 @@ class PagesController
      */
     public function info()
     {
+        ob_start();
         show($this->config, 'Config');
         show($this->request, 'Request');
         show($this->router, 'Router');
@@ -171,5 +181,12 @@ class PagesController
         show($this->response, 'Response');
         show($this->view, 'View');
         show($this->assets, 'Assets');
+        $contents = ob_get_contents();
+        ob_end_clean();
+
+        return $this->view->render('pages/my-view', [
+            'content' => $contents
+        ]);
+
     }
 }

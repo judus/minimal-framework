@@ -41,6 +41,11 @@ class AssetsController
     protected $assets;
 
     /**
+     * @var null
+     */
+    protected $basePath = null;
+
+    /**
      * PageController constructor.
      *
      * @param ConfigInterface   $config
@@ -66,7 +71,7 @@ class AssetsController
         /** @var \Maduser\Minimal\Base\Core\Router $router */
         /** @var \Maduser\Minimal\Base\Core\Response $response */
         /** @var \Maduser\Minimal\Base\Core\View $view */
-        /** @var \Maduser\Minimal\Base\Core\Asset $asset */
+        /** @var \Maduser\Minimal\Base\Core\Assets $assets */
         $this->config = $config;
         $this->request = $request;
         $this->router = $router;
@@ -74,20 +79,46 @@ class AssetsController
         $this->view = $view;
         $this->assets = $assets;
         $this->modules = $modules;
+
     }
 
-    public function getPath($filePath)
+    /**
+     * @return string
+     */
+    protected function getBasePath()
     {
-        return PATH . 'public/assets/' .$filePath;
+        if ($this->basePath) {
+            return rtrim($this->basePath, '/') . '/';
+        }
+
+        /* Default if not defined */
+        return $_SERVER['DOCUMENT_ROOT'] . '/assets/';
     }
 
+    /**
+     * @param $filePath
+     *
+     * @return string
+     */
+    protected function getPath($filePath)
+    {
+        return $this->getBasePath() .$filePath;
+    }
+
+    /**
+     * @param $filePath
+     */
     public function getAsset($filePath)
     {
-        $this->serve($filePath);
+        return $this->serve($filePath);
     }
 
-
-    private function searchModules($fileSegmentPath)
+    /**
+     * @param $fileSegmentPath
+     *
+     * @return null|string
+     */
+    protected function searchModules($fileSegmentPath)
     {
         $modules = $this->modules->getModules();
 
@@ -108,7 +139,10 @@ class AssetsController
         return null;
     }
 
-    private function serve($fileSegmentPath)
+    /**
+     * @param $fileSegmentPath
+     */
+    protected function serve($fileSegmentPath)
     {
         $filePath = $this->getPath($fileSegmentPath);
 
@@ -141,12 +175,18 @@ class AssetsController
 
         readfile($filePath);
 
-        ob_end_flush();
+        $contents = ob_get_contents();
+        ob_end_clean();
 
-        $this->response->exit();
+        return $contents;
     }
 
-    private function mimeContentType($filename)
+    /**
+     * @param $filename
+     *
+     * @return mixed|string
+     */
+    protected function mimeContentType($filename)
     {
         $mimeTypes = [
             'txt' => 'text/plain',

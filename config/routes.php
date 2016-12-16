@@ -8,21 +8,27 @@ $route->get('/', function () {
 });
 
 // Using controller and method
-$route->get('pages/(:any)', 'Acme\\Pages\\Controllers\\PagesController@getStaticPage');
-$route->get('pages/info', 'Acme\\Pages\\Controllers\\PagesController@info');
+$route->group([
+    'uriPrefix' => 'pages',
+    'middlewares' => ['Acme\\Middlewares\\Cache' => [8]]
+], function () use ($route) {
+    $route->get('info', 'Acme\\Pages\\Controllers\\PagesController@info');
+    $route->get('(:any)', 'Acme\\Pages\\Controllers\\PagesController@getStaticPage');
+});
 
-$route->get('contact', 'Maduser\Minimal\\Base\\Controllers\\PagesController@contact');
 $route->get('welcome/(:any)', 'Maduser\Minimal\\Base\\Controllers\\PagesController@welcome');
 $route->get('welcome', 'Maduser\Minimal\\Base\\Controllers\\PagesController@welcome');
+$route->get('contact', 'Maduser\Minimal\\Base\\Controllers\\PagesController@contact');
+
 
 $route->get('page/welcome/(:any)/(:any)', 'Maduser\Minimal\\Base\\Controllers\\PagesController@welcome');
 $route->get('page/welcome/(:any)', 'Maduser\Minimal\\Base\\Controllers\\PagesController@welcome');
 $route->get('page/(:any)', 'Maduser\Minimal\\Base\\Controllers\\PagesController@getStaticPage');
 
 $route->get('page/info', [
+    'middlewares' => ['Maduser\Minimal\\Base\\Middlewares\\Cache' => [8]],
     'controller' => 'Maduser\Minimal\\Base\\Controllers\\PagesController',
     'action' => 'info',
-    'middlewares' => ['Maduser\Minimal\\Base\\Middlewares\\Cache' => [8]]
 ]);
 
 // Display dev info
@@ -83,7 +89,7 @@ $route->group([
         ]);
 
         /**
-         * Example with overrides and custom values
+         * Example with overrides
          */
         $route->get('register', [
             // Override namespace for this route
@@ -119,15 +125,10 @@ $route->get('download/pdf', function ($value1, $value2) use ($response) {
     $response->send();
 });
 
-// Caching the output
 $route->get('huge/data/table', [
-    // keep in cache for day: (60*60*24)
-    // keep in cache forever: -1
-    // disable cache: 0 or null
-    'cache' => (60 * 60 * 24),
+    'middlewares' => ['Acme\\Middlewares\\Cache' => [60*60*24]],
     'namespace' => 'Maduser\\Minimal\\Base\\Controllers',
     'controller' => 'UsersController',
-    'action' => 'timeConsumingAction'
 ]);
 
 

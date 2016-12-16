@@ -1,3 +1,13 @@
+/*!
+ * minimal-framework
+ * https://github.com/judus/minimal-framework
+ * Last updated: 2016-12-16
+ * 
+ * Made by Julien Duseyau
+ * 
+ * Copyright (c) 2016 Julien Duseyau
+ * License MIT license
+ */
 ;(function($, window, document) {
 	'use strict';
 
