@@ -7,8 +7,7 @@
     "mvc"
   ],
   "license": "MIT",
-  "type": "framework",
-  "language": "PHP",
+  "type": "PHP framework",
   "authors": [
     {
       "name": "Julien Duseyau",
