@@ -8,4 +8,4 @@ $modules->register('Pages', [
     //'routes' => 'Config/routes.php',
 ]);
 
-$modules->register('Assets', []);
+$modules->register('Assets');

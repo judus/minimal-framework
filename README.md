@@ -1,3 +1,5 @@
+This is a proof of concept. (full working as described) 
+
 # Minimal PHP Framework
 
 Minimal is a web application framework.
@@ -50,14 +52,14 @@ http://localhost/hello/julien/duseyau
 ```php
 // in config/routes.php 
 
-$route->get('hello/(:any)/(:any)', 'Acme\\Controllers\\YourController@yourmethod')
+$route->get('hello/(:any)/(:any)', 'Acme\\Controllers\\YourController@yourMethod')
 ```
 ```php
 // in app/Controllers/YourController.php
 
 class Acme\Controllers\YourController
 {
-	public function yourmethod($name, $lastname)
+	public function yourMethod($name, $lastname)
 	{
 		return 'Hello ' . ucfirst($name) . ' ' . ucfirst($lastname);
 	}
@@ -71,54 +73,87 @@ http://localhost/hello/julien/duseyau
 // in config/routes.php
 
 $route->group([
+
+    // Prefixes all urls in the group with 'auth/'
+    'uriPrefix' => 'auth',
+
     // Define the class namespace for all routes in this group
     // Will be prefixed to the controllers
     'namespace' => 'Acme\\Controllers\\'
+
 ], function () use ($route) {
 
+    // GET request: 'auth/login'
+    // Controller 'Acme\\Controllers\AuthController
+    $route->get('login', [
+        'controller' => 'AuthController',
+        'action' => 'loginForm' // Show the login form
+    ]);
+
+    // POST request: 'auth/login'
+    // Controller 'Acme\\Controllers\AuthController
+    $route->post('login', [
+        'controller' => 'AuthController',
+        'action' => 'login' // Login the user
+    ]);
+
+    // GET request: 'auth/logout'
+    // Controller 'Acme\\Controllers\AuthController
+    $route->get('logout', [
+        'controller' => 'AuthController',
+        'action' => 'logout' // Logout the user
+    ]);
+
     /**
-     * Subgroup with url prefix and middleware
+     * Subgroup with middlewares
      */
     $route->group([
-        // Prefixes all urls in the group with 'auth/'
-        'uriPrefix' => 'auth',
-        // What should be done when accessing these routes
+    
+        // Middlewares apply to all route in this (sub)group
         'middlewares' => [
-            // Check if the client is authorized to access this routes
-            'Acme\\Middlewares\\checkPermission',
-            // Send a email to the administrator
+            // Check if the client is authorised to access these routes
+            'Acme\\Middlewares\\CheckPermission',
+            // Log or send a access report
             'Acme\\Middlewares\\ReportAccess',
         ]
     ], function () use ($route) {
 
-        $route->get('users', [
-            'controller' => 'UsersController',
-            'action' => 'listUsers' // Show a list of users
-        ]); 
-        // Uri is: 'auth/users'
-        // Controller is 'Acme\\Controllers\UsersController
+        // No access to these routes if middleware CheckPermission fails
+        // Middleware ReportAccess reports all access to these routes
 
-        $route->get('users/create', [
-            'controller' => 'UsersController',
-            'action' => 'create' // Show a empty user form
+        // GET request: 'auth/users'
+        // Controller 'Acme\\Controllers\UserController
+        $route->get('users', [
+            'controller' => 'UserController',
+            'action' => 'list' // Show a list of users
         ]);
-        // Uri is: 'auth/users/create'
-        // Controller is 'Acme\\Controllers\UsersController
-	
-	// etc...
-	});
+
+        // GET request: 'auth/users/create'
+        // Controller 'Acme\\Controllers\UserController
+        $route->get('users/create', [
+            'controller' => 'UserController',
+            'action' => 'createForm' // Show a empty user form
+        ]);
+
+        // GET request: 'auth/users/edit'
+        // Controller 'Acme\\Controllers\UserController
+        $route->get('users/edit/(:num)', [
+            'controller' => 'UserController',
+            'action' => 'editForm' // Show a edit form for user (:num)
+        ]);
+
+        // etc...
+    });
 });
 ```
 ##### File download
 ```php
 $route->get('download/pdf', function () use ($response) {
-    $response->addHeader('Content-Type: application/pdf');
-    $response->addHeader('Content-Disposition: attachment; filename="downloaded.pdf"');
-    readfile('original.pdf');
+    $response->header('Content-Type: application/pdf');
+    $response->header('Content-Disposition: attachment; filename="downloaded.pdf"');
+    readfile('sample.pdf');
 });
 ```
-
-
 ### Middlewares
 
 ```php

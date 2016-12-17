@@ -1,5 +1,9 @@
 <?php
 
+if (version_compare(phpversion(), '7.0.0', '<')) {
+    die('Requires PHP version > 7.0.0');
+}
+
 ini_set('error_reporting', E_ALL);
 ini_set('display_errors', true);
 

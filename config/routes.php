@@ -2,157 +2,115 @@
 
 /** @var \Maduser\Minimal\Base\Core\Router $route */
 
-// Direct output
+/**
+ * Direct output
+ *
+ * Routes with closure are executed instantly if method and uri match, further
+ * application logic is discarded
+ */
 $route->get('/', function () {
     return 'Hello from Minimal!';
 });
 
-// Using controller and method
-$route->group([
-    'uriPrefix' => 'pages',
-    'middlewares' => ['Acme\\Middlewares\\Cache' => [8]]
-], function () use ($route) {
-    $route->get('info', 'Acme\\Pages\\Controllers\\PagesController@info');
-    $route->get('(:any)', 'Acme\\Pages\\Controllers\\PagesController@getStaticPage');
+$route->get('hello/(:any)/(:any)', function ($firstname, $lastname) {
+    return 'Hello ' . ucfirst($firstname) . ' ' . ucfirst($lastname);
 });
 
-$route->get('welcome/(:any)', 'Maduser\Minimal\\Base\\Controllers\\PagesController@welcome');
-$route->get('welcome', 'Maduser\Minimal\\Base\\Controllers\\PagesController@welcome');
-$route->get('contact', 'Maduser\Minimal\\Base\\Controllers\\PagesController@contact');
-
-
-$route->get('page/welcome/(:any)/(:any)', 'Maduser\Minimal\\Base\\Controllers\\PagesController@welcome');
-$route->get('page/welcome/(:any)', 'Maduser\Minimal\\Base\\Controllers\\PagesController@welcome');
-$route->get('page/(:any)', 'Maduser\Minimal\\Base\\Controllers\\PagesController@getStaticPage');
-
-$route->get('page/info', [
-    'middlewares' => ['Maduser\Minimal\\Base\\Middlewares\\Cache' => [8]],
-    'controller' => 'Maduser\Minimal\\Base\\Controllers\\PagesController',
-    'action' => 'info',
-]);
-
-// Display dev info
-$route->get('info', 'Maduser\Minimal\\Base\\Controllers\\PagesController@info');
 
 /**
- * Grouped routes example
+ * Using controllers
+ */
+$route->get('welcome/(:any)/(:any)', 'Acme\\Controllers\\YourController@yourMethod');
+
+
+/**
+ * Route groups
  */
 $route->group([
+
+    // Prefixes all urls in the group with 'auth/'
+    'uriPrefix' => 'auth',
+
     // Define the class namespace for all routes in this group
     // Will be prefixed to the controllers
-    'namespace' => 'Maduser\\Minimal\\Base\\Controllers\\'
+    'namespace' => 'Acme\\Controllers\\'
+
 ], function () use ($route) {
 
+    // GET request: 'auth/login'
+    // Controller 'Acme\\Controllers\AuthController
+    $route->get('login', [
+        'controller' => 'AuthController',
+        'action' => 'loginForm' // Show the login form
+    ]);
+
+    // POST request: 'auth/login'
+    // Controller 'Acme\\Controllers\AuthController
+    $route->post('login', [
+        'controller' => 'AuthController',
+        'action' => 'login' // Login the user
+    ]);
+
+    // GET request: 'auth/logout'
+    // Controller 'Acme\\Controllers\AuthController
+    $route->get('logout', [
+        'controller' => 'AuthController',
+        'action' => 'logout' // Logout the user
+    ]);
+
     /**
-     * Subgroup with url prefix and middleware
+     * Subgroup with middlewares
      */
     $route->group([
-        // Prefixes all urls in the group with 'auth/'
-        'uriPrefix' => 'auth',
-        // What should be done when accessing these routes
+        // Middlewares apply to all route in this (sub)group
         'middlewares' => [
-            // Check if the client is authorized to access this routes
-            'Maduser\Minimal\\Base\\Middlewares\\CheckPermission',
+            // Check if the client is authorised to access these routes
+            'Acme\\Middlewares\\CheckPermission',
             // Send a email to the administrator
-            'Maduser\Minimal\\Base\\Middlewares\\ReportAccess',
+            'Acme\\Middlewares\\ReportAccess',
         ]
     ], function () use ($route) {
 
+        // No access to these routes if middleware CheckPermission fails
+        // Middleware ReportAccess reports all access to these routes
+
+        // GET request: 'auth/users'
+        // Controller 'Acme\\Controllers\UserController
         $route->get('users', [
-            'controller' => 'UsersController',
-            'action' => 'listUsers' // Show a list of users
+            'controller' => 'UserController',
+            'action' => 'list' // Show a list of users
         ]);
 
+        // GET request: 'auth/users/create'
+        // Controller 'Acme\\Controllers\UserController
         $route->get('users/create', [
-            'controller' => 'UsersController',
-            'action' => 'create' // Show a empty user form
+            'controller' => 'UserController',
+            'action' => 'createForm' // Show a empty user form
         ]);
 
-        $route->post('users', [
-            'controller' => 'UsersController',
-            'action' => 'saveAsNew' // Save a new user
-        ]);
-
+        // GET request: 'auth/users/edit'
+        // Controller 'Acme\\Controllers\UserController
         $route->get('users/edit/(:num)', [
-            'controller' => 'UsersController',
-            'action' => 'edit' // Show a form with user id = (:num)
+            'controller' => 'UserController',
+            'action' => 'editForm' // Show a edit form for user (:num)
         ]);
 
-        $route->put('users/(:num)', [
-            'controller' => 'UsersController',
-            'action' => 'saveExistingUser' // Save user with id = (:num)
-        ]);
-
-        $route->delete('users/(:num)', [
-            'controller' => 'UsersController',
-            'action' => 'deleteUser' // Delete user with id = (:num)
-        ]);
-
-        /**
-         * Example with overrides
-         */
-        $route->get('register', [
-            // Override namespace for this route
-            'namespace' => 'Maduser\\Minimal\\Modules\\Auth\\',
-            // Disable the middleware for this route
-            'middlewares' => null,
-            // Add a custom value
-            'module-path' => 'modules/auth',
-            // Use controller
-            'controller' => 'RegisterController',
-            // Action
-            'action' => 'showRegisterForm'
-        ]);
-
+        // etc...
     });
-
 });
 
-/**
- *  Direct responses
- */
-
-// Direct output
-$route->get('hello/(:any)/(:any)', function ($value1, $value2) {
-    return 'Hello ' . $value1 . ' ' . $value2 . '!';
+// Example: file download
+$route->get('download/pdf', function () use ($response) {
+    $response->header('Content-Type: application/pdf');
+    $response->header('Content-Disposition: attachment; filename="downloaded.pdf"');
+    readfile('sample.pdf');
 });
 
-// Advanced responses
-$route->get('download/pdf', function ($value1, $value2) use ($response) {
-    $response->addHeader('Content-Type: application/pdf');
-    $response->addHeader('Content-Disposition: attachment; filename="downloaded.pdf"');
-    $response->setContent(readfile('original.pdf'));
-    $response->send();
-});
-
+// Example: caching
 $route->get('huge/data/table', [
-    'middlewares' => ['Acme\\Middlewares\\Cache' => [60*60*24]],
-    'namespace' => 'Maduser\\Minimal\\Base\\Controllers',
-    'controller' => 'UsersController',
+    'middlewares' => ['Acme\\Middlewares\\Cache' => [10]], // Cache for 10sec
+    'controller' => 'Acme\\Controllers\\YourController',
+    'action' => 'timeConsumingAction'
 ]);
 
-
-// Catch all
-//$route->get('(:any)', 'Maduser\Minimal\\Base\\Controllers\\PagesController@getPage');
-
-// TODO: Catch all in Closure
-/* Problem: Closure are executed in registration, before the uri matching loop
-$route->get('(:any)', function ($one) use ($view, $response) {
-    $view->setBaseDir('../resources/views');
-    $view->setTheme('my-theme');
-    $view->setViewDir('main');
-    $view->setView($one);
-
-    if (!file_exists($view->getFullViewPath())) {
-        $response->setHeader('HTTP/1.1 404 File not found');
-        $content = '<h1>404 File not found</h1>';
-        $content.= $view->getFullViewPath();
-        $response->setContent($content);
-
-        $response->send()->exit();
-    }
-
-    return $view->render(null, ['content' => $one]);
-});
-*/
 

@@ -19,5 +19,4 @@ return [
     'ViewFactory'       => Maduser\Minimal\Base\Providers\ViewFactoryProvider::class,
     'View'              => Maduser\Minimal\Base\Providers\ViewProvider::class,
     'Modules'           => Maduser\Minimal\Base\Providers\ModulesProvider::class
-
 ];

@@ -2,13 +2,13 @@
 
 if ( ! function_exists('show'))
 {
-	/**
-	 * @param null $data
-	 * @param null $heading
-	 * @param bool $print
-	 *
-	 * @return string
-	 */
+    /**
+     * @param null $data
+     * @param null $heading
+     * @param bool $getContents
+     *
+     * @return string
+     */
 	function show($data = NULL, $heading = NULL, $getContents = false) {
 		!is_null($data) OR $data = 'Hi from '. debug_backtrace()[0]['file'] .
 			' at line '. debug_backtrace()[0]['line'];
@@ -21,8 +21,9 @@ if ( ! function_exists('show'))
 		$html.= '</pre>';
 		$html.= '</div>';
 
-		if ($getContents)
+		if ($getContents) {
 			return $html;
+        }
 		echo $html;
 	}
 }
