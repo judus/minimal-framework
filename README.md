@@ -13,9 +13,8 @@ https://github.com/judus/maduser-minimal
 1. PHP version 7
 2. composer
 
-Optional
-
-3. npm for bower, grunt and gulp
+Optional:
+npm for bower, grunt and gulp
 
 ## Install
 ```bash
@@ -231,6 +230,7 @@ class Cache implements MiddlewareInterface
 }
 ```
 
+#####Standalone example
 ```php
 // Array of middlewares
 $middlewares = [
@@ -245,7 +245,7 @@ $middleware = new Maduser\Minimal\Base\Core\Middleware($middlewares);
 // Wrap a task in middleware layers
 $response = $middleware->dispatch(function() {
 	// executes before() on each middleware layer here
-	return 'the actual task'
+	return 'the task, for example frontController->dispatch(),'
 	// executes after() on each middleware layer here
 });
 
@@ -447,7 +447,7 @@ Outputs:
 See config/modules.php and example module in framework/app/Pages.
 
 1. Create a folder your-module in the framework/app directory 
-2. Copy & Paste framework/config and  framework/resources to framework/app/your-module
+2. Copy & Paste framework/config and framework/resources to framework/app/your-module
 3. Modify the config files accordingly or just empty them (you can't register the same route twice, it would throw a exception)
 4. Register the new module in framework/config/modules.php: 
 ```php
@@ -491,8 +491,6 @@ See resources/npm/gulp for Gulp setup options (not implemented yet)
 
    ---
 #### TODOs
-- Route model/view binding
-- ViewModel, Presenter
 - Unit tests
 - Api documentation
 
