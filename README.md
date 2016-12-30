@@ -240,7 +240,7 @@ $middlewares = [
 ];
 
 // The middleware controller
-$middleware = new Maduser\Minimal\Base\Core\Middleware($middlewares);
+$middleware = new Maduser\Minimal\Core\Middleware($middlewares);
 
 // Wrap a task in middleware layers
 $response = $middleware->dispatch(function() {
@@ -324,7 +324,7 @@ $MyClass = IOC::make(MyClass::class);
 ```php
 // anywhere in your code
 
-$view = new Maduser\Minimal\Base\Core\View();
+$view = new Maduser\Minimal\Libraries\View\View();
 $view->setBase('../resources/views/'); // Path from index.php
 $view->setTheme('my-theme'); // Set a subdir (optional)
 $view->setLayout('layouts/my-layout') // View wrapper
@@ -381,7 +381,7 @@ class SomeController
 
 ### Assets
 ```php
-$assets = new Maduser\Minimal\Base\Core\Asset();
+$assets = new Maduser\Minimal\Libraries\Assets\Assets();
 $assets->setBase('../app/Pages/resources/assets'); // Set base dir of assets
 $assets->setTheme('my-theme'); // Optional subdirectory
 $assets->setCssDir('css'); // Directory for the css
@@ -391,7 +391,7 @@ $assets->addJs(['vendor/modernizr-2.8.3.min.js'], 'top'); //Register js files wi
 $assets->addJs(['plugins.js', 'main.js'], 'bottom'); // Register more js files with another keyword
 $assets->addExternalJs(['https://code.jquery.com/jquery-3.1.0.min.js'], 'bottom'); // Js from CDN
 
-/** @var Maduser\Minimal\Base\Core\View $view */
+/** @var Maduser\Minimal\Libraries\View\View $view */
 $assets->addInlineScripts('jQueryFallback', function () use ($view) {
 	return $view->render('scripts/jquery-fallback', [], true);
 });
