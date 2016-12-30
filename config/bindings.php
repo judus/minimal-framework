@@ -1,39 +1,35 @@
 <?php
 
 return [
-    'Maduser\Minimal\Base\Interfaces\AssetsInterface' =>
-        Maduser\Minimal\Base\Core\Assets::class,
+    // Core
+    'Maduser\Minimal\Interfaces\ConfigInterface' =>
+        Maduser\Minimal\Core\Config::class,
 
-    'Maduser\Minimal\Base\Interfaces\BaseModelInterface' =>
-        Maduser\Minimal\Base\Models\BaseModel::class,
+    'Maduser\Minimal\Interfaces\CollectionFactoryInterface' =>
+        Maduser\Minimal\Factories\CollectionFactory::class,
 
-    'Maduser\Minimal\Base\Interfaces\ConfigInterface' =>
-        Maduser\Minimal\Base\Core\Config::class,
+    'Maduser\Minimal\Interfaces\CollectionInterface' =>
+        Maduser\Minimal\Core\Collection::class,
 
-    'Maduser\Minimal\Base\Interfaces\CollectionFactoryInterface' =>
-        Maduser\Minimal\Base\Core\CollectionFactory::class,
+    'Maduser\Minimal\Interfaces\ModulesInterface' =>
+        Maduser\Minimal\Core\Modules::class,
 
-    'Maduser\Minimal\Base\Interfaces\CollectionInterface' =>
-        Maduser\Minimal\Base\Core\Collection::class,
+    'Maduser\Minimal\Interfaces\ResponseInterface' =>
+        Maduser\Minimal\Core\Response::class,
 
-    'Maduser\Minimal\Base\Interfaces\ModulesInterface' =>
-        Maduser\Minimal\Base\Core\Modules::class,
+    'Maduser\Minimal\Interfaces\RequestInterface' =>
+        Maduser\Minimal\Core\Request::class,
 
-    'Maduser\Minimal\Base\Interfaces\PresenterInterface' =>
-        Maduser\Minimal\Base\Core\Presenter::class,
+    'Maduser\Minimal\Interfaces\RouteInterface' =>
+        Maduser\Minimal\Core\Route::class,
 
-    'Maduser\Minimal\Base\Interfaces\ResponseInterface' =>
-        Maduser\Minimal\Base\Core\Response::class,
+    'Maduser\Minimal\Interfaces\RouterInterface' =>
+        Maduser\Minimal\Core\Router::class,
 
-    'Maduser\Minimal\Base\Interfaces\RequestInterface' =>
-        Maduser\Minimal\Base\Core\Request::class,
+    // Libraries
+    'Maduser\Minimal\Interfaces\AssetsInterface' =>
+        Maduser\Minimal\Libraries\Assets\Assets::class,
 
-    'Maduser\Minimal\Base\Interfaces\RouteInterface' =>
-        Maduser\Minimal\Base\Core\Route::class,
-
-    'Maduser\Minimal\Base\Interfaces\RouterInterface' =>
-        Maduser\Minimal\Base\Core\Router::class,
-
-    'Maduser\Minimal\Base\Interfaces\ViewInterface' =>
-        Maduser\Minimal\Base\Core\View::class,
+    'Maduser\Minimal\Interfaces\ViewInterface' =>
+        Maduser\Minimal\Libraries\View\View::class,
 ];

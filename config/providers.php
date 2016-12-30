@@ -1,22 +1,27 @@
 <?php
 
 return [
-    'Assets'            => Maduser\Minimal\Base\Providers\AssetsProvider::class,
-    'CollectionFactory' => Maduser\Minimal\Base\Providers\CollectionFactoryProvider::class,
-    'Collection'        => Maduser\Minimal\Base\Providers\CollectionProvider::class,
-    'Config'            => Maduser\Minimal\Base\Providers\ConfigProvider::class,
-    'ControllerFactory' => Maduser\Minimal\Base\Providers\ControllerFactoryProvider::class,
-    'FrontController'   => Maduser\Minimal\Base\Providers\FrontControllerProvider::class,
-    'Middleware'        => Maduser\Minimal\Base\Providers\MiddlewareProvider::class,
-    'ModelFactory'      => Maduser\Minimal\Base\Providers\ModelFactoryProvider::class,
-    'ModuleFactory'     => Maduser\Minimal\Base\Providers\ModuleFactoryProvider::class,
-    'Module'            => Maduser\Minimal\Base\Providers\ModuleProvider::class,
-    'Presenter'         => Maduser\Minimal\Base\Providers\PresenterProvider::class,
-    'Request'           => Maduser\Minimal\Base\Providers\RequestProvider::class,
-    'Response'          => Maduser\Minimal\Base\Providers\ResponseProvider::class,
-    'Route'             => Maduser\Minimal\Base\Providers\RouteProvider::class,
-    'Router'            => Maduser\Minimal\Base\Providers\RouterProvider::class,
-    'ViewFactory'       => Maduser\Minimal\Base\Providers\ViewFactoryProvider::class,
-    'View'              => Maduser\Minimal\Base\Providers\ViewProvider::class,
-    'Modules'           => Maduser\Minimal\Base\Providers\ModulesProvider::class
+    // Core classes
+    'CollectionFactory' => Maduser\Minimal\Providers\CollectionFactoryProvider::class,
+    'Collection'        => Maduser\Minimal\Providers\CollectionProvider::class,
+    'Config'            => Maduser\Minimal\Providers\ConfigProvider::class,
+    'ControllerFactory' => Maduser\Minimal\Providers\ControllerFactoryProvider::class,
+    'FrontController'   => Maduser\Minimal\Providers\FrontControllerProvider::class,
+    'Middleware'        => Maduser\Minimal\Providers\MiddlewareProvider::class,
+    'ModelFactory'      => Maduser\Minimal\Providers\ModelFactoryProvider::class,
+    'ModuleFactory'     => Maduser\Minimal\Providers\ModuleFactoryProvider::class,
+    'Module'            => Maduser\Minimal\Providers\ModuleProvider::class,
+    'Presenter'         => Maduser\Minimal\Providers\PresenterProvider::class,
+    'Request'           => Maduser\Minimal\Providers\RequestProvider::class,
+    'Response'          => Maduser\Minimal\Providers\ResponseProvider::class,
+    'Route'             => Maduser\Minimal\Providers\RouteProvider::class,
+    'Router'            => Maduser\Minimal\Providers\RouterProvider::class,
+    'ViewFactory'       => Maduser\Minimal\Providers\ViewFactoryProvider::class,
+    'Modules'           => Maduser\Minimal\Providers\ModulesProvider::class,
+
+    // Libraries
+    'Maduser\Minimal\Libraries\Assets\Assets' =>
+        Maduser\Minimal\Libraries\Assets\AssetsProvider::class,
+    'Maduser\Minimal\Libraries\View\View' =>
+        Maduser\Minimal\Libraries\View\ViewProvider::class,
 ];

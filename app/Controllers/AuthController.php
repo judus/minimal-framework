@@ -1,6 +1,6 @@
 <?php namespace Acme\Controllers;
 
-use Maduser\Minimal\Base\Interfaces\ResponseInterface;
+use Maduser\Minimal\Interfaces\ResponseInterface;
 
 /**
  * Class AuthController

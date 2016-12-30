@@ -1,12 +1,12 @@
 <?php namespace Acme\Assets\Controllers;
 
-use Maduser\Minimal\Base\Interfaces\ConfigInterface;
-use Maduser\Minimal\Base\Interfaces\ModulesInterface;
-use Maduser\Minimal\Base\Interfaces\RequestInterface;
-use Maduser\Minimal\Base\Interfaces\RouterInterface;
-use Maduser\Minimal\Base\Interfaces\ViewInterface;
-use Maduser\Minimal\Base\Interfaces\AssetsInterface;
-use Maduser\Minimal\Base\Interfaces\ResponseInterface;
+use Maduser\Minimal\Interfaces\ConfigInterface;
+use Maduser\Minimal\Interfaces\ModulesInterface;
+use Maduser\Minimal\Interfaces\RequestInterface;
+use Maduser\Minimal\Interfaces\RouterInterface;
+use Maduser\Minimal\Interfaces\ViewInterface;
+use Maduser\Minimal\Interfaces\AssetsInterface;
+use Maduser\Minimal\Interfaces\ResponseInterface;
 
 /**
  * Class AssetsController
@@ -66,12 +66,12 @@ class AssetsController
         ModulesInterface $modules
     )
     {
-        /** @var \Maduser\Minimal\Base\Core\Config $config */
-        /** @var \Maduser\Minimal\Base\Core\Request $request */
-        /** @var \Maduser\Minimal\Base\Core\Router $router */
-        /** @var \Maduser\Minimal\Base\Core\Response $response */
-        /** @var \Maduser\Minimal\Base\Core\View $view */
-        /** @var \Maduser\Minimal\Base\Core\Assets $assets */
+        /** @var \Maduser\Minimal\Core\Config $config */
+        /** @var \Maduser\Minimal\Core\Request $request */
+        /** @var \Maduser\Minimal\Core\Router $router */
+        /** @var \Maduser\Minimal\Core\Response $response */
+        /** @var \Maduser\Minimal\Core\View $view */
+        /** @var \Maduser\Minimal\Core\Assets $assets */
         $this->config = $config;
         $this->request = $request;
         $this->router = $router;
@@ -141,6 +141,8 @@ class AssetsController
 
     /**
      * @param $fileSegmentPath
+     *
+     * @return string
      */
     protected function serve($fileSegmentPath)
     {

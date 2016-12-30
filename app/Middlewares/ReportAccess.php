@@ -1,6 +1,6 @@
 <?php namespace Acme\Middlewares;
 
-use Maduser\Minimal\Base\Interfaces\MiddlewareInterface;
+use Maduser\Minimal\Interfaces\MiddlewareInterface;
 use Maduser\Minimal\Base\Middlewares\Middleware;
 
 /**

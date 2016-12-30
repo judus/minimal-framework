@@ -9,11 +9,13 @@ ini_set('display_errors', true);
 
 require "../vendor/autoload.php";
 require "../helpers/common.php";
+/*
+require "../libraries/Translation.php";
 
 /**
  * Example 1
  * /
-new \Maduser\Minimal\Base\Core\Minimal([
+new \Maduser\Minimal\Core\Minimal([
     'basepath' => realpath(__DIR__ . '/../'),
 ]);
 // exits PHP
@@ -23,11 +25,11 @@ new \Maduser\Minimal\Base\Core\Minimal([
  * will do the same as example 1
  */
 
-$benchmark = new \Maduser\Minimal\Base\Libraries\Benchmark();
+$benchmark = new \Maduser\Minimal\Libraries\Benchmark\Benchmark();
 
 $benchmark->mark('Start');
 
-$minimal = new \Maduser\Minimal\Base\Core\Minimal([
+$minimal = new \Maduser\Minimal\Core\Minimal([
     'basepath' => realpath(__DIR__ . '/../'),
     'app' => 'app',
     'config' => 'config/config.php',
@@ -44,21 +46,21 @@ $minimal->load();
 
 $benchmark->mark('Ready');
 
-/** @var \Maduser\Minimal\Base\Core\Request $request */
+/** @var \Maduser\Minimal\Core\Request $request */
 $request = $minimal->getRequest();
 
-/** @var \Maduser\Minimal\Base\Core\Router $router */
+/** @var \Maduser\Minimal\Core\Router $router */
 $router = $minimal->getRouter();
 
 
 
 $benchmark->mark('Resolving route');
 
-/** @var \Maduser\Minimal\Base\Core\Route $route */
+/** @var \Maduser\Minimal\Core\Route $route */
 $route = $router->getRoute($request->getUriString());
 $benchmark->mark('Route resolved');
 
-/** @var \Maduser\Minimal\Base\Core\Middleware $middleware */
+/** @var \Maduser\Minimal\Core\Middleware $middleware */
 $middleware = $minimal->getMiddleware($route->getMiddlewares());
 
 $benchmark->mark('Middleware before start');
@@ -83,7 +85,7 @@ $benchmark->mark('Middleware after end');
 
 $benchmark->mark('Preparing the response');
 
-/** @var \Maduser\Minimal\Base\Core\Response $response */
+/** @var \Maduser\Minimal\Core\Response $response */
 $response = $minimal->getResponse();
 
 $response->prepare($result);

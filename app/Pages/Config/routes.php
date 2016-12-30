@@ -6,11 +6,11 @@ $route->group([
     'middlewares' => ['Acme\\Middlewares\\Cache' => [(10)]]
 ], function() use ($route) {
 
-    $route->get('module/pages/(:any)', [
+    $route->get('pages/(:any)', [
         'controller' => 'Acme\\Pages\\Controllers\\PagesController',
         'action' => 'getStaticPage',
     ]);
 
-    $route->get('module/pages/info',
+    $route->get('pages/info',
         'Acme\\Pages\\Controllers\\PagesController@info');
 });

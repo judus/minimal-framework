@@ -1,13 +1,13 @@
 <?php namespace Acme\Pages\Controllers;
 
-use Maduser\Minimal\Base\Interfaces\ConfigInterface;
-use Maduser\Minimal\Base\Interfaces\RequestInterface;
-use Maduser\Minimal\Base\Interfaces\RouterInterface;
-use Maduser\Minimal\Base\Interfaces\RouteInterface;
-use Maduser\Minimal\Base\Interfaces\ViewInterface;
-use Maduser\Minimal\Base\Interfaces\AssetsInterface;
-use Maduser\Minimal\Base\Interfaces\ResponseInterface;
-use Maduser\Minimal\Base\Interfaces\ModulesInterface;
+use Maduser\Minimal\Interfaces\ConfigInterface;
+use Maduser\Minimal\Interfaces\RequestInterface;
+use Maduser\Minimal\Interfaces\RouterInterface;
+use Maduser\Minimal\Interfaces\RouteInterface;
+use Maduser\Minimal\Interfaces\ViewInterface;
+use Maduser\Minimal\Interfaces\AssetsInterface;
+use Maduser\Minimal\Interfaces\ResponseInterface;
+use Maduser\Minimal\Interfaces\ModulesInterface;
 
 /**
  * Class PagesController
@@ -76,20 +76,21 @@ class PagesController
         AssetsInterface $assets,
         ModulesInterface $modules
     ) {
-        /** @var \Maduser\Minimal\Base\Core\Config $config */
+        /** @var \Maduser\Minimal\Core\Config $config */
         $this->config = $config;
-        /** @var \Maduser\Minimal\Base\Core\Request $request */
+        /** @var \Maduser\Minimal\Core\Request $request */
         $this->request = $request;
-        /** @var \Maduser\Minimal\Base\Core\Router $router */
+        /** @var \Maduser\Minimal\Core\Router $router */
         $this->router = $router;
-        /** @var \Maduser\Minimal\Base\Core\Response $response */
+        /** @var \Maduser\Minimal\Core\Response $response */
         $this->response = $response;
-        /** @var \Maduser\Minimal\Base\Core\View $view */
+        /** @var \Maduser\Minimal\Core\View $view */
         $this->view = $view;
-        /** @var \Maduser\Minimal\Base\Core\Assets $assets */
+        /** @var \Maduser\Minimal\Libraries\Assets\Assets $assets */
         $this->assets = $assets;
-        /** @var \Maduser\Minimal\Base\Core\Modules $modules */
+        /** @var \Maduser\Minimal\Core\Modules $modules */
         $this->modules = $modules;
+//show($this->assets, 'assests');
 
         // Setup views
         $this->view->setBase('../app/Pages/resources/views');
