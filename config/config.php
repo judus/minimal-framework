@@ -13,5 +13,6 @@ return [
     'modules.providersFile' => 'Config/providers.php',
     'modules.routesFile' => 'Config/routes.php',
 
-    'cache.path' => 'storage/cache'
+    'cache.path' => 'storage/cache',
+    'content.path' => 'storage/content'
 ];

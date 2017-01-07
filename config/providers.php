@@ -24,4 +24,6 @@ return [
         Maduser\Minimal\Libraries\Assets\AssetsProvider::class,
     'Maduser\Minimal\Libraries\View\View' =>
         Maduser\Minimal\Libraries\View\ViewProvider::class,
+    'Maduser\Minimal\Libraries\Content\Content' =>
+        Maduser\Minimal\Libraries\Content\ContentProvider::class,
 ];

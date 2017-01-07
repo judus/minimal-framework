@@ -90,13 +90,14 @@ class PagesController
         $this->assets = $assets;
         /** @var \Maduser\Minimal\Core\Modules $modules */
         $this->modules = $modules;
-//show($this->assets, 'assests');
+        //show($this->assets, 'assests');
 
         // Setup views
         $this->view->setBase('../app/Pages/resources/views');
         $this->view->setTheme('my-theme');
         $this->view->setLayout('layouts/my-layout');
         $this->view->share('title', 'My title');
+        $this->view->share('assets', $this->assets);
 
         // Setup assets
         $this->assets->setSource('../app/Pages/public/build');
@@ -133,6 +134,7 @@ class PagesController
         $this->assets->addInlineScripts('jQueryFallback', function () {
             return $this->view->render('scripts/jquery-fallback', [], true);
         });
+
     }
 
     /**

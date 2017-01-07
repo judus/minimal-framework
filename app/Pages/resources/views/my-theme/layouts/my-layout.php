@@ -12,10 +12,10 @@ $title = isset($title) ? $title : '';
 
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
-    <?= $this->assets->getVendorCss('top') ?>
-    <?= $this->assets->getCss('top') ?>
-    <?= $this->assets->getVendorJs('top') ?>
-    <?= $this->assets->getJs('top') ?>
+    <?= $assets->getVendorCss('top') ?>
+    <?= $assets->getCss('top') ?>
+    <?= $assets->getVendorJs('top') ?>
+    <?= $assets->getJs('top') ?>
 </head>
 <body>
     <!--[if lt IE 8]>
@@ -96,11 +96,11 @@ $title = isset($title) ? $title : '';
         </footer>
     </div>
 
-    <?= $this->assets->getExternalJs('bottom') ?>
-    <?= $this->assets->getInlineScripts('jQueryFallback') ?>
-    <?= $this->assets->getVendorJs('bottom') ?>
-    <?= $this->assets->getJs('bottom') ?>
-    <?= $this->assets->getInlineScripts() ?>
+    <?= $assets->getExternalJs('bottom') ?>
+    <?= $assets->getInlineScripts('jQueryFallback') ?>
+    <?= $assets->getVendorJs('bottom') ?>
+    <?= $assets->getJs('bottom') ?>
+    <?= $assets->getInlineScripts() ?>
 
 </body>
 </html>

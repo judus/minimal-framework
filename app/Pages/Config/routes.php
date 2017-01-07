@@ -1,6 +1,6 @@
 <?php
 
-/** @var \Maduser\Minimal\Base\Core\Router $route */
+/** @var \Maduser\Minimal\Core\Router $route */
 
 $route->group([
     'middlewares' => ['Acme\\Middlewares\\Cache' => [(10)]]
