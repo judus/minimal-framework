@@ -10,7 +10,7 @@ https://github.com/judus/maduser-minimal
 
 ## Requirements
 
-1. PHP version 7.0
+1. PHP version >= 7.0
 2. composer
 
 Optional:
