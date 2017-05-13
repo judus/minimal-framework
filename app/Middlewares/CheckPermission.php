@@ -33,7 +33,7 @@ class CheckPermission implements MiddlewareInterface
         $this->request = $request;
         $this->response = $response;
 
-        if (!session_id()) {
+        if (session_status() == PHP_SESSION_NONE) {
             session_start();
         }
     }

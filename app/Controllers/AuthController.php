@@ -23,7 +23,7 @@ class AuthController
     {
         $this->response = $response;
 
-        if (!session_id()) {
+        if (session_status() == PHP_SESSION_NONE) {
             session_start();
         }
     }
@@ -84,9 +84,12 @@ class AuthController
      */
     private function redirect()
     {
-        $redirectUrl = $_SESSION['redirectUrl'];
-        unset($_SESSION['redirectUrl']);
-
-        $this->response->redirect($redirectUrl);
+        if (isset($_SESSION['redirectUrl'])) {
+            $redirectUrl = $_SESSION['redirectUrl'];
+            unset($_SESSION['redirectUrl']);
+            $this->response->redirect($redirectUrl);
+        } else {
+            $this->response->redirect('/auth/login');
+        }
     }
 }

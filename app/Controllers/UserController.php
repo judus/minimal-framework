@@ -34,8 +34,16 @@ class UserController
     /**
      * @return string
      */
-    public function create()
+    public function createForm()
     {
         return 'Imagine a user form';
+    }
+
+    /**
+     * @return string
+     */
+    public function editForm($id)
+    {
+        return 'Imagine a user form for user with $id = '.$id;
     }
 }
