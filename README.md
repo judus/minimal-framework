@@ -1,11 +1,13 @@
-This is a proof of concept. (full working as described) 
+This is a (working) proof of concept.
 
 # Minimal PHP Framework
 
 Minimal is a web application framework.
 
-This repo contains only the required directories for a new project. Composer will install the framework core.
+This is a skeleton for a new project. 
+Install the framework with composer.
 
+The framework core has its own repository:
 https://github.com/judus/maduser-minimal
 
 ## Requirements
