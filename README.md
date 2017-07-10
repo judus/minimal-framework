@@ -25,7 +25,7 @@ $ composer create-project minimal/framework
 
 ## Usage
 
-[Routing](#routing) | [Middlewares](#middlewares) | [Providers](#providers) | [Dependency Injection](#dependency-injection) | [Views](#views) | [Assets](#assets) | [Modules](#modules)
+[Routing](#routing) | [Middlewares](#middlewares) | [Providers](#providers) | [Dependency Injection](#dependency-injection) | [Views](#views) | [Assets](#assets) | [Modules](#modules) | [CLI](#cli)
 
 ### Routing
 
@@ -232,7 +232,7 @@ class Cache implements MiddlewareInterface
 }
 ```
 
-#####Standalone example
+##### Standalone example
 ```php
 // Array of middlewares
 $middlewares = [
@@ -463,6 +463,43 @@ $modules->register('your-module-dirname', [
 ]);
 ```
 
+### CLI
+##### Lists all registered routes
+```bash
+$ php minimal routes
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+| Type | Pattern                 | Action                                               | Middlewares                                                     |
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+| GET  | /                       | <= Closure()                                         |                                                                 |
+| GET  | /hello/(:any)/(:any)    | <= Closure()                                         |                                                                 |
+| GET  | /collections            | Acme\Controllers\YourController@collections          |                                                                 |
+| GET  | /welcome/(:any)/(:any)  | Acme\Controllers\YourController@yourMethod           |                                                                 |
+| GET  | /auth/login             | Acme\Controllers\AuthController@loginForm            |                                                                 |
+| POST | /auth/login             | Acme\Controllers\AuthController@login                |                                                                 |
+| GET  | /auth/logout            | Acme\Controllers\AuthController@logout               |                                                                 |
+| GET  | /auth/users             | Acme\Controllers\UserController@list                 | Acme\Middlewares\CheckPermission, Acme\Middlewares\ReportAccess |
+| GET  | /auth/users/create      | Acme\Controllers\UserController@createForm           | Acme\Middlewares\CheckPermission, Acme\Middlewares\ReportAccess |
+| GET  | /auth/users/edit/(:num) | Acme\Controllers\UserController@editForm             | Acme\Middlewares\CheckPermission, Acme\Middlewares\ReportAccess |
+| GET  | /download/pdf           | <= Closure()                                         |                                                                 |
+| GET  | /huge/data/table        | Acme\Controllers\YourController@timeConsumingAction  | Acme\Middlewares\Cache(10)                                      |
+| GET  | /pages/(:any)           | Acme\Pages\Controllers\PagesController@getStaticPage | Acme\Middlewares\Cache(10)                                      |
+| GET  | /pages/info             | Acme\Pages\Controllers\PagesController@info          | Acme\Middlewares\Cache(10)                                      |
+| GET  | /assets/(:any)          | Acme\Assets\Controllers\AssetsController@getAsset    |                                                                 |
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+```
+##### Lists all registered modules
+```bash
+$ php minimal modules
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+| Name   | Path        | Config                       | Routes                       | Providers                       | Bindings                       |
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+| Pages  | app/Pages/  | app/Pages/Config/config.php  | app/Pages/Config/routes.php  | app/Pages/Config/providers.php  | app/Pages/Config/bindings.php  |
+| Assets | app/Assets/ | app/Assets/Config/config.php | app/Assets/Config/routes.php | app/Assets/Config/providers.php | app/Assets/Config/bindings.php |
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+```
+
 ### Frontend tools
 
 Install packages
@@ -500,7 +537,8 @@ See resources/npm/gulp for Gulp setup options (not implemented yet)
 
 ### About
 
-It was too cold for outdoor activities. 
+- It was too cold for outdoor activities. (Winter 2016)
+- It was too warm for physical activities. (Summer 2016)
 
 
 ### License
