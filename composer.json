@@ -7,7 +7,7 @@
     "mvc"
   ],
   "license": "MIT",
-  "type": "PHP-Framework",
+  "type": "project",
   "authors": [
     {
       "name": "Julien Duseyau",
@@ -16,7 +16,7 @@
   ],
   "minimum-stability": "dev",
   "require": {
-    "maduser/minimal": "v0.4.9"
+    "maduser/minimal": "v0.4.10"
   },
   "require-dev": {
   },
