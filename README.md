@@ -499,6 +499,20 @@ $ php minimal modules
 | Assets | app/Assets/ | app/Assets/Config/config.php | app/Assets/Config/routes.php | app/Assets/Config/providers.php | app/Assets/Config/bindings.php |
 ---------------------------------------------------------------------------------------------------------------------------------------------------------
 ```
+##### List all registered bindings
+```bash
+$ php minimal bindings
+```
+
+##### List all registered providers
+```bash
+$ php minimal providers
+```
+
+##### List all registered config
+```bash
+$ php minimal config
+```
 
 ### Frontend tools
 
