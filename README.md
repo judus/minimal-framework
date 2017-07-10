@@ -464,7 +464,7 @@ $modules->register('your-module-dirname', [
 ```
 
 ### CLI
-##### Lists all registered routes
+##### List all registered routes
 ```bash
 $ php minimal routes
 
@@ -488,7 +488,7 @@ $ php minimal routes
 | GET  | /assets/(:any)          | Acme\Assets\Controllers\AssetsController@getAsset    |                                                                 |
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
 ```
-##### Lists all registered modules
+##### List all registered modules
 ```bash
 $ php minimal modules
 
