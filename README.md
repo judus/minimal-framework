@@ -473,7 +473,6 @@ $ php minimal routes
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
 | GET  | /                       | <= Closure()                                         |                                                                 |
 | GET  | /hello/(:any)/(:any)    | <= Closure()                                         |                                                                 |
-| GET  | /collections            | Acme\Controllers\YourController@collections          |                                                                 |
 | GET  | /welcome/(:any)/(:any)  | Acme\Controllers\YourController@yourMethod           |                                                                 |
 | GET  | /auth/login             | Acme\Controllers\AuthController@loginForm            |                                                                 |
 | POST | /auth/login             | Acme\Controllers\AuthController@login                |                                                                 |
