@@ -538,7 +538,7 @@ See resources/npm/gulp for Gulp setup options (not implemented yet)
 ### About
 
 - It was too cold for outdoor activities. (Winter 2016)
-- It was too warm for physical activities. (Summer 2016)
+- It was too warm for physical activities. (Summer 2017)
 
 
 ### License
