@@ -425,22 +425,22 @@ Outputs:
 ```html
 <html>
 <head>
-	<title>My title</title>
+    <title>My title</title>
 	
-	<link rel="stylesheet" href="assets/my-theme/css/normalize.css">
-	<link rel="stylesheet" href="assets/my-theme/css/main.css">
-	<script src="assets/my-theme/js/vendor/modernizr-2.8.3.min.js" ></script>
+    <link rel="stylesheet" href="assets/my-theme/css/normalize.css">
+    <link rel="stylesheet" href="assets/my-theme/css/main.css">
+    <script src="assets/my-theme/js/vendor/modernizr-2.8.3.min.js" ></script>
 </head>
 <body>
     <div class="content">
         ...
-	</div>
+    </div>
 
-	<script src="https://code.jquery.com/jquery-3.1.0.min.js" ></script>
-	<script>window.jQuery || document.write('...blablabla...')</script>
-	
-	<script src="assets/my-theme/js/plugins.js" ></script>
-	<script src="assets/my-theme/js/main.js" ></script>
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js" ></script>
+    <script>window.jQuery || document.write('...blablabla...')</script>
+
+    <script src="assets/my-theme/js/plugins.js" ></script>
+    <script src="assets/my-theme/js/main.js" ></script>
 </body>
 </html>
 ```
