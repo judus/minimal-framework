@@ -1,6 +1,6 @@
 <?php
 
-/** @var \Maduser\Minimal\Base\Core\Router $route */
+/** @var \Maduser\Minimal\Core\Router $route */
 
 /**
  * Direct output
@@ -16,12 +16,10 @@ $route->get('hello/(:any)/(:any)', function ($firstname, $lastname) {
     return 'Hello ' . ucfirst($firstname) . ' ' . ucfirst($lastname);
 });
 
-
 /**
  * Using controllers
  */
 $route->get('welcome/(:any)/(:any)', 'Acme\\Controllers\\YourController@yourMethod');
-
 
 /**
  * Route groups

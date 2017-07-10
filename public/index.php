@@ -7,8 +7,8 @@ if (version_compare(phpversion(), '7.0.0', '<')) {
 ini_set('error_reporting', E_ALL);
 ini_set('display_errors', true);
 
-require "../vendor/autoload.php";
-require "../helpers/common.php";
+require __DIR__ . "/../vendor/autoload.php";
+require __DIR__ . "/../helpers/common.php";
 /*
 require "../libraries/Translation.php";
 
