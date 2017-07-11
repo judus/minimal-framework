@@ -3,3 +3,5 @@ resources/assets/* linguist-vendored
 resources/lang/* linguist-vendored
 resources/npm/* linguist-vendored
 storage/* linguist-vendored
+app/Pages/public/* linguist-vendored
+app/Pages/resources/* linguist-vendored
