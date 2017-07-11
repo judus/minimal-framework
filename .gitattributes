@@ -1,3 +1,4 @@
+public/.htaccess linguist-vendored 
 public/assets/* linguist-vendored
 resources/assets/* linguist-vendored
 resources/lang/* linguist-vendored
