@@ -17,9 +17,9 @@ return [
         'driver' => 'mysql',
         'host' => 'localhost',
         'port' => '3306',
-        'user' => 'testuser',
-        'password' => '494949',
-        'database' => 'my_gally_test',
+        'user' => '',
+        'password' => '',
+        'database' => '',
         'charset' => 'utf8',
         'handler' => \PDO::class,
         'handlerOptions' => [
