@@ -1,7 +1,7 @@
 <?php namespace Acme\Middlewares;
 
-use Maduser\Minimal\Interfaces\MiddlewareInterface;
-use Maduser\Minimal\Base\Middlewares\Middleware;
+use Maduser\Minimal\Middlewares\MiddlewareInterface;
+
 
 /**
  * Class ReportAccess

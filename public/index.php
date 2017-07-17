@@ -1,4 +1,4 @@
-<?php
+<?php namespace Maduser\Minimal\Facades;
 
 if (version_compare(phpversion(), '7.0.0', '<')) {
     die('Requires PHP version > 7.0.0');
@@ -9,16 +9,56 @@ ini_set('display_errors', true);
 
 require __DIR__ . "/../vendor/autoload.php";
 require __DIR__ . "/../helpers/common.php";
+
+App::respond([
+    'path' => __DIR__,
+    'config' => __DIR__ . '/../config/env.php',
+    'bindings' => __DIR__ . '/../config/bindings.php',
+    'providers' => __DIR__ . '/../config/providers.php',
+    'routes' => __DIR__ . '/../config/routes.php',
+    'modules' => __DIR__ . '/../config/modules.php',
+], function () {
+
+    Router::get('array', function () {
+        return Config::getItems();
+    });
+
+    Router::get('object', function () {
+        return new Collection();
+    });
+
+    Router::get('blabla', [
+        'middlewares' => ['Acme\\Middlewares\\StringReplacements']
+    ], function () {
+        return 'blabla {CACHE_MESSAGE}';
+    });
+
+    Router::get('lorem', [
+        'middlewares' => ['Acme\\Middlewares\\StringReplacements'],
+        'controller' => 'Acme\\Controllers\\YourController',
+        'action' => 'loremIpsum'
+    ]);
+
+    Router::get('database', function () {
+        if (PDO::connection(Config::item('database'))) {
+            return 'Successfully connected to database';
+        }
+    });
+
+    Router::get('include', function () {
+        include 'app/modules/Demo/demo.php';
+    });
+});
+
+exit();
+
 /*
 require "../libraries/Translation.php";
 
 /**
  * Example 1
  * /
-new \Maduser\Minimal\Core\Minimal([
-    'basepath' => realpath(__DIR__ . '/../'),
-]);
-// exits PHP
+
 
 /**
  * Example 2

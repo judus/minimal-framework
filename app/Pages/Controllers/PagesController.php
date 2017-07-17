@@ -1,13 +1,15 @@
 <?php namespace Acme\Pages\Controllers;
 
-use Maduser\Minimal\Interfaces\ConfigInterface;
-use Maduser\Minimal\Interfaces\RequestInterface;
-use Maduser\Minimal\Interfaces\RouterInterface;
-use Maduser\Minimal\Interfaces\RouteInterface;
-use Maduser\Minimal\Interfaces\ViewInterface;
-use Maduser\Minimal\Interfaces\AssetsInterface;
-use Maduser\Minimal\Interfaces\ResponseInterface;
-use Maduser\Minimal\Interfaces\ModulesInterface;
+use Maduser\Minimal\Facades\App;
+use Maduser\Minimal\Facades\Router;
+use Maduser\Minimal\Config\ConfigInterface;
+use Maduser\Minimal\Apps\FactoryInterface;
+use Maduser\Minimal\Http\RequestInterface;
+use Maduser\Minimal\Routers\RouterInterface;
+use Maduser\Minimal\Routers\RouteInterface;
+use Maduser\Minimal\Views\ViewInterface;
+use Maduser\Minimal\Assets\AssetsInterface;
+use Maduser\Minimal\Http\ResponseInterface;
 
 /**
  * Class PagesController
@@ -65,7 +67,7 @@ class PagesController
      * @param ResponseInterface $response
      * @param ViewInterface     $view
      * @param AssetsInterface   $assets
-     * @param ModulesInterface  $modules
+     * @param FactoryInterface  $modules
      */
     public function __construct(
         ConfigInterface $config,
@@ -74,19 +76,19 @@ class PagesController
         ResponseInterface $response,
         ViewInterface $view,
         AssetsInterface $assets,
-        ModulesInterface $modules
+        FactoryInterface $modules
     ) {
-        /** @var \Maduser\Minimal\Core\Config $config */
+        /** @var \Maduser\Minimal\Config\Config $config */
         $this->config = $config;
-        /** @var \Maduser\Minimal\Core\Request $request */
+        /** @var \Maduser\Minimal\Http\Request $request */
         $this->request = $request;
-        /** @var \Maduser\Minimal\Core\Router $router */
+        /** @var \Maduser\Minimal\Routers\Router $router */
         $this->router = $router;
-        /** @var \Maduser\Minimal\Core\Response $response */
+        /** @var \Maduser\Minimal\Http\Response $response */
         $this->response = $response;
-        /** @var \Maduser\Minimal\Core\View $view */
+        /** @var \Maduser\Minimal\Views\View $view */
         $this->view = $view;
-        /** @var \Maduser\Minimal\Libraries\Assets\Assets $assets */
+        /** @var \Maduser\Minimal\Assets\Assets $assets */
         $this->assets = $assets;
         /** @var \Maduser\Minimal\Core\Modules $modules */
         $this->modules = $modules;
@@ -175,6 +177,9 @@ class PagesController
      */
     public function info()
     {
+
+        /*
+
         ob_start();
         show($this->config, 'Config');
         show($this->request, 'Request');
@@ -186,9 +191,32 @@ class PagesController
         show($this->assets, 'Assets');
         $contents = ob_get_contents();
         ob_end_clean();
+        */
+        ob_start();
+        d($this->config, 'Config');
+        d($this->request, 'Request');
+        d($this->router, 'Router');
+        d($this->router->getRoute(), 'Route');
+        d($this->modules, 'Modules');
+        d($this->response, 'Response');
+        d($this->view, 'View');
+        d($this->assets, 'Assets');
+        $contents = ob_get_contents();
+        ob_end_clean();
+
+        $result = run('blabla');
+        $result .= run('lorem');
+        $result .= run('lorem');
+        $result .= run('lorem');
+        $result .= run('lorem');
+        $result .= run('lorem');
+        $result .= run('lorem');
+        //echo $result; die();
+        //show($result);die();
 
         return $this->view->render('pages/my-view', [
-            'content' => $contents
+            'title' => run('welcome/john/doe'),
+            'content' => $contents . $result
         ]);
 
     }

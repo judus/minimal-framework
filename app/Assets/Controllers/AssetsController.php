@@ -1,12 +1,13 @@
 <?php namespace Acme\Assets\Controllers;
 
-use Maduser\Minimal\Interfaces\ConfigInterface;
-use Maduser\Minimal\Interfaces\ModulesInterface;
-use Maduser\Minimal\Interfaces\RequestInterface;
-use Maduser\Minimal\Interfaces\RouterInterface;
-use Maduser\Minimal\Interfaces\ViewInterface;
-use Maduser\Minimal\Interfaces\AssetsInterface;
-use Maduser\Minimal\Interfaces\ResponseInterface;
+use Maduser\Minimal\Config\ConfigInterface;
+use Maduser\Minimal\Apps\FactoryInterface;
+use Maduser\Minimal\Facades\App;
+use Maduser\Minimal\Http\RequestInterface;
+use Maduser\Minimal\Routers\RouterInterface;
+use Maduser\Minimal\Views\ViewInterface;
+use Maduser\Minimal\Assets\AssetsInterface;
+use Maduser\Minimal\Http\ResponseInterface;
 
 /**
  * Class AssetsController
@@ -54,7 +55,7 @@ class AssetsController
      * @param ResponseInterface $response
      * @param ViewInterface     $view
      * @param AssetsInterface   $assets
-     * @param ModulesInterface  $modules
+     * @param FactoryInterface $modules
      */
     public function __construct(
         ConfigInterface $config,
@@ -63,15 +64,14 @@ class AssetsController
         ResponseInterface $response,
         ViewInterface $view,
         AssetsInterface $assets,
-        ModulesInterface $modules
-    )
-    {
-        /** @var \Maduser\Minimal\Core\Config $config */
-        /** @var \Maduser\Minimal\Core\Request $request */
-        /** @var \Maduser\Minimal\Core\Router $router */
-        /** @var \Maduser\Minimal\Core\Response $response */
-        /** @var \Maduser\Minimal\Core\View $view */
-        /** @var \Maduser\Minimal\Core\Assets $assets */
+        FactoryInterface $modules
+    ) {
+        /** @var \Maduser\Minimal\Config\Config $config */
+        /** @var \Maduser\Minimal\Http\Request $request */
+        /** @var \Maduser\Minimal\Routers\Router $router */
+        /** @var \Maduser\Minimal\Http\Response $response */
+        /** @var \Maduser\Minimal\Views\View $view */
+        /** @var \Maduser\Minimal\Assets\Assets $assets */
         $this->config = $config;
         $this->request = $request;
         $this->router = $router;
@@ -79,7 +79,6 @@ class AssetsController
         $this->view = $view;
         $this->assets = $assets;
         $this->modules = $modules;
-
     }
 
     /**
@@ -149,7 +148,11 @@ class AssetsController
         $filePath = $this->getPath($fileSegmentPath);
 
         if (!file_exists($filePath)) {
+
+
             $filePath = $this->searchModules($fileSegmentPath);
+
+
         }
 
         if (is_null($filePath)) {

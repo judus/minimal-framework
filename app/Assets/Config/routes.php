@@ -1,6 +1,6 @@
 <?php
 
-/** @var \Maduser\Minimal\Base\Core\Router $route */
+/** @var \Maduser\Minimal\Routers\Router $route */
 
 $route->get('assets/(:any)', [
     'controller' => 'Acme\\Assets\\Controllers\\AssetsController',

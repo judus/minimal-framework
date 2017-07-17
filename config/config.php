@@ -24,4 +24,8 @@ return [
     'content' => [
         'path' => 'storage/content'
     ],
+
+    'system' => [
+        'path' => realpath(__DIR__ .'/../')
+    ]
 ];

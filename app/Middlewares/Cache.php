@@ -1,9 +1,9 @@
 <?php namespace Acme\Middlewares;
 
-use Maduser\Minimal\Interfaces\ConfigInterface;
-use Maduser\Minimal\Interfaces\MiddlewareInterface;
-use Maduser\Minimal\Interfaces\RequestInterface;
-use Maduser\Minimal\Interfaces\RouteInterface;
+use Maduser\Minimal\Config\ConfigInterface;
+use Maduser\Minimal\Middlewares\MiddlewareInterface;
+use Maduser\Minimal\Http\RequestInterface;
+
 
 /**
  * Class Cache

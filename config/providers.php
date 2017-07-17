@@ -2,28 +2,25 @@
 
 return [
     // Core classes
-    'CollectionFactory' => Maduser\Minimal\Providers\CollectionFactoryProvider::class,
-    'Collection'        => Maduser\Minimal\Providers\CollectionProvider::class,
-    'Config'            => Maduser\Minimal\Providers\ConfigProvider::class,
-    'ControllerFactory' => Maduser\Minimal\Providers\ControllerFactoryProvider::class,
-    'FrontController'   => Maduser\Minimal\Providers\FrontControllerProvider::class,
-    'Middleware'        => Maduser\Minimal\Providers\MiddlewareProvider::class,
-    'ModelFactory'      => Maduser\Minimal\Providers\ModelFactoryProvider::class,
-    'ModuleFactory'     => Maduser\Minimal\Providers\ModuleFactoryProvider::class,
-    'Module'            => Maduser\Minimal\Providers\ModuleProvider::class,
-    'Presenter'         => Maduser\Minimal\Providers\PresenterProvider::class,
-    'Request'           => Maduser\Minimal\Providers\RequestProvider::class,
-    'Response'          => Maduser\Minimal\Providers\ResponseProvider::class,
-    'Route'             => Maduser\Minimal\Providers\RouteProvider::class,
-    'Router'            => Maduser\Minimal\Providers\RouterProvider::class,
-    'ViewFactory'       => Maduser\Minimal\Providers\ViewFactoryProvider::class,
-    'Modules'           => Maduser\Minimal\Providers\ModulesProvider::class,
+    'CollectionFactory' => Maduser\Minimal\Collections\CollectionFactoryProvider::class,
+    'Collection'        => Maduser\Minimal\Collections\CollectionProvider::class,
+    'Config'            => Maduser\Minimal\Config\ConfigProvider::class,
+    'ControllerFactory' => Maduser\Minimal\Controllers\ControllerFactoryProvider::class,
+    'Factory'           => Maduser\Minimal\Apps\FactoryProvider::class,
+    'FrontController'   => Maduser\Minimal\Controllers\FrontControllerProvider::class,
+    'Middleware'        => Maduser\Minimal\Middlewares\MiddlewareProvider::class,
+    'ModelFactory'      => Maduser\Minimal\Models\ModelFactoryProvider::class,
+    'ModuleFactory'     => Maduser\Minimal\Apps\ModuleFactoryProvider::class,
+    'Module'            => Maduser\Minimal\Apps\ModuleProvider::class,
+    'Request'           => Maduser\Minimal\Http\RequestProvider::class,
+    'Response'          => Maduser\Minimal\Http\ResponseProvider::class,
+    'Route'             => Maduser\Minimal\Routers\RouteProvider::class,
+    'Router'            => Maduser\Minimal\Routers\RouterProvider::class,
+    'ViewFactory'       => Maduser\Minimal\Views\ViewFactoryProvider::class,
 
     // Libraries
     'Maduser\Minimal\Libraries\Assets\Assets' =>
-        Maduser\Minimal\Libraries\Assets\AssetsProvider::class,
+        Maduser\Minimal\Assets\AssetsProvider::class,
     'Maduser\Minimal\Libraries\View\View' =>
-        Maduser\Minimal\Libraries\View\ViewProvider::class,
-    'Maduser\Minimal\Libraries\Content\Content' =>
-        Maduser\Minimal\Libraries\Content\ContentProvider::class,
+        Maduser\Minimal\Views\ViewProvider::class
 ];

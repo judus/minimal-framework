@@ -1,5 +1,5 @@
 <?php
-/** @var \Maduser\Minimal\Base\Core\Modules $modules */
+/** @var \Maduser\Minimal\Core\Modules $modules */
 
 $modules->register('Pages', [
     //'config' => 'Config/config.php',

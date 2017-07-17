@@ -1,8 +1,8 @@
 <?php namespace Acme\Middlewares;
 
-use Maduser\Minimal\Interfaces\MiddlewareInterface;
-use Maduser\Minimal\Interfaces\RequestInterface;
-use Maduser\Minimal\Interfaces\ResponseInterface;
+use Maduser\Minimal\Middlewares\MiddlewareInterface;
+use Maduser\Minimal\Http\RequestInterface;
+use Maduser\Minimal\Http\ResponseInterface;
 
 /**
  * Class CheckPermission
