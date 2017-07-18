@@ -82,7 +82,7 @@ class Cache implements MiddlewareInterface
      */
     public function setFilename($uri)
     {
-        $this->filename = PATH . rtrim($this->config->item('cache.path'), '/') .
+        $this->filename = rtrim($this->config->item('system.path'), '/') . '/' . rtrim($this->config->item('cache.path'), '/') .
             '/' . md5($uri) . '.cache';
     }
 

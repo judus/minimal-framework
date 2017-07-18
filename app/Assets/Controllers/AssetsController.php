@@ -126,7 +126,7 @@ class AssetsController
 
                 $modulesPath = $this->config->item('modules.path');
 
-                $filePath = PATH . $modulesPath . '/' . $moduleName . ltrim($fileSegmentPath,
+                $filePath = rtrim($this->config->item('system.path'), '/') . '/' . $modulesPath . '/' . $moduleName . ltrim($fileSegmentPath,
                         strtolower($moduleName));
 
                 if (file_exists($filePath)) {
