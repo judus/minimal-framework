@@ -167,7 +167,7 @@ class PagesController
     public function getStaticPage($uri)
     {
         return $this->view->render('pages/my-view', [
-            'content' => 'Would load page ' . "'" . str_replace('/', '-',
+            'content' => 'Would load partial view for page ' . "'" . str_replace('/', '-',
                     $uri) . "'"
         ]);
     }
