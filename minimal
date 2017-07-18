@@ -1,21 +1,20 @@
 <?php
 
-use Maduser\Minimal\Cli\Cli;
-
 require __DIR__ .'/vendor/autoload.php';
 
-$minimal = new \Maduser\Minimal\Core\Minimal([
-    'basepath' => realpath(__DIR__ . '/'),
-    'app' => 'app',
-    'config' => 'config/config.php',
-    'bindings' => 'config/bindings.php',
-    'providers' => 'config/providers.php',
-    'routes' => 'config/routes.php',
-], true);
-
-$minimal->load();
-
 if ((php_sapi_name() === 'cli' or defined('STDIN'))) {
-    new Cli(array_slice($argv, 1), $minimal);
+
+    $minimal = new \Maduser\Minimal\Apps\Minimal([
+        'basepath' => realpath(__DIR__ . '/'),
+        'app' => 'app',
+        'config' => 'config/config.php',
+        'bindings' => 'config/bindings.php',
+        'providers' => 'config/providers.php',
+        'routes' => 'config/routes.php',
+    ], true);
+
+    $minimal->load();
+
+    new Maduser\Minimal\Cli\Cli(array_slice($argv, 1), $minimal);
 }
 
