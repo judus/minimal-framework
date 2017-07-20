@@ -32,6 +32,5 @@ composer.lock
 /**/bower_components
 /**/node_modules
 /composer.phar
-/kint.css
-/kint.php
 /composer.dev.json
+/config/development.php
