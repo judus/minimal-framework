@@ -1,6 +1,7 @@
 <?php namespace Acme\Middlewares;
 
 use Maduser\Minimal\Config\ConfigInterface;
+use Maduser\Minimal\Middlewares\AbstractMiddleware;
 use Maduser\Minimal\Middlewares\MiddlewareInterface;
 use Maduser\Minimal\Http\RequestInterface;
 
@@ -10,7 +11,7 @@ use Maduser\Minimal\Http\RequestInterface;
  *
  * @package Maduser\Minimal\Middlewares
  */
-class Cache implements MiddlewareInterface
+class Cache extends AbstractMiddleware
 {
     /**
      * @var RequestInterface
@@ -102,7 +103,6 @@ class Cache implements MiddlewareInterface
     ) {
         $this->request = $request;
         $this->config = $config;
-
         $this->setTimeout($timeout);
         $this->setData($data);
         $this->setFilename($request->getUriString());
@@ -115,10 +115,12 @@ class Cache implements MiddlewareInterface
     {
         $cache = $this->getCache($this->getFilename(), $this->getTimeout());
         if ($cache) {
+
             $cache = str_replace('</footer>',
                 '<p><small>Cached contents - FrontController was not executed</small></p></footer>', $cache);
         }
 
+        $this->setPayload($cache);
         return $cache;
     }
 
@@ -128,7 +130,7 @@ class Cache implements MiddlewareInterface
     public function after()
     {
         $this->deleteCache($this->getFilename());
-        $this->setCache($this->getFilename(), $this->getData());
+        $this->setCache($this->getFilename(), $this->getPayload());
     }
 
     /**

@@ -1,5 +1,6 @@
 <?php namespace Acme\Middlewares;
 
+use Maduser\Minimal\Middlewares\AbstractMiddleware;
 use Maduser\Minimal\Middlewares\MiddlewareInterface;
 use Maduser\Minimal\Http\RequestInterface;
 use Maduser\Minimal\Http\ResponseInterface;
@@ -9,7 +10,7 @@ use Maduser\Minimal\Http\ResponseInterface;
  *
  * @package Acme\Middlewares
  */
-class CheckPermission implements MiddlewareInterface
+class CheckPermission extends AbstractMiddleware
 {
     /**
      * @var ResponseInterface

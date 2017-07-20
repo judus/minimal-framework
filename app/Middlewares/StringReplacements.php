@@ -1,66 +1,20 @@
 <?php namespace Acme\Middlewares;
 
-use Maduser\Minimal\Config\ConfigInterface;
-use Maduser\Minimal\Middlewares\MiddlewareInterface;
-use Maduser\Minimal\Http\RequestInterface;
-use Maduser\Minimal\Http\RouteInterface;
+use Maduser\Minimal\Middlewares\AbstractMiddleware;
 
 /**
  * Class Cache
  *
  * @package Maduser\Minimal\Middlewares
  */
-class StringReplacements implements MiddlewareInterface
+class StringReplacements extends AbstractMiddleware
 {
-    /**
-     * @var
-     */
-    private $content;
-
-    /**
-     * @return mixed
-     */
-    public function getContent()
-    {
-        return $this->content;
-    }
-
-    /**
-     * @param mixed $content
-     *
-     * @return StringReplacements
-     */
-    public function setContent($content)
-    {
-        $this->content = $content;
-
-        return $this;
-    }
-
-    /**
-     * Cache constructor.
-     *
-     * @param $content
-     */
-    public function __construct($content)
-    {
-        $this->setContent($content);
-    }
-
-    /**
-     * @return string
-     */
-    public function before()
-    {
-        return $this->getContent();
-    }
-
     /**
      * @return mixed
      */
     public function after()
     {
-        return $this->replaceTags($this->getContent());
+       $this->setPayload($this->replaceTags($this->getPayload()));
     }
 
     /**
@@ -86,7 +40,7 @@ class StringReplacements implements MiddlewareInterface
      */
     public function findTags($content)
     {
-        preg_match_all('/(?:\{(.*?)(?:(:([a-zA-Z0-9\s\W]+))?)\})/',
+        preg_match_all('/(?:\{{(.*?)(?:(:([a-zA-Z0-9\s\W]+))?)\}})/',
             $content, $matches);
 
         $tags = [];

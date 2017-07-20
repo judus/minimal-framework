@@ -1,5 +1,6 @@
 <?php namespace Acme\Middlewares;
 
+use Maduser\Minimal\Middlewares\AbstractMiddleware;
 use Maduser\Minimal\Middlewares\MiddlewareInterface;
 
 
@@ -8,7 +9,7 @@ use Maduser\Minimal\Middlewares\MiddlewareInterface;
  *
  * @package Maduser\Minimal\Base\Middlewares
  */
-class ReportAccess implements MiddlewareInterface
+class ReportAccess extends AbstractMiddleware
 {
     /**
      * @var
