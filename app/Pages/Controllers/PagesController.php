@@ -1,6 +1,8 @@
 <?php namespace Acme\Pages\Controllers;
 
 use Maduser\Minimal\Facades\App;
+use Maduser\Minimal\Facades\Config;
+use Maduser\Minimal\Facades\Request;
 use Maduser\Minimal\Facades\Router;
 use Maduser\Minimal\Config\ConfigInterface;
 use Maduser\Minimal\Apps\FactoryInterface;
@@ -78,6 +80,7 @@ class PagesController
         AssetsInterface $assets,
         FactoryInterface $modules
     ) {
+
         /** @var \Maduser\Minimal\Config\Config $config */
         $this->config = $config;
         /** @var \Maduser\Minimal\Http\Request $request */
@@ -93,7 +96,10 @@ class PagesController
         /** @var \Maduser\Minimal\Core\Modules $modules */
         $this->modules = $modules;
         //show($this->assets, 'assests');
+    }
 
+    private function setupAssetsAndViews()
+    {
         // Setup views
         $this->view->setBase('../app/Pages/resources/views');
         $this->view->setTheme('my-theme');
@@ -136,8 +142,8 @@ class PagesController
         $this->assets->addInlineScripts('jQueryFallback', function () {
             return $this->view->render('scripts/jquery-fallback', [], true);
         });
-
     }
+
 
     /**
      * @param null $name
@@ -166,6 +172,8 @@ class PagesController
      */
     public function getStaticPage($uri)
     {
+        $this->setupAssetsAndViews();
+
         return $this->view->render('pages/my-view', [
             'content' => 'Would load partial view for page ' . "'" . str_replace('/', '-',
                     $uri) . "'"
@@ -177,23 +185,10 @@ class PagesController
      */
     public function info()
     {
-
-        /*
+        $this->setupAssetsAndViews();
 
         ob_start();
-        show($this->config, 'Config');
-        show($this->request, 'Request');
-        show($this->router, 'Router');
-        show($this->router->getRoute(), 'Route');
-        show($this->modules, 'Modules');
-        show($this->response, 'Response');
-        show($this->view, 'View');
-        show($this->assets, 'Assets');
-        $contents = ob_get_contents();
-        ob_end_clean();
-        */
-        ob_start();
-        d($this->config, 'Config');
+        d($this->config, 'Config: $this->config');
         d($this->request, 'Request');
         d($this->router, 'Router');
         d($this->router->getRoute(), 'Route');
@@ -204,20 +199,63 @@ class PagesController
         $contents = ob_get_contents();
         ob_end_clean();
 
-        $result = run('blabla');
+        $result  = run('lorem');
         $result .= run('lorem');
         $result .= run('lorem');
         $result .= run('lorem');
         $result .= run('lorem');
         $result .= run('lorem');
-        $result .= run('lorem');
-        //echo $result; die();
-        //show($result);die();
 
         return $this->view->render('pages/my-view', [
-            'title' => run('welcome/john/doe'),
             'content' => $contents . $result
         ]);
 
+    }
+
+    public function frontController()
+    {
+        $html = $this->timeConsumingAction();
+
+        ob_start();
+        d($this->config, 'Config: $this->config');
+        d($this->request, 'Request');
+        d($this->router, 'Router');
+        d($this->router->getRoute(), 'Route');
+        d($this->modules, 'Modules');
+        d($this->response, 'Response');
+        d($this->view, 'View');
+        d($this->assets, 'Assets');
+        $contents = ob_get_contents();
+        ob_end_clean();
+
+        $result = run('lorem');
+        $result .= run('lorem');
+        $result .= run('lorem');
+        $result .= run('lorem');
+        $result .= run('lorem');
+        $result .= run('lorem');
+
+        return $html . $contents . $result;
+    }
+
+    public function timeConsumingAction()
+    {
+        $countTo = 1000000000;
+
+        $start = time();
+        for ($i = 0; $i < $countTo; $i++) {
+            $i;
+        }
+        $end = time();
+
+        $period = $end - $start;
+
+        $html = '<p>I have counted to ' . $countTo . '. It took '
+            . $period . ' seconds.<br>If the response reached you faster than '
+            . 'that, you received cached contents</p>'
+            . '<p>Content generated at ' . date('Y-m-d h:i:sa') . '</p>'
+            . '<p>Cache is valid for 5 seconds. Press ctrl+R or cmd+R to reload.</p>';
+
+        return $html;
     }
 }

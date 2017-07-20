@@ -36,13 +36,13 @@ class YourController
     public function loremIpsum()
     {
         return 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, ' .
-            'sed diam nonumy {MODULE_A} eirmod tempor invidunt ut labore et dolore ' .
-            'magna aliquyam erat, {MODULE_D:123:12e}sed diam voluptua. At vero eos et accusam ' .
+            'sed diam nonumy {{MODULE_A}} eirmod tempor invidunt ut labore et dolore ' .
+            'magna aliquyam erat, {{MODULE_D:qwe}}sed diam voluptua. At vero eos et accusam ' .
             'et justo duo dolores et ea rebum. Stet clita kasd gubergren, ' .
-            'no sea takimata {MODULE_B:123} sanctus est Lorem ipsum dolor sit amet. Lorem ' .
-            'ipsum dolor{MODULE_E} sit amet, consetetur sadipscing elitr, sed diam ' .
+            'no sea takimata {{MODULE_B:123}} sanctus est Lorem ipsum dolor sit amet. Lorem ' .
+            'ipsum dolor{{MODULE_E789:456}} sit amet, consetetur sadipscing elitr, sed diam ' .
             'nonumy eirmod tempor invidunt ut labore et dolore magna ' .
-            'aliquyam erat, sed diam {MODULE_C:789:456:xcv} voluptua. At vero eos et accusam et ' .
+            'aliquyam erat, sed diam {{MODULE_C:789:456:xcv}} voluptua. At vero eos et accusam et ' .
             'justo duo dolores et ea rebum. Stet clita kasd gubergren, no ' .
             'sea takimata sanctus est Lorem ipsum dolor sit amet.';
     }

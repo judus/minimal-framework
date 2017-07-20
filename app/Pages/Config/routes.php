@@ -1,16 +1,29 @@
 <?php
 
-/** @var \Maduser\Minimal\Core\Router $route */
+/** @var \Maduser\Minimal\Routers\Router $route */
 
 $route->group([
-    'middlewares' => ['Acme\\Middlewares\\Cache' => [(10)]]
+    'middlewares' => [
+        'Acme\\Middlewares\\Cache' => [(5)],
+    ]
 ], function() use ($route) {
 
     $route->get('pages/(:any)', [
-        'controller' => 'Acme\\Pages\\Controllers\\PagesController',
+        'controller' => \Acme\Pages\Controllers\PagesController::class,
         'action' => 'getStaticPage',
     ]);
 
-    $route->get('pages/info',
-        'Acme\\Pages\\Controllers\\PagesController@info');
+    $route->get('pages/info', [
+        'controller' => \Acme\Pages\Controllers\PagesController::class,
+        'action' => 'info',
+    ]);
+
+    $route->get('pages/front', [
+        'middlewares' => [
+            'Acme\\Middlewares\\StringReplacements' => [(5)],
+            'Acme\\Middlewares\\MakeView',
+        ],
+        'controller' => 'Acme\Pages\Controllers\PagesController',
+        'action' => 'frontController'
+    ]);
 });
