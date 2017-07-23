@@ -1,6 +1,8 @@
 <?php
 
-/** @var \Maduser\Minimal\Core\Router $route */
+/** @var \Maduser\Minimal\Routers\Router $route */
+use Maduser\Minimal\Database\Connectors\PDO;
+use Maduser\Minimal\Facades\Config;
 
 /**
  * Direct output
@@ -110,5 +112,52 @@ $route->get('huge/data/table', [
     'controller' => 'Acme\\Controllers\\YourController',
     'action' => 'timeConsumingAction'
 ]);
+
+$route->get('orm', function() {
+
+    $config = Config::getInstance();
+    /** @var \Maduser\Minimal\Config\Config $config */
+
+    PDO::connection(Config::item('database'));
+
+    // Quick find
+    $user = \Maduser\Minimal\Database\User::find(1);
+    d($user);
+
+    // Eager loading
+    $users = $user->with(['type', 'profile', 'roles', 'posts', 'comments'])->getAll();
+    d($users);
+
+    // Saving/Updating rows
+    $users = \Maduser\Minimal\Database\User::create();
+
+    $i = 0;
+    foreach($users->where(['id', '>', 4])->getAll() as $user) {
+        $users->username = 'user-' . $i++;
+        $users->save();
+    }
+
+    // Deleting rows
+    $users = \Maduser\Minimal\Database\User::create();
+    $users = $users->where(['id', '>', 11])->getAll();
+
+    foreach ($users as $user) {
+        $user->delete();
+    }
+
+    /*
+
+    // Attaching many to many relationships
+    $user = \Maduser\Minimal\Database\User::find(1);
+    $roles = \Maduser\Minimal\Database\Role::create();
+    $roles = $roles->getAll();
+
+    $user->roles()->attach($roles);
+
+    // Detaching  many to many relationships
+    $user->roles()->detach($roles);
+
+    */
+});
 
 
