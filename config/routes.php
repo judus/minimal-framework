@@ -1,7 +1,12 @@
 <?php
 
 /** @var \Maduser\Minimal\Routers\Router $route */
+
+use Maduser\Minimal\Database\Comment;
 use Maduser\Minimal\Database\Connectors\PDO;
+use Maduser\Minimal\Database\Post;
+use Maduser\Minimal\Database\Role;
+use Maduser\Minimal\Database\User;
 use Maduser\Minimal\Facades\Config;
 
 /**
@@ -115,13 +120,10 @@ $route->get('huge/data/table', [
 
 $route->get('orm', function() {
 
-    $config = Config::getInstance();
-    /** @var \Maduser\Minimal\Config\Config $config */
-
     PDO::connection(Config::item('database'));
 
     // Quick find
-    $user = \Maduser\Minimal\Database\User::find(1);
+    $user = User::find(1);
     d($user);
 
     // Eager loading
@@ -129,7 +131,7 @@ $route->get('orm', function() {
     d($users);
 
     // Saving/Updating rows
-    $users = \Maduser\Minimal\Database\User::create();
+    $users = User::create();
 
     $i = 0;
     foreach($users->where(['id', '>', 4])->getAll() as $user) {
@@ -138,24 +140,32 @@ $route->get('orm', function() {
     }
 
     // Deleting rows
-    $users = \Maduser\Minimal\Database\User::create();
+    $users = User::create();
     $users = $users->where(['id', '>', 11])->getAll();
 
     foreach ($users as $user) {
         $user->delete();
     }
 
+    // Attaching/detaching many to many relationships
+    $user = User::find(1);
+    $roles = Role::create()->getAll();
+
+    d($user->roles()->attach($roles));
+    d($user->roles()->detach($roles));
+
+
+    // Associate/Dissociate belongs to relationships
+    $post = Post::find(9);
+    $comment = Comment::find(3);
+
+    // TODO: fix associate() and dissociate()
     /*
+    $comment->post()->associate($post);
+    d($comment);
 
-    // Attaching many to many relationships
-    $user = \Maduser\Minimal\Database\User::find(1);
-    $roles = \Maduser\Minimal\Database\Role::create();
-    $roles = $roles->getAll();
-
-    $user->roles()->attach($roles);
-
-    // Detaching  many to many relationships
-    $user->roles()->detach($roles);
+    $comment->post()->dissociate();
+    d($comment);
 
     */
 });
