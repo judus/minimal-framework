@@ -1,5 +1,5 @@
 <?php
-/** @var \Maduser\Minimal\Core\Modules $modules */
+/** @var \Maduser\Minimal\Apps\Factory $modules */
 
 $modules->register('Pages', [
     //'config' => 'Config/config.php',
@@ -9,3 +9,4 @@ $modules->register('Pages', [
 ]);
 
 $modules->register('Assets');
+$modules->register('ORM');

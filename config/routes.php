@@ -5,8 +5,10 @@
 use Maduser\Minimal\Database\Comment;
 use Maduser\Minimal\Database\Connectors\PDO;
 use Maduser\Minimal\Database\Post;
+use Maduser\Minimal\Database\Profile;
 use Maduser\Minimal\Database\Role;
 use Maduser\Minimal\Database\User;
+use Maduser\Minimal\Database\Usertype;
 use Maduser\Minimal\Facades\Config;
 
 /**
@@ -117,57 +119,5 @@ $route->get('huge/data/table', [
     'controller' => 'Acme\\Controllers\\YourController',
     'action' => 'timeConsumingAction'
 ]);
-
-$route->get('orm', function() {
-
-    PDO::connection(Config::item('database'));
-
-    // Quick find
-    $user = User::find(1);
-    d($user);
-
-    // Eager loading
-    $users = $user->with(['type', 'profile', 'roles', 'posts', 'comments'])->getAll();
-    d($users);
-
-    // Saving/Updating rows
-    $users = User::create();
-
-    $i = 0;
-    foreach($users->where(['id', '>', 4])->getAll() as $user) {
-        $users->username = 'user-' . $i++;
-        $users->save();
-    }
-
-    // Deleting rows
-    $users = User::create();
-    $users = $users->where(['id', '>', 11])->getAll();
-
-    foreach ($users as $user) {
-        $user->delete();
-    }
-
-    // Attaching/detaching many to many relationships
-    $user = User::find(1);
-    $roles = Role::create()->getAll();
-
-    d($user->roles()->attach($roles));
-    d($user->roles()->detach($roles));
-
-
-    // Associate/Dissociate belongs to relationships
-    $post = Post::find(9);
-    $comment = Comment::find(3);
-
-    // TODO: fix associate() and dissociate()
-    /*
-    $comment->post()->associate($post);
-    d($comment);
-
-    $comment->post()->dissociate();
-    d($comment);
-
-    */
-});
 
 
