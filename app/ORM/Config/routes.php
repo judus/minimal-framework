@@ -81,6 +81,12 @@ $route->get('orm', function () {
         }
     }
 
+    // Retrieving related object
+    $user->profile; // has one : ORM
+    $user->type; // belongs to : ORM
+    $user->posts; // has many : Collection
+    $user->roles; // belongs to many : Collection
+
     // Attaching/detaching many to many relationships
     $user = User::find(1);
     $collection = Role::create()->getAll();
@@ -112,6 +118,9 @@ $route->get('orm', function () {
     $comment2->post()->dissociate();
 
     //d($comment);
+
+    // Eager loading relationships
+    $user->with(['type', 'profile', 'roles', 'posts', 'comments'])->getAll();
 
     return count(PDO::getExecutedQueries()) . ' queries have been executed.';
 });
