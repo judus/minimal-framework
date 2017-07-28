@@ -5,6 +5,9 @@
  *
  * @package Acme\Pages\Controllers
  */
+
+use Maduser\Minimal\Facades\Router;
+
 /**
  * Class UserController
  *

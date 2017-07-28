@@ -27,12 +27,6 @@ App::respond([
         return new Collection();
     });
 
-    Router::get('blabla', [
-        'middlewares' => ['Acme\\Middlewares\\StringReplacements']
-    ], function () {
-        return 'blabla {CACHE_MESSAGE}';
-    });
-
     Router::get('lorem', [
         'middlewares' => ['Acme\\Middlewares\\StringReplacements'],
         'controller' => 'Acme\\Controllers\\YourController',

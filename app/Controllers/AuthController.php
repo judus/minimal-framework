@@ -1,5 +1,6 @@
 <?php namespace Acme\Controllers;
 
+use Maduser\Minimal\Facades\Router;
 use Maduser\Minimal\Http\ResponseInterface;
 
 /**

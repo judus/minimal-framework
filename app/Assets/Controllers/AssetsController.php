@@ -106,6 +106,8 @@ class AssetsController
 
     /**
      * @param $filePath
+     *
+     * @return mixed
      */
     public function getAsset($filePath)
     {
