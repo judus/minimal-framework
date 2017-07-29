@@ -2,6 +2,6 @@
 
 /** @var \Maduser\Minimal\Routers\Router $route */
 
-$route->get('/', function () {
+$router->get('/', function () {
     return 'Hello from Minimal!';
 });

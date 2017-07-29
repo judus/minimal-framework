@@ -8,9 +8,9 @@ use Acme\Demo\ORM\Entities\Usertype;
 use Maduser\Minimal\Database\Connectors\PDO;
 use Maduser\Minimal\Facades\Config;
 
-/** @var \Maduser\Minimal\Routers\Router $route */
+/** @var \Maduser\Minimal\Routers\Router $router */
 
-$route->get('orm', function () {
+$router->get('orm', function () {
 
     PDO::connection(Config::item('database'));
 

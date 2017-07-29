@@ -1,11 +1,11 @@
 <?php
 
-/** @var \Maduser\Minimal\Routers\Router $route */
+/** @var \Maduser\Minimal\Routers\Router $router */
 
 /**
  * Route groups
  */
-$route->group([
+$router->group([
 
     // Prefixes all urls in the group with 'auth/'
     'uriPrefix' => 'auth',
@@ -14,25 +14,25 @@ $route->group([
     // Will be prefixed to the controllers
     'namespace' => 'Acme\\Demo\\Auth\\Controllers\\'
 
-], function () use ($route) {
+], function () use ($router) {
 
     // GET request: 'auth/login'
     // Controller 'Acme\\Controllers\AuthController
-    $route->get('login', [
+    $router->get('login', [
         'controller' => 'AuthController',
         'action' => 'loginForm' // Show the login form
     ]);
 
     // POST request: 'auth/login'
     // Controller 'Acme\\Controllers\AuthController
-    $route->post('login', [
+    $router->post('login', [
         'controller' => 'AuthController',
         'action' => 'login' // Login the user
     ]);
 
     // GET request: 'auth/logout'
     // Controller 'Acme\\Controllers\AuthController
-    $route->get('logout', [
+    $router->get('logout', [
         'controller' => 'AuthController',
         'action' => 'logout' // Logout the user
     ]);
@@ -40,7 +40,7 @@ $route->group([
     /**
      * Subgroup with middlewares
      */
-    $route->group([
+    $router->group([
         // Middlewares apply to all route in this (sub)group
         'middlewares' => [
             // Check if the client is authorised to access these routes
@@ -48,28 +48,28 @@ $route->group([
             // Send a email to the administrator
             'Acme\\Demo\\Base\\Middlewares\\ReportAccess',
         ]
-    ], function () use ($route) {
+    ], function () use ($router) {
 
         // No access to these routes if middleware CheckPermission fails
         // Middleware ReportAccess reports all access to these routes
 
         // GET request: 'auth/users'
         // Controller 'Acme\\Controllers\UserController
-        $route->get('users', [
+        $router->get('users', [
             'controller' => 'UserController',
             'action' => 'list' // Show a list of users
         ]);
 
         // GET request: 'auth/users/create'
         // Controller 'Acme\\Controllers\UserController
-        $route->get('users/create', [
+        $router->get('users/create', [
             'controller' => 'UserController',
             'action' => 'createForm' // Show a empty user form
         ]);
 
         // GET request: 'auth/users/edit'
         // Controller 'Acme\\Controllers\UserController
-        $route->get('users/edit/(:num)', [
+        $router->get('users/edit/(:num)', [
             'controller' => 'UserController',
             'action' => 'editForm' // Show a edit form for user (:num)
         ]);
