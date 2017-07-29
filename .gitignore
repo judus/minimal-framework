@@ -34,3 +34,5 @@ composer.lock
 /composer.phar
 /composer.dev.json
 /config/development.php
+/config/production.php
+/config/environment.php
