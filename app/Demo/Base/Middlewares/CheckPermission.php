@@ -46,7 +46,8 @@ class CheckPermission extends AbstractMiddleware
     {
         if (!isset($_SESSION['currentUser'])) {
             $_SESSION['redirectUrl'] = '/' . $this->request->getUriString();
-            return $this->response->redirect('/auth/login');
+            $this->response->redirect('/auth/login');
+            return false;
         }
     }
 
