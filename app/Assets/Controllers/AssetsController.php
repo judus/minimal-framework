@@ -126,9 +126,9 @@ class AssetsController
         foreach ($modules->getArray() as $moduleName => $values) {
             if ($this->request->segment(1) == strtolower($moduleName)) {
 
-                $modulesPath = $this->config->item('modules.path');
+                $modulesPath = $this->config->item('paths.modules');
 
-                $filePath = rtrim($this->config->item('system.path'), '/') . '/' . $modulesPath . '/' . $moduleName . ltrim($fileSegmentPath,
+                $filePath = rtrim($this->config->item('paths.system'), '/') . '/' . $modulesPath . '/' . $moduleName . ltrim($fileSegmentPath,
                         strtolower($moduleName));
 
                 if (file_exists($filePath)) {

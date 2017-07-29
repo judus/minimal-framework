@@ -83,7 +83,7 @@ class Cache extends AbstractMiddleware
      */
     public function setFilename($uri)
     {
-        $this->filename = rtrim($this->config->item('system.path'), '/') . '/' . rtrim($this->config->item('cache.path'), '/') .
+        $this->filename = rtrim($this->config->item('paths.system'), '/') . '/' . rtrim($this->config->item('storage.cache'), '/') .
             '/' . md5($uri) . '.cache';
     }
 
