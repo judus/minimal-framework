@@ -1,4 +1,4 @@
-<?php
+<?php namespace Maduser\Minimal\Facades;
 
 /** @var \Maduser\Minimal\Routers\Router $route */
 
@@ -109,6 +109,13 @@ $route->get('huge/data/table', [
     'middlewares' => ['Acme\\Middlewares\\Cache' => [10]], // Cache for 10sec
     'controller' => 'Acme\\Controllers\\YourController',
     'action' => 'timeConsumingAction'
+]);
+
+
+$route->get('lorem', [
+    'middlewares' => ['Acme\\Middlewares\\StringReplacements'],
+    'controller' => 'Acme\\Controllers\\YourController',
+    'action' => 'loremIpsum'
 ]);
 
 $route->get('demos', function() use ($route) {

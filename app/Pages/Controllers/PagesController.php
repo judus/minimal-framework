@@ -199,6 +199,7 @@ class PagesController
         $contents = ob_get_contents();
         ob_end_clean();
 
+        $result = '';
         $result  = run('lorem');
         $result .= run('lorem');
         $result .= run('lorem');
