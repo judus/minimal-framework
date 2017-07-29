@@ -25,7 +25,7 @@ $ composer create-project minimal/framework
 
 ## Usage
 
-[Routing](#routing) | [Middlewares](#middlewares) | [Providers](#providers) | [Dependency Injection](#dependency-injection) | [Views](#views) | [Assets](#assets) | [Modules](#modules) | [CLI](#cli)
+[Facades](#alternate-usage-with-facades) | [Routing](#routing) | [Middlewares](#middlewares) | [Providers](#providers) | [Dependency Injection](#dependency-injection) | [Views](#views) | [Assets](#assets) | [Modules](#modules) | [CLI](#cli)
 
 ### Routing
 
@@ -33,15 +33,15 @@ $ composer create-project minimal/framework
 ```php
 // in config/routes.php
 
-$route->get('hello/(:any)/(:any)', function($firstname, $lastname) {
-	return 'Hello ' . ucfirst($firstname) . ' ' . ucfirst($lastname);
+$router->get('hello/(:any)/(:any)', function($firstname, $lastname) {
+    return 'Hello ' . ucfirst($firstname) . ' ' . ucfirst($lastname);
 });
 
-// $route->get() responds to GET requests
-// $route->post() responds to POST requests
-// $route->put() ...you get it
-// $route->patch()
-// $route->delete()
+// $router->get() responds to GET requests
+// $router->post() responds to POST requests
+// $router->put() ...you get it
+// $router->patch()
+// $router->delete()
 
 // (:any) match letters and integer
 // (:num) match integer only
@@ -53,17 +53,17 @@ http://localhost/hello/julien/duseyau
 ```php
 // in config/routes.php 
 
-$route->get('hello/(:any)/(:any)', 'Acme\\Controllers\\YourController@yourMethod')
+$router->get('hello/(:any)/(:any)', 'Acme\\Controllers\\YourController@yourMethod')
 ```
 ```php
 // in app/Controllers/YourController.php
 
 class Acme\Controllers\YourController
 {
-	public function yourMethod($name, $lastname)
-	{
-		return 'Hello ' . ucfirst($name) . ' ' . ucfirst($lastname);
-	}
+    public function yourMethod($name, $lastname)
+    {
+        return 'Hello ' . ucfirst($name) . ' ' . ucfirst($lastname);
+    }
 }
 ```
 http://localhost/hello/julien/duseyau
@@ -73,7 +73,7 @@ http://localhost/hello/julien/duseyau
 ```php
 // in config/routes.php
 
-$route->group([
+$router->group([
 
     // Prefixes all urls in the group with 'auth/'
     'uriPrefix' => 'auth',
@@ -86,21 +86,21 @@ $route->group([
 
     // GET request: 'auth/login'
     // Controller 'Acme\\Controllers\AuthController
-    $route->get('login', [
+    $router->get('login', [
         'controller' => 'AuthController',
         'action' => 'loginForm' // Show the login form
     ]);
 
     // POST request: 'auth/login'
     // Controller 'Acme\\Controllers\AuthController
-    $route->post('login', [
+    $router->post('login', [
         'controller' => 'AuthController',
         'action' => 'login' // Login the user
     ]);
 
     // GET request: 'auth/logout'
     // Controller 'Acme\\Controllers\AuthController
-    $route->get('logout', [
+    $router->get('logout', [
         'controller' => 'AuthController',
         'action' => 'logout' // Logout the user
     ]);
@@ -108,7 +108,7 @@ $route->group([
     /**
      * Subgroup with middlewares
      */
-    $route->group([
+    $router->group([
     
         // Middlewares apply to all route in this (sub)group
         'middlewares' => [
@@ -124,21 +124,21 @@ $route->group([
 
         // GET request: 'auth/users'
         // Controller 'Acme\\Controllers\UserController
-        $route->get('users', [
+        $router->get('users', [
             'controller' => 'UserController',
             'action' => 'list' // Show a list of users
         ]);
 
         // GET request: 'auth/users/create'
         // Controller 'Acme\\Controllers\UserController
-        $route->get('users/create', [
+        $router->get('users/create', [
             'controller' => 'UserController',
             'action' => 'createForm' // Show a empty user form
         ]);
 
         // GET request: 'auth/users/edit'
         // Controller 'Acme\\Controllers\UserController
-        $route->get('users/edit/(:num)', [
+        $router->get('users/edit/(:num)', [
             'controller' => 'UserController',
             'action' => 'editForm' // Show a edit form for user (:num)
         ]);
@@ -149,7 +149,7 @@ $route->group([
 ```
 ##### File download
 ```php
-$route->get('download/pdf', function () use ($response) {
+$router->get('download/pdf', function () use ($response) {
     $response->header('Content-Type: application/pdf');
     $response->header('Content-Disposition: attachment; filename="downloaded.pdf"');
     readfile('sample.pdf');
@@ -160,17 +160,17 @@ $route->get('download/pdf', function () use ($response) {
 ```php
 // in config/routes.php
 
-$route->get('users', [
-	'controller' => 'UsersController',
-	'action' => 'list',
-	'middlewares' => [
-		// Check if the client is authorized to access this route
-		'Acme\\Middlewares\\checkPermission',
-		// Send a email to the administrator
-		'Acme\\Middlewares\\ReportAccess',
-		// Cache for x seconds
-		'Acme\\Middlewares\\Cache' => [(1*1*10)]
-	]
+$router->get('users', [
+    'controller' => 'UsersController',
+    'action' => 'list',
+    'middlewares' => [
+        // Check if the client is authorized to access this route
+        'Acme\\Middlewares\\checkPermission',
+        // Send a email to the administrator
+        'Acme\\Middlewares\\ReportAccess',
+        // Cache for x seconds
+        'Acme\\Middlewares\\Cache' => [(1*1*10)]
+    ]
 ]);
 ```
 
@@ -180,7 +180,7 @@ $route->get('users', [
 class CheckPermission implements MiddlewareInterface
 {
     ...
-	    
+        
     // Inject what you want, instance is created through
     // IOC::make() which injects any dependencies
     public function __construct(
@@ -193,7 +193,7 @@ class CheckPermission implements MiddlewareInterface
         $this->route = $route;
     }
 
-	// Executed before dispatch
+    // Executed before dispatch
     public function before() {
         // If not authorised...
                 
@@ -217,18 +217,18 @@ class CheckPermission implements MiddlewareInterface
 
 class Cache implements MiddlewareInterface
 {
-	...
+    ...
 
-	// Executed before dispatch
-	public function before() {
-		// return cached contents
-	}
-	
-	// Executed after dispatch
-	public function after() {
-		// delete old cache
-		// create new cache
-	}
+    // Executed before dispatch
+    public function before() {
+        // return cached contents
+    }
+    
+    // Executed after dispatch
+    public function after() {
+        // delete old cache
+        // create new cache
+    }
 }
 ```
 
@@ -236,9 +236,9 @@ class Cache implements MiddlewareInterface
 ```php
 // Array of middlewares
 $middlewares = [
-	'Acme\\Middlewares\\checkPermission',
-	'Acme\\Middlewares\\ReportAccess',
-	'Acme\\Middlewares\\Cache' => [(1*1*10)]
+    'Acme\\Middlewares\\checkPermission',
+    'Acme\\Middlewares\\ReportAccess',
+    'Acme\\Middlewares\\Cache' => [(1*1*10)]
 ];
 
 // The middleware controller
@@ -246,9 +246,9 @@ $middleware = new Maduser\Minimal\Core\Middleware($middlewares);
 
 // Wrap a task in middleware layers
 $response = $middleware->dispatch(function() {
-	// executes before() on each middleware layer here
-	return 'the task, for example frontController->dispatch(),'
-	// executes after() on each middleware layer here
+    // executes before() on each middleware layer here
+    return 'the task, for example frontController->dispatch(),'
+    // executes after() on each middleware layer here
 });
 
 ```
@@ -259,9 +259,9 @@ $response = $middleware->dispatch(function() {
 // in config/providers.php
 
 return [
-	'Acme\\MyClass' => Acme\MyClassProvider::class, 
-	'Acme\\MyOtherClassA' => Acme\MyOtherClassAProvider::class, 
-	'Acme\\MyOtherClassB' => Acme\MyOtherClassBProvider::class, 
+    'Acme\\MyClass' => Acme\MyClassProvider::class, 
+    'Acme\\MyOtherClassA' => Acme\MyOtherClassAProvider::class, 
+    'Acme\\MyOtherClassB' => Acme\MyOtherClassBProvider::class, 
 ];
 ```
 
@@ -270,24 +270,24 @@ return [
 
 class MyClassProvider extends Provider
 {
-	public function resolve()
-	{
-		// Do something before the class is instantiated
-		$time = time();
-		Assets::setPath()
-		$settings = Config::item('settings');
-		
-		// return new instance
-		/* return new MyClass($time, $settings); */ 
-		
-		// Make singleton and resolve dependencies
-		return $this->singleton('MyClass', new Acme\\MyClass(
-			IOC::resolve('Acme\\MyOtherClassA'),
-			IOC::resolve('Acme\\MyOtherClassB'),
-			$time,
-			$settings
-	   ));
-	}
+    public function resolve()
+    {
+        // Do something before the class is instantiated
+        $time = time();
+        Assets::setPath()
+        $settings = Config::item('settings');
+        
+        // return new instance
+        /* return new MyClass($time, $settings); */ 
+        
+        // Make singleton and resolve dependencies
+        return $this->singleton('MyClass', new Acme\\MyClass(
+            IOC::resolve('Acme\\MyOtherClassA'),
+            IOC::resolve('Acme\\MyOtherClassB'),
+            $time,
+            $settings
+       ));
+    }
 }
 
 // IOC::resolve('Acme\\MyOtherClassA')
@@ -301,21 +301,21 @@ Binding a interface implementation
 // in config/bindings.php
 
 return [
-	'Acme\\InterfaceA' => Acme\ClassA::class,
-	'Acme\\InterfaceB' => Acme\ClassB::class',
+    'Acme\\InterfaceA' => Acme\ClassA::class,
+    'Acme\\InterfaceB' => Acme\ClassB::class',
 ];
 ```
 
 ```php
 class MyClass
 {
-	private $classA;
-	private $classB;
-	
-	public function __construct(InterfaceA $classA, InterfaceB $classB) {
-		$this->classA = $classA;
-		$this->classB = $classB;
-	}
+    private $classA;
+    private $classB;
+    
+    public function __construct(InterfaceA $classA, InterfaceB $classB) {
+        $this->classA = $classA;
+        $this->classB = $classB;
+    }
 }
 
 $MyClass = IOC::make(MyClass::class); 
@@ -338,8 +338,8 @@ $view->share('title', 'My title');
 $view->set('viewValue1', 'someValue1')
 
 $view->render('pages/my-view', [
-	'viewValue2' => 'someValue2', // Same as $view->set()
-	'viewValue3' => 'someValue3'  // Same as $view->set()
+    'viewValue2' => 'someValue2', // Same as $view->set()
+    'viewValue3' => 'someValue3'  // Same as $view->set()
 ]);
 ```
 
@@ -349,11 +349,11 @@ $view->render('pages/my-view', [
 <!DOCTYPE html>
 <html>
 <head>
-	<title><?=$title?></title>	
+    <title><?=$title?></title>    
 </head>
 <body>
-	<!-- Get the view -->
-	<?=$this->yield()?>	
+    <!-- Get the view -->
+    <?=$this->yield()?>    
 </body>
 </html>
 
@@ -368,16 +368,16 @@ $view->render('pages/my-view', [
 
 class SomeController
 {
-	public function __construct(ViewInterface $view)
-	{
-		$this->view = $view;		
-		$this->view->setBaseDir('../resources/views');
-	}
+    public function __construct(ViewInterface $view)
+    {
+        $this->view = $view;        
+        $this->view->setBaseDir('../resources/views');
+    }
 
-	public function someMethod()
-	{
-		return $this->view->render('my-view');
-	}
+    public function someMethod()
+    {
+        return $this->view->render('my-view');
+    }
 }
 ```
 
@@ -395,7 +395,7 @@ $assets->addExternalJs(['https://code.jquery.com/jquery-3.1.0.min.js'], 'bottom'
 
 /** @var Maduser\Minimal\Libraries\View\View $view */
 $assets->addInlineScripts('jQueryFallback', function () use ($view) {
-	return $view->render('scripts/jquery-fallback', [], true);
+    return $view->render('scripts/jquery-fallback', [], true);
 });
 ```
 
@@ -426,7 +426,7 @@ Outputs:
 <html>
 <head>
     <title>My title</title>
-	
+    
     <link rel="stylesheet" href="assets/my-theme/css/normalize.css">
     <link rel="stylesheet" href="assets/my-theme/css/main.css">
     <script src="assets/my-theme/js/vendor/modernizr-2.8.3.min.js" ></script>
@@ -456,10 +456,10 @@ See config/modules.php and example module in framework/app/Pages.
 // in framework/config/modules.php
 
 $modules->register('your-module-dirname', [
-	// optional config array
-	'path' => 'app', // location of the module dir
-	'routes' => 'app/YourModule/Http/routes.php',
-	// ...more options
+    // optional config array
+    'path' => 'app', // location of the module dir
+    'routes' => 'app/YourModule/Http/routes.php',
+    // ...more options
 ]);
 ```
 
@@ -511,6 +511,97 @@ $ php minimal providers
 ##### List all registered config
 ```bash
 $ php minimal config
+```
+
+### Alternate usage with facades
+```php
+// in public/index.php
+
+App::respond(function () {
+
+    // Register all modules configs and routes within path
+    Modules::register('Demo/*');
+
+    // Respond on GET request
+    Router::get('/', function () {
+        return 'Hello from Minimal!';
+    });
+
+    // Respond on GET request with uri paramters
+    Router::get('hello/(:any)/(:num)', function ($any, $num) {
+        return 'Hello ' . $any . ' ' . $num ;
+    });
+
+    // Respond on POST request
+    Router::post('/', function () {
+        return Request::post();
+    });
+
+    // Respond with HTTP location
+    Router::get('redirection', function () {
+        Response::redirect('/');
+    });
+
+    // Respond with a view
+    Router::get('view', function () {
+        return View::render('fancy-html', ['param' => 'value']);
+    });
+
+    // Test the database connection
+    Router::get('database', function () {
+        PDO::connection(Config::item('database'));
+        return 'Successfully connected to database';
+    });
+
+    // Route group
+    Router::group([
+        'uriPrefix' => 'route-groups',
+        'namespace' => 'Acme\\Demo\\Base\\Controllers\\',
+        'middlewares' => [
+            'Acme\\Demo\\Base\\Middlewares\\CheckPermission',
+            'Acme\\Demo\\Base\\Middlewares\\ReportAccess',
+        ]
+    ], function () {
+
+        // Database connection for all the routes in this group
+        PDO::connection(Config::item('database'));
+
+        // Responds to GET route-groups/controller-action/with/middlewares'
+        Router::get('controller-action/with/middlewares', [
+            'middlewares' => ['Acme\\Demo\\Base\\Middlewares\\Cache' => [10]],
+            'controller' => 'YourController',
+            'action' => 'timeConsumingAction'
+        ]);
+
+        // Do database stuff
+        Router::get('users', function () {
+
+            // Import namespaces of the models on top of file to make this work
+
+            // Truncate tables
+            Role::instance()->truncate();
+            User::instance()->truncate();
+
+            // Create 2 new roles
+            Role::create([['name' => 'admin'], ['name' => 'member']]);
+
+            // Get all the roles
+            $roles = Role::all();
+
+            // Create a user
+            $user = User::create(['username' => 'john']);
+
+            // Assign all roles to this user
+            $user->roles()->attach($roles);
+
+            // Get the first username 'john' with his roles
+            return $user->with('roles')->where(['username', 'john'])->first();
+        });
+
+        // ... subgroups are possible ...
+
+    });
+});
 ```
 
 ### Frontend tools
