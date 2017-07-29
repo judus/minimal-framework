@@ -14,9 +14,9 @@ return [
 // DATABASE
 
     'database' => [
-        'user' => 'minimal',
-        'password' => 'minimal',
-        'database' => 'minimal',
+        'user' => '',
+        'password' => '',
+        'database' => '',
         'handlerOptions' => [
             \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION
         ]

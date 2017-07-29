@@ -44,9 +44,9 @@ return [
         'driver' => 'mysql',
         'host' => 'localhost',
         'port' => '3306',
-        'user' => 'minimal',
-        'password' => 'minimal',
-        'database' => 'minimal',
+        'user' => '',
+        'password' => '',
+        'database' => '',
         'charset' => 'utf8',
         'handler' => \PDO::class,
         'handlerOptions' => [
