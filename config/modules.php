@@ -1,12 +1,9 @@
 <?php
+
 /** @var \Maduser\Minimal\Apps\Factory $modules */
 
-$modules->register('Pages', [
-    //'config' => 'Config/config.php',
-    //'bindings' => 'Config/bindings.php',
-    //'providers' => 'Config/providers.php',
-    //'routes' => 'Config/routes.php',
-]);
-
-$modules->register('Assets');
-$modules->register('ORM');
+$modules->register('Demo/Assets');
+$modules->register('Demo/Auth');
+$modules->register('Demo/Base');
+$modules->register('Demo/Pages');
+$modules->register('Demo/ORM');
