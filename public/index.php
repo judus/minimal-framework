@@ -7,36 +7,40 @@ require __DIR__ . "/../helpers/common.php";
  * Example 1
  *
  * If you're happy with defaults, then you're in luck.
- * All you need is this: new \Maduser\Minimal\Apps\Minimal();
- * But for the demo:
  */
-$minimal = new \Maduser\Minimal\Apps\Minimal();
-
-$minimal->exit();
+/*
+new \Maduser\Minimal\Apps\Minimal();
+*/
 
 /**
  * Example 2
  *
  * Same as Example 1, but with a config array
  */
+/*
 $minimal = new \Maduser\Minimal\Apps\Minimal([
     'basepath' => realpath(__DIR__ . '/../'),
     'app' => 'app',
-    'config' => 'config/env.php',
+    'config' => 'config/environment.php',
     'bindings' => 'config/bindings.php',
     'providers' => 'config/providers.php',
     'routes' => 'config/routes.php',
 ]);
-
-$minimal->exit();
+*/
 
 /**
  * Example 3
  *
- * If you don't want to use the routes config file and rather start coding
- * right away in the index.php, then use the App facade with a closure:
+ * If you don't want to use the routes config or modules config file and rather
+ * start coding right away in the index.php:
  */
 App::respond(function () {
+
+    Router::get('/', function () {
+        return 'Hello from Minimal!';
+    });
+
+    Modules::register('Demo/*');
 
     Router::get('array', function () {
         return Config::items();
@@ -46,14 +50,12 @@ App::respond(function () {
         return new Collection();
     });
 
-
     Router::get('database', function () {
-        if (PDO::connection(Config::item('database'))) {
-            return 'Successfully connected to database';
-        }
+        PDO::connection(Config::item('database'));
+        return 'Successfully connected to database';
     });
 
-})->exit();
+});
 
 /**
  * Example 4
@@ -75,7 +77,7 @@ App::respond([
 
     // ...
 
-})->exit();
+});
 
 /**
  * Example 5

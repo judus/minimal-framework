@@ -5,5 +5,3 @@
 $route->get('/', function () {
     return 'Hello from Minimal!';
 });
-
-
