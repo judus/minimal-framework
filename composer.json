@@ -24,5 +24,11 @@
     "psr-4": {
       "Acme\\": "app"
     }
+  },
+  "scripts": {
+    "post-create-project-cmd": [
+      "php -r \"copy('config/_development.php', 'config/development.php');\"",
+      "php -r \"copy('config/_production.php', 'config/production.php');\""
+    ]
   }
 }
