@@ -16,7 +16,7 @@
   ],
   "minimum-stability": "dev",
   "require": {
-    "maduser/minimal": "v0.5.8"
+    "maduser/minimal": "v0.5.9"
   },
   "require-dev": {
   },
@@ -27,8 +27,9 @@
   },
   "scripts": {
     "post-create-project-cmd": [
-      "php -r \"copy('config/_development.php', 'config/development.php');\"",
-      "php -r \"copy('config/_production.php', 'config/production.php');\""
+      "php -r \"rename('config/_development.php', 'config/development.php');\"",
+      "php -r \"rename('config/_production.php', 'config/production.php');\"",
+      "php -r \"rename('config/_environment.php', 'config/environment.php');\""
     ]
   }
 }
