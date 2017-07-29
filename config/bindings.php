@@ -1,7 +1,6 @@
 <?php
 
 return [
-    // Core
     'Maduser\Minimal\Config\ConfigInterface' =>
         Maduser\Minimal\Config\Config::class,
 
@@ -29,7 +28,6 @@ return [
     'Maduser\Minimal\Routers\RouterInterface' =>
         Maduser\Minimal\Routers\Router::class,
 
-    // Libraries
     'Maduser\Minimal\Assets\AssetsInterface' =>
         Maduser\Minimal\Assets\Assets::class,
 

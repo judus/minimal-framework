@@ -1,7 +1,6 @@
 <?php
 
 return [
-    // Core classes
     'CollectionFactory' => Maduser\Minimal\Collections\CollectionFactoryProvider::class,
     'Collection'        => Maduser\Minimal\Collections\CollectionProvider::class,
     'Config'            => Maduser\Minimal\Config\ConfigProvider::class,
@@ -18,7 +17,6 @@ return [
     'Router'            => Maduser\Minimal\Routers\RouterProvider::class,
     'ViewFactory'       => Maduser\Minimal\Views\ViewFactoryProvider::class,
 
-    // Libraries
     'Maduser\Minimal\Libraries\Assets\Assets' =>
         Maduser\Minimal\Assets\AssetsProvider::class,
     'Maduser\Minimal\Libraries\View\View' =>
