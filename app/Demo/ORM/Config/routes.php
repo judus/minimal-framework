@@ -15,12 +15,12 @@ $router->get('orm', function () {
     PDO::connection(Config::item('database'));
 
     // Getting instances
-    $user = User::create();
-    $type = Usertype::create();
-    $profile = Profile::create();
-    $role = Role::create();
-    $post = Post::create();
-    $comment = Comment::create();
+    $user = User::instance();
+    $type = Usertype::instance();
+    $profile = Profile::instance();
+    $role = Role::instance();
+    $post = Post::instance();
+    $comment = Comment::instance();
 
     // Truncating tables
     $user->truncate();
@@ -33,32 +33,26 @@ $router->get('orm', function () {
     // Creating records
     for ($i = 1; $i <= 10; $i++) {
 
-        $user = User::create();
-        $user->username = 'user-' . $i;
-        $user->save();
+        $user = User::create(['username' => 'user-' . $i]);
 
-        $type = Usertype::create();
-        $type->name = 'type-' . $i;
-        $type->save();
+        $type = Usertype::create(['name' => 'type-' . $i]);
 
-        $profile = Profile::create();
-        $profile->firstname = 'profile-firstname-' . $i;
-        $profile->lastname = 'profile-lastname-' . $i;
-        $profile->save();
+        $role = Role::create(['name' => 'role-' . $i]);
 
-        $role = Role::create();
-        $role->name = 'role-' . $i;
-        $role->save();
+        $profile = Profile::create([
+            'firstname' => 'profile-firstname-' . $i,
+            'lastname' => 'profile-lastname-' . $i
+        ]);
 
-        $post = Post::create();
-        $post->title = 'post-title-' . $i;
-        $post->text = 'post-text-' . $i;
-        $post->save();
+        $post = Post::create([
+            'title' => 'post-title-' . $i,
+            'text' => 'post-text-' . $i
+        ]);
 
-        $comment = Comment::create();
-        $comment->title = 'comment-title-' . $i;
-        $comment->text = 'comment-text-' . $i;
-        $comment->save();
+        $comment = Comment::create([
+            'title' => 'comment-title-' . $i,
+            'text' => 'comment-text-' . $i
+        ]);
     }
 
     // Quick find
@@ -66,7 +60,7 @@ $router->get('orm', function () {
 
     // Updating rows
     $i = 0;
-    $collection = $user->getAll();
+    $collection = User::all();
     foreach ($collection as $user) {
         $user->username = 'user-username-' . $i++;
         $user->save();
@@ -89,11 +83,11 @@ $router->get('orm', function () {
 
     // Attaching/detaching many to many relationships
     $user = User::find(1);
-    $collection = Role::create()->getAll();
+    $collection = Role::all();
 
     $user->roles()->attach($collection);
 
-    $collection = Role::create()->where(
+    $collection = Role::instance()->where(
         ['id', '<', 3],
         ['id', '>', '7', 'OR']
     )->getAll();
