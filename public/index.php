@@ -123,29 +123,6 @@ App::respond(function () {
         });
 });
 
-App::respond(function () {
-
-    Router::get('/', function () {
-        return 'Hello from Minimal!';
-    });
-
-    Modules::register('Demo/*');
-
-    Router::get('array', function () {
-        return Config::items();
-    });
-
-    Router::get('object', function () {
-        return new Collection();
-    });
-
-    Router::get('database', function () {
-        PDO::connection(Config::item('database'));
-        return 'Successfully connected to database';
-    });
-
-});
-
 /**
  * Example 4
  *

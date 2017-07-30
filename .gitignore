@@ -36,3 +36,6 @@ composer.lock
 /config/development.php
 /config/production.php
 /config/environment.php
+/storage/php7to5/
+/app/Downgrade/
+/storage/lang/lang.json
