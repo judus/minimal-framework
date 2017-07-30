@@ -51,7 +51,7 @@ $title = isset($title) ? $title : '';
         </div>
     </nav>
 
-    <?= $this->yield() ?>
+    <?= $this->view() ?>
 
     <div class="container">
         <hr>

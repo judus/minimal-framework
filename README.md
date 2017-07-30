@@ -353,7 +353,7 @@ $view->render('pages/my-view', [
 </head>
 <body>
     <!-- Get the view -->
-    <?=$this->yield()?>    
+    <?=$this->view()?>    
 </body>
 </html>
 

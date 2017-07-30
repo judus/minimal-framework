@@ -41,6 +41,7 @@ App::respond(function () {
 
     // Register all modules configs and routes within path
     Modules::register('Demo/*');
+    Modules::register('Downgrade');
 
     // Respond on GET request
     Router::get('/', function () {
