@@ -16,7 +16,7 @@
   ],
   "minimum-stability": "dev",
   "require": {
-    "maduser/minimal": "v0.5.19"
+    "maduser/minimal": "v0.5.20"
   },
   "require-dev": {
   },
