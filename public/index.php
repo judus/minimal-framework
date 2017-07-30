@@ -83,9 +83,6 @@ App::respond(function () {
         ]
     ], function () {
 
-            // Database connection for all the routes in this group
-            PDO::connection(Config::item('database'));
-
             // Responds to GET route-groups/controller-action/with/middlewares'
             Router::get('controller-action/with/middlewares', [
                 'middlewares' => ['Acme\\Demo\\Base\\Middlewares\\Cache' => [10]],
@@ -95,6 +92,9 @@ App::respond(function () {
 
             // Do database stuff
             Router::get('users', function () {
+
+                // Database connection for all the routes in this group
+                PDO::connection(Config::item('database'));
 
                 // Import namespaces of the models on top of file to make this work
 
