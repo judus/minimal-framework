@@ -1,4 +1,4 @@
-<?php namespace Acme\Demo\Auth\Controllers;
+<?php namespace App\Demo\Auth\Controllers;
 
 use Maduser\Minimal\Facades\Router;
 use Maduser\Minimal\Http\ResponseInterface;
@@ -6,7 +6,7 @@ use Maduser\Minimal\Http\ResponseInterface;
 /**
  * Class AuthController
  *
- * @package Acme\Demo\Controllers
+ * @package App\Demo\Controllers
  */
 class AuthController
 {
@@ -38,12 +38,12 @@ class AuthController
             $html = '<p>You are logged in as '
                 . $_SESSION['currentUser'] .'</p>';
 
-            $html.= '<a href="/auth/logout">Logout</a>';
+            $html.= '<a href="' . http() . 'auth/logout">Logout</a>';
             return $html;
         }
 
         $html = '<p>Imagine a login form and press the button:</p>';
-        $html.= '<form action="/auth/login" method="post">';
+        $html.= '<form action="' . http() . 'auth/login" method="post">';
         $html.= '<input type="submit" name="login" value="login">';
         $html.= '</form >';
 
@@ -65,7 +65,7 @@ class AuthController
     public function logout()
     {
         unset($_SESSION['currentUser']);
-        $this->response->redirect('/auth/login');
+        $this->response->redirect(http() . 'auth/login');
     }
 
     /**
@@ -90,7 +90,7 @@ class AuthController
             unset($_SESSION['redirectUrl']);
             $this->response->redirect($redirectUrl);
         } else {
-            $this->response->redirect('/auth/login');
+            $this->response->redirect(http() . 'auth/login');
         }
     }
 }

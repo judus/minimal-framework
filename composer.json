@@ -16,14 +16,17 @@
   ],
   "minimum-stability": "dev",
   "require": {
-    "maduser/minimal": "v0.5.20"
+    "maduser/minimal": "v0.5.24"
   },
   "require-dev": {
   },
   "autoload": {
     "psr-4": {
-      "Acme\\": "app"
-    }
+      "App\\": "app"
+    },
+    "files": [
+      "helpers/helpers.php"
+    ]
   },
   "scripts": {
     "post-create-project-cmd": [

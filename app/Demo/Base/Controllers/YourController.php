@@ -1,9 +1,9 @@
-<?php namespace Acme\Demo\Base\Controllers;
+<?php namespace App\Demo\Base\Controllers;
 
 /**
  * Class YourController
  *
- * @package Acme\Demo\Controllers
+ * @package App\Demo\Controllers
  */
 class YourController
 {

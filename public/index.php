@@ -1,10 +1,9 @@
 <?php namespace Maduser\Minimal\Facades;
 
-use Acme\Demo\ORM\Entities\Role;
-use Acme\Demo\ORM\Entities\User;
+use App\Demo\ORM\Entities\Role;
+use App\Demo\ORM\Entities\User;
 
 require __DIR__ . "/../vendor/autoload.php";
-require __DIR__ . "/../helpers/common.php";
 
 /**
  * Example 1
@@ -39,89 +38,101 @@ $minimal = new \Maduser\Minimal\Apps\Minimal([
  */
 App::respond(function () {
 
-    // Register all modules configs and routes within path
-    Modules::register('Demo/*');
-    Modules::register('Downgrade');
-
     // Respond on GET request
     Router::get('/', function () {
-        return 'Hello from Minimal!';
+        Response::redirect(http() . 'demos');
     });
+
+    // Register all modules configs and routes within modules path
+    Modules::register('Demo/*');
 
     // Respond on GET request with uri paramters
     Router::get('hello/(:any)/(:num)', function ($any, $num) {
-        return 'Hello ' . $any . ' ' . $num ;
+        return 'Hello ' . $any . ' ' . $num;
     });
 
     // Respond on POST request
-    Router::post('/', function () {
+    Router::post('/post', function () {
         return Request::post();
     });
 
-    // Respond with HTTP location
-    Router::get('redirection', function () {
-        Response::redirect('/');
+    // Translations
+    Router::get('translator', function () {
+
+        $str = '"Guete Morge" => (auto) ' . __('Guete Morge');
+        $str .= '<br>"Guete Morge" => (en) ' . __('Guete Morge', 'en');
+        $str .= '<br>"Guete Morge" => (de) ' . __('Guete Morge', 'de');
+        $str .= '<br>"Guete Morge" => (fr) ' . __('Guete Morge', 'fr');
+        $str .= '<br>"Guete Morge" => (it) ' . __('Guete Morge', 'it');
+        $str .= '<br>"Guete Morge" => (rm) ' . __('Guete Morge', 'rm');
+
+        return $str;
+
     });
 
     // Respond with a view
     Router::get('view', function () {
-        return View::render('fancy-html', ['param' => 'value']);
+        return View::render(path('views') . 'pages/my-view', [
+            'title' => 'Hello',
+            'content' => lorem()
+        ]);
     });
 
     // Test the database connection
     Router::get('database', function () {
         PDO::connection(Config::item('database'));
+
         return 'Successfully connected to database';
     });
 
     // Route group
     Router::group([
         'uriPrefix' => 'route-groups',
-        'namespace' => 'Acme\\Demo\\Base\\Controllers\\',
+        'namespace' => 'App\\Demo\\Base\\Controllers\\',
         'middlewares' => [
-            'Acme\\Demo\\Base\\Middlewares\\CheckPermission',
-            'Acme\\Demo\\Base\\Middlewares\\ReportAccess',
+            'App\\Demo\\Base\\Middlewares\\CheckPermission',
+            'App\\Demo\\Base\\Middlewares\\ReportAccess',
         ]
     ], function () {
 
-            // Responds to GET route-groups/controller-action/with/middlewares'
-            Router::get('controller-action/with/middlewares', [
-                'middlewares' => ['Acme\\Demo\\Base\\Middlewares\\Cache' => [10]],
-                'controller' => 'YourController',
-                'action' => 'timeConsumingAction'
-            ]);
+        // Responds to GET route-groups/controller-action/with/middlewares'
+        Router::get('controller-action/with/middlewares', [
+            'middlewares' => ['App\\Demo\\Base\\Middlewares\\Cache' => [10]],
+            'controller' => 'YourController',
+            'action' => 'timeConsumingAction'
+        ]);
 
-            // Do database stuff
-            Router::get('users', function () {
+        // Do database stuff
+        Router::get('users', function () {
 
-                // Database connection for all the routes in this group
-                PDO::connection(Config::item('database'));
+            // Database connection for all the routes in this group
+            PDO::connection(Config::item('database'));
 
-                // Import namespaces of the models on top of file to make this work
+            // Import namespaces of the models on top of file to make this work
 
-                // Truncate tables
-                Role::instance()->truncate();
-                User::instance()->truncate();
+            // Truncate tables
+            Role::instance()->truncate();
+            User::instance()->truncate();
 
-                // Create 2 new roles
-                Role::create([['name' => 'admin'], ['name' => 'member']]);
+            // Create 2 new roles
+            Role::create([['name' => 'admin'], ['name' => 'member']]);
 
-                // Get all the roles
-                $roles = Role::all();
+            // Get all the roles
+            $roles = Role::all();
 
-                // Create a user
-                $user = User::create(['username' => 'john']);
+            // Create a user
+            $user = User::create(['username' => 'john']);
 
-                // Assign all roles to this user
-                $user->roles()->attach($roles);
+            // Assign all roles to this user
+            $user->roles()->attach($roles);
 
-                // Get the first username 'john' with his roles
-                return $user->with('roles')->where(['username', 'john'])->first();
-            });
-
-            // ... subgroups are possible ...
-
+            // Get the first username 'john' with his roles
+            return $user->with('roles')->where(['username', 'john'])->first();
         });
+
+        // ... subgroups are possible ...
+
+    });
 });
 
 /**

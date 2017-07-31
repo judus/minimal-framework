@@ -1,9 +1,14 @@
 <?php
+
 use Maduser\Minimal\Facades\App;
+use Maduser\Minimal\Facades\Config;
+use Maduser\Minimal\Facades\Path;
 use Maduser\Minimal\Facades\View;
+use Maduser\Minimal\Translation\Translation;
 use Symfony\Component\VarDumper\VarDumper;
 
-if ( ! function_exists('view')) {
+
+if (!function_exists('view')) {
     /**
      * Simple view renderer
      *
@@ -17,6 +22,7 @@ if ( ! function_exists('view')) {
         return View::render($viewPath, $data);
     }
 }
+
 
 if (!function_exists('run')) {
     /**
@@ -35,125 +41,61 @@ if (!function_exists('run')) {
 }
 
 
-if (!function_exists('show')) {
+if (!function_exists('path')) {
     /**
-     * @param null $data
-     * @param null $heading
-     * @param bool $getContents
+     * @param null $item
      *
      * @return string
      */
-    function show($data = null, $heading = null, $getContents = false)
+    function path($item = null, $root = true)
     {
-        !is_null($data) OR $data = 'Hi from ' . debug_backtrace()[0]['file'] .
-            ' at line ' . debug_backtrace()[0]['line'];
-
-        $string = '<div class="debug_show">';
-        $string .= $heading ? '<span>' . $heading : '';
-        $string .= $heading ? '</span>' : '';
-        $string .= '<pre>';
-        $string .= htmlentities(print_r($data, true));
-        $string .= '</pre>';
-        $string .= '</div>';
-
-        if ($getContents) {
-            return $string;
-        }
-
-        echo $string;
+        return Path::path($item, $root);
     }
 }
 
-if (!function_exists('d')) {
-    function d($data = null, $heading = null, $return = false)
+if (!function_exists('http')) {
+    /**
+     * @param null $item
+     *
+     * @return string
+     */
+    function http($item = null)
     {
-        $string = '';
-
-        if (class_exists(VarDumper::class)) {
-            $array = [];
-            is_null($heading) || $array['heading'] = $heading;
-            is_null($data) || $array['data'] = $data;
-            count($array) > 0 || $array['data'] = null;
-            ob_start();
-            call_user_func_array('dump', $array);
-            $string .= ob_get_contents();
-            ob_end_clean();
-        } else {
-            $string .= show($data, $heading, true);
-        }
-
-        if ($return) {
-            return $string;
-        }
-
-        echo $string;
-    }
-}
-
-if (!function_exists('dd')) {
-    function dd($data = null, $heading = null)
-    {
-        echo d($data, $heading, true);
-        exit();
+        return Path::http($item);
     }
 }
 
 
-if (!function_exists('k')) {
-    function k($data = null, $heading = null, $return = false)
+if (!function_exists('__')) {
+    /**
+     * @param      $str
+     * @param null $lang
+     *
+     * @return mixed
+     */
+    function __($str, $lang = null)
     {
-        $string = '';
+        Translation::setFilePath(path('translations'));
 
-        if (class_exists(Kint::class)) {
-            ob_start();
-            is_null($heading) || $string .= show($heading, null, true);
-            Kint::$enabled_mode = ($_SERVER['REMOTE_ADDR'] === '127.0.0.1');
-            Kint::$max_depth = 6;
-            Kint_Renderer_Rich::$theme = $_SERVER['DOCUMENT_ROOT'] . '/../vendor/kint-php/kint/resources/compiled/aante-light.css';
-            Kint::dump($data);
-            $string .= ob_get_contents();
-            ob_end_clean();
-        } else {
-            $string = d($data, $heading, true);
-        }
-
-        if ($return) {
-            return $string;
-        }
-
-        echo $string;
+        return Translation::get($str, $lang);
     }
 }
 
-if (!function_exists('kd')) {
-    function kd($data = null, $heading = null)
+
+if (!function_exists('lorem')) {
+    /**
+     * @return string
+     */
+    function lorem()
     {
-        echo k($data, $heading, true);
-        exit();
+        return 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed ' .
+            'diam nonumy eirmod tempor invidunt ut labore et dolore magna ' .
+            'aliquyam erat, sed diam voluptua. At vero eos et accusam et justo ' .
+            'duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata ' .
+            'sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, ' .
+            'consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ' .
+            'ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero ' .
+            'eos et accusam et justo duo dolores et ea rebum. Stet clita kasd ' .
+            'gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.';
     }
-}
-
-function scanDirectories($rootDir, $allData = array())
-{
-    // set filenames invisible if you want
-    $invisibleFileNames = array(".", "..", ".htaccess", ".htpasswd");
-    // run through content of root directory
-    $dirContent = scandir($rootDir);
-    foreach ($dirContent as $key => $content) {
-        // filter all files not accessible
-        $path = $rootDir . '/' . $content;
-        if (!in_array($content, $invisibleFileNames)) {
-            // if content is file & readable, add to array
-            if (is_file($path) && is_readable($path)) {
-                // save file name with path
-                $allData[] = $path;
-                // if content is a directory and readable, add path and name
-            } elseif (is_dir($path) && is_readable($path)) {
-                // recursive callback to open new directory
-                $allData = scanDirectories($path, $allData);
-            }
-        }
-    }
-
-    return $allData;
 }

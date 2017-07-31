@@ -1,4 +1,4 @@
-<?php namespace Acme\Demo\Base\Models;
+<?php namespace App\Demo\Base\Models;
 
 use Maduser\Minimal\Facades\Router;
 
@@ -20,8 +20,8 @@ class Navigation
                 }
             }
 
-            $uri = call_user_func_array([$route, 'uri'], $args);
-            $text = $route->getUriPattern();
+            $uri = http() . ltrim(call_user_func_array([$route, 'uri'], $args), '/');
+            $text = $route->getUriPrefix() . $route->getUriPattern();
             $html .= '<li><a href="' . $uri . '">' . $text . '</a></li>';
         }
 

@@ -1,4 +1,4 @@
-<?php namespace Acme\Demo\Pages\Controllers;
+<?php namespace App\Demo\Pages\Controllers;
 
 use Maduser\Minimal\Facades\App;
 use Maduser\Minimal\Facades\Config;
@@ -101,15 +101,15 @@ class PagesController
     private function setupAssetsAndViews()
     {
         // Setup views
-        $this->view->setBase('../app/Demo/Pages/resources/views');
+        $this->view->setBase(path('modules') . 'Demo/Pages/resources/views');
         $this->view->setTheme('my-theme');
         $this->view->setLayout('layouts/my-layout');
         $this->view->share('title', 'My title');
         $this->view->share('assets', $this->assets);
 
         // Setup assets
-        $this->assets->setSource('../app/Demo/Pages/public/build');
-        $this->assets->setBase('assets/demo/pages/public/build');
+        $this->assets->setSource(path('modules') . 'Demo/Pages/public/build');
+        $this->assets->setBase(http().'assets/demo/pages/public/build');
         $this->assets->setTheme('my-theme');
         $this->assets->setCssDir('css');
         $this->assets->setJsDir('js');

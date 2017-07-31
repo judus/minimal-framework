@@ -38,4 +38,3 @@ composer.lock
 /config/environment.php
 /storage/php7to5/
 /app/Downgrade/
-/storage/lang/lang.json

@@ -1,4 +1,4 @@
-<?php namespace Acme\Demo\Base\Middlewares;
+<?php namespace App\Demo\Base\Middlewares;
 
 use Maduser\Minimal\Config\ConfigInterface;
 use Maduser\Minimal\Middlewares\AbstractMiddleware;

@@ -14,19 +14,21 @@ return [
         'public' => 'public',
         'resources' => 'resources',
         'storage' => 'storage',
-        'system' => realpath(__DIR__ . '/../')
+        'system' => realpath(__DIR__ . '/../'),
+        'translations' => 'storage/lang/lang.json',
+        'views' => 'resources/views/my-theme'
     ],
 
 // ----------------------------------------------------------------------------
 // APPLICATION
-
+/*
     'app' => [
         'bindingsFile' => 'config/bindings.php',
         'configFile' => 'config/config.php',
         'providersFile' => 'config/providers.php',
         'routesFile' => 'config/routes.php',
     ],
-
+*/
 // ----------------------------------------------------------------------------
 // MODULES
 
@@ -70,8 +72,7 @@ return [
         'app' => 'storage/app',
         'cache' => 'storage/cache',
         'logs' => 'storage/logs',
-        'translation' => 'storage/translation',
-        'content' => 'storage/content'
+        'translation' => 'storage/translation'
     ],
 
 ];

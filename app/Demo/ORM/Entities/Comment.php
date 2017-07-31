@@ -1,6 +1,6 @@
 <?php
 
-namespace Acme\Demo\ORM\Entities;
+namespace App\Demo\ORM\Entities;
 
 use Maduser\Minimal\Database\ORM\ORM;
 

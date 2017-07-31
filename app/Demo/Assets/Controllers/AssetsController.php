@@ -1,4 +1,4 @@
-<?php namespace Acme\Demo\Assets\Controllers;
+<?php namespace App\Demo\Assets\Controllers;
 
 use Maduser\Minimal\Config\ConfigInterface;
 use Maduser\Minimal\Apps\FactoryInterface;

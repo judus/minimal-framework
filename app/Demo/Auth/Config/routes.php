@@ -12,7 +12,7 @@ $router->group([
 
     // Define the class namespace for all routes in this group
     // Will be prefixed to the controllers
-    'namespace' => 'Acme\\Demo\\Auth\\Controllers\\'
+    'namespace' => 'App\\Demo\\Auth\\Controllers\\'
 
 ], function () use ($router) {
 
@@ -44,9 +44,9 @@ $router->group([
         // Middlewares apply to all route in this (sub)group
         'middlewares' => [
             // Check if the client is authorised to access these routes
-            'Acme\\Demo\\Base\\Middlewares\\CheckPermission',
+            'App\\Demo\\Base\\Middlewares\\CheckPermission',
             // Send a email to the administrator
-            'Acme\\Demo\\Base\\Middlewares\\ReportAccess',
+            'App\\Demo\\Base\\Middlewares\\ReportAccess',
         ]
     ], function () use ($router) {
 

@@ -1,10 +1,10 @@
 <?php
-use Acme\Demo\ORM\Entities\Comment;
-use Acme\Demo\ORM\Entities\Post;
-use Acme\Demo\ORM\Entities\Profile;
-use Acme\Demo\ORM\Entities\Role;
-use Acme\Demo\ORM\Entities\User;
-use Acme\Demo\ORM\Entities\Usertype;
+use App\Demo\ORM\Entities\Comment;
+use App\Demo\ORM\Entities\Post;
+use App\Demo\ORM\Entities\Profile;
+use App\Demo\ORM\Entities\Role;
+use App\Demo\ORM\Entities\User;
+use App\Demo\ORM\Entities\Usertype;
 use Maduser\Minimal\Database\Connectors\PDO;
 use Maduser\Minimal\Facades\Config;
 

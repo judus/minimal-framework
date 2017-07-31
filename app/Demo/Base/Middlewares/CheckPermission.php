@@ -1,4 +1,4 @@
-<?php namespace Acme\Demo\Base\Middlewares;
+<?php namespace App\Demo\Base\Middlewares;
 
 use Maduser\Minimal\Middlewares\AbstractMiddleware;
 use Maduser\Minimal\Middlewares\MiddlewareInterface;
@@ -45,8 +45,8 @@ class CheckPermission extends AbstractMiddleware
     public function before()
     {
         if (!isset($_SESSION['currentUser'])) {
-            $_SESSION['redirectUrl'] = '/' . $this->request->getUriString();
-            $this->response->redirect('/auth/login');
+            $_SESSION['redirectUrl'] = http() . $this->request->getUriString();
+            $this->response->redirect(http() . 'auth/login');
             return false;
         }
     }

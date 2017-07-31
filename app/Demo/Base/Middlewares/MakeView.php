@@ -1,4 +1,4 @@
-<?php namespace Acme\Demo\Base\Middlewares;
+<?php namespace App\Demo\Base\Middlewares;
 
 use Maduser\Minimal\Assets\AssetsInterface;
 use Maduser\Minimal\Config\ConfigInterface;
@@ -31,14 +31,14 @@ class MakeView extends AbstractMiddleware
      */
     public function after()
     {
-        $this->view->setBase('../app/Demo/Pages/resources/views');
+        $this->view->setBase(path('modules') . 'Demo/Pages/resources/views');
         $this->view->setTheme('my-theme');
         $this->view->setLayout('layouts/my-layout');
         $this->view->share('title', 'My title');
         $this->view->share('assets', Assets::getInstance());
 
-        Assets::setSource('../app/demo/Pages/public/build');
-        Assets::setBase('assets/demo/pages/public/build');
+        Assets::setSource(path('modules') . 'Demo/Pages/public/build');
+        Assets::setBase(http() . 'assets/demo/pages/public/build');
         Assets::setTheme('my-theme');
         Assets::setCssDir('css');
         Assets::setJsDir('js');

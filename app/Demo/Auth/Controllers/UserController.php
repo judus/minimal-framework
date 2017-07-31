@@ -1,4 +1,4 @@
-<?php namespace Acme\Demo\Auth\Controllers;
+<?php namespace App\Demo\Auth\Controllers;
 
 /**
  * Class UserController
@@ -11,7 +11,7 @@ use Maduser\Minimal\Facades\Router;
 /**
  * Class UserController
  *
- * @package Acme\Demo\Controllers
+ * @package App\Demo\Controllers
  */
 class UserController
 {

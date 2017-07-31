@@ -16,6 +16,8 @@ return [
     'Route'             => Maduser\Minimal\Routers\RouteProvider::class,
     'Router'            => Maduser\Minimal\Routers\RouterProvider::class,
     'ViewFactory'       => Maduser\Minimal\Views\ViewFactoryProvider::class,
+    'HtmlBuilder'       => Maduser\Minimal\Html\HtmlProvider::class,
+    'FormBuilder'       => Maduser\Minimal\Html\FormProvider::class,
 
     'Maduser\Minimal\Libraries\Assets\Assets' =>
         Maduser\Minimal\Assets\AssetsProvider::class,
