@@ -6,9 +6,9 @@ use App\Demo\ORM\Entities\Role;
 use App\Demo\ORM\Entities\User;
 use App\Demo\ORM\Entities\Usertype;
 use Maduser\Minimal\Database\Connectors\PDO;
-use Maduser\Minimal\Facades\Config;
+use Maduser\Minimal\Framework\Facades\Config;
 
-/** @var \Maduser\Minimal\Routers\Router $router */
+/** @var \Maduser\Minimal\Routing\Router $router */
 
 $router->get('orm', function () {
 
@@ -110,7 +110,6 @@ $router->get('orm', function () {
     //d($comment);
 
     $comment2->post()->dissociate();
-
     //d($comment);
 
     // Eager loading relationships

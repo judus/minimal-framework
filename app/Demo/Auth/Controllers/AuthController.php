@@ -1,12 +1,11 @@
 <?php namespace App\Demo\Auth\Controllers;
 
-use Maduser\Minimal\Facades\Router;
-use Maduser\Minimal\Http\ResponseInterface;
+use Maduser\Minimal\Http\Contracts\ResponseInterface;
 
 /**
  * Class AuthController
  *
- * @package App\Demo\Controllers
+ * @package App\Demo\Auth\Controllers
  */
 class AuthController
 {

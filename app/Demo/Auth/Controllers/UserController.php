@@ -1,17 +1,11 @@
 <?php namespace App\Demo\Auth\Controllers;
 
-/**
- * Class UserController
- *
- * @package Acme\Pages\Controllers
- */
-
-use Maduser\Minimal\Facades\Router;
+use Maduser\Minimal\Framework\Facades\Router;
 
 /**
  * Class UserController
  *
- * @package App\Demo\Controllers
+ * @package App\Auth\Controllers
  */
 class UserController
 {
@@ -43,6 +37,8 @@ class UserController
     }
 
     /**
+     * @param $id
+     *
      * @return string
      */
     public function editForm($id)

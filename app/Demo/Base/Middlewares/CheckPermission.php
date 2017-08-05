@@ -1,9 +1,8 @@
 <?php namespace App\Demo\Base\Middlewares;
 
 use Maduser\Minimal\Middlewares\AbstractMiddleware;
-use Maduser\Minimal\Middlewares\MiddlewareInterface;
-use Maduser\Minimal\Http\RequestInterface;
-use Maduser\Minimal\Http\ResponseInterface;
+use Maduser\Minimal\Http\Contracts\RequestInterface;
+use Maduser\Minimal\Http\Contracts\ResponseInterface;
 
 /**
  * Class CheckPermission
@@ -49,6 +48,8 @@ class CheckPermission extends AbstractMiddleware
             $this->response->redirect(http() . 'auth/login');
             return false;
         }
+
+        return true;
     }
 
     /**

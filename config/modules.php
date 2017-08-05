@@ -1,5 +1,5 @@
 <?php
 
-/** @var \Maduser\Minimal\Apps\Factory $modules */
+/** @var \Maduser\Minimal\Framework\Factory $modules */
 
 $modules->register('Demo/*');

@@ -1,17 +1,13 @@
 <?php namespace App\Demo\Pages\Controllers;
 
-use Maduser\Minimal\Facades\App;
-use Maduser\Minimal\Facades\Config;
-use Maduser\Minimal\Facades\Request;
-use Maduser\Minimal\Facades\Router;
-use Maduser\Minimal\Config\ConfigInterface;
-use Maduser\Minimal\Apps\FactoryInterface;
-use Maduser\Minimal\Http\RequestInterface;
-use Maduser\Minimal\Routers\RouterInterface;
-use Maduser\Minimal\Routers\RouteInterface;
-use Maduser\Minimal\Views\ViewInterface;
-use Maduser\Minimal\Assets\AssetsInterface;
-use Maduser\Minimal\Http\ResponseInterface;
+use Maduser\Minimal\Assets\Contracts\AssetsInterface;
+use Maduser\Minimal\Framework\Contracts\FactoryInterface;
+use Maduser\Minimal\Config\Contracts\ConfigInterface;
+use Maduser\Minimal\Http\Contracts\RequestInterface;
+use Maduser\Minimal\Http\Contracts\ResponseInterface;
+use Maduser\Minimal\Routing\Contracts\RouterInterface;
+use Maduser\Minimal\Routing\Contracts\RouteInterface;
+use Maduser\Minimal\Views\Contracts\ViewInterface;
 
 /**
  * Class PagesController
@@ -85,7 +81,7 @@ class PagesController
         $this->config = $config;
         /** @var \Maduser\Minimal\Http\Request $request */
         $this->request = $request;
-        /** @var \Maduser\Minimal\Routers\Router $router */
+        /** @var \Maduser\Minimal\Routing\RouterProvider $router */
         $this->router = $router;
         /** @var \Maduser\Minimal\Http\Response $response */
         $this->response = $response;
@@ -199,7 +195,6 @@ class PagesController
         $contents = ob_get_contents();
         ob_end_clean();
 
-        $result = '';
         $result  = run('lorem');
         $result .= run('lorem');
         $result .= run('lorem');
@@ -241,17 +236,18 @@ class PagesController
 
     public function timeConsumingAction()
     {
-        $countTo = 100000000;
-
         $start = time();
-        for ($i = 0; $i < $countTo; $i++) {
-            $i;
+
+        $i = 0;
+        while ($i < 100000000) {
+            $i++;
         }
+
         $end = time();
 
         $period = $end - $start;
 
-        $html = '<p>I have counted to ' . $countTo . '. It took '
+        $html = '<p>I have counted to ' . $i . '. It took '
             . $period . ' seconds.<br>If the response reached you faster than '
             . 'that, you received cached contents</p>'
             . '<p>Content generated at ' . date('Y-m-d h:i:sa') . '</p>'

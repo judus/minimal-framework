@@ -4,7 +4,7 @@ require __DIR__ .'/vendor/autoload.php';
 
 if ((php_sapi_name() === 'cli' or defined('STDIN'))) {
 
-    $minimal = new \Maduser\Minimal\Apps\Minimal([
+    $minimal = new \Maduser\Minimal\Framework\Minimal([
         'basepath' => realpath(__DIR__ . '/'),
         'app' => 'app',
         'config' => 'config/config.php',

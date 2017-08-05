@@ -1,6 +1,6 @@
 <?php
 
-/** @var \Maduser\Minimal\Routers\Router $router */
+/** @var \Maduser\Minimal\Routing\Router $router */
 
 /**
  * Direct output

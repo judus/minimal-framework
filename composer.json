@@ -17,7 +17,7 @@
   "minimum-stability": "dev",
   "require": {
     "php": ">=7.0.0",
-    "maduser/minimal": "v0.5.26"
+    "maduser/minimal": "v0.6.1"
   },
   "require-dev": {
   },

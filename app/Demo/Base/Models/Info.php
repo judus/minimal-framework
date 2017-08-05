@@ -2,18 +2,21 @@
 
 namespace App\Demo\Base\Models;
 
-use Maduser\Minimal\Apps\Minimal;
+use Maduser\Minimal\Framework\Minimal;
 use Maduser\Minimal\Cli\Console;
-use Maduser\Minimal\Facades\IOC;
+use Maduser\Minimal\Framework\Facades\IOC;
 
 class Info
 {
+    private $minimal;
+
+    private $console;
+
     public function __construct(Minimal $minimal)
     {
         $this->minimal = $minimal;
         $this->console = new Console();
     }
-
 
     public function config()
     {
@@ -38,7 +41,7 @@ class Info
     {
         $router = $this->minimal->getRouter();
 
-        /** @var Collection $routes */
+        /** @var \Maduser\Minimal\Collections\Contracts\CollectionInterface $routes */
         $routes = $router->getRoutes();
 
         $routesAll = $routes->get('ALL');
@@ -47,7 +50,7 @@ class Info
 
         foreach ($routesAll->getArray() as $route) {
 
-            /** @var Route $route */
+            /** @var \Maduser\Minimal\Routing\Route $route */
 
             $mws = $route->getMiddlewares();
             $str = '';
@@ -68,15 +71,9 @@ class Info
                 }
             }
 
-            $uri = http() . ltrim(call_user_func_array([$route, 'uri'], $args),
-                    '/');
-            $text = '/' . ltrim($route->getUriPrefix() . $route->getUriPattern(),
-                    '/');
-            $html = '<a href="' . $uri . '">' . $text . '</a>';
-
             $array[] = [
                 'type' => $route->getRequestMethod(),
-                'pattern' => $text,
+                'pattern' => '/' . ltrim($route->getUriPrefix() . $route->getUriPattern(), '/'),
                 'action' => $route->hasClosure() ? '<= Closure()' : $route->getController() . '@' . $route->getAction(),
                 'middleware' => $str
             ];
@@ -100,7 +97,7 @@ class Info
         $array = [];
 
         foreach ($modules as $module) {
-            /** @var Module $module */
+            /** @var \Maduser\Minimal\Framework\Module $module */
             $array[] = [
                 'name' => $module->getName(),
                 'path' => $module->getBasePath(),

@@ -1,10 +1,8 @@
 <?php namespace App\Demo\Base\Middlewares;
 
-use Maduser\Minimal\Config\ConfigInterface;
+use Maduser\Minimal\Config\Contracts\ConfigInterface;
 use Maduser\Minimal\Middlewares\AbstractMiddleware;
-use Maduser\Minimal\Middlewares\MiddlewareInterface;
-use Maduser\Minimal\Http\RequestInterface;
-
+use Maduser\Minimal\Http\Contracts\RequestInterface;
 
 /**
  * Class Cache
@@ -166,6 +164,8 @@ class Cache extends AbstractMiddleware
         ) {
             return file_get_contents($filename);
         }
+
+        return null;
     }
 
 }

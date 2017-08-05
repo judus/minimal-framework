@@ -1,4 +1,4 @@
-<?php namespace Maduser\Minimal\Facades;
+<?php namespace Maduser\Minimal\Framework\Facades;
 
 use App\Demo\ORM\Entities\Role;
 use App\Demo\ORM\Entities\User;
@@ -8,10 +8,10 @@ require __DIR__ . "/../vendor/autoload.php";
 /**
  * Example 1
  *
- * If you're happy with defaults, then you're in luck.
+ * If you're happy with the defaults, then you're in luck.
  */
 /*
-new \Maduser\Minimal\Apps\Minimal();
+new \Maduser\Minimal\Framework\Minimal();
 */
 
 /**
@@ -20,7 +20,7 @@ new \Maduser\Minimal\Apps\Minimal();
  * Same as Example 1, but with a config array
  */
 /*
-$minimal = new \Maduser\Minimal\Apps\Minimal([
+$minimal = new \Maduser\Minimal\Framework\Minimal([
     'basepath' => realpath(__DIR__ . '/../'),
     'app' => 'app',
     'config' => 'config/environment.php',
@@ -45,8 +45,9 @@ App::respond(function () {
 
     // Register all modules configs and routes within modules path
     Modules::register('Demo/*');
+    Modules::register('Downgrade');
 
-    // Respond on GET request with uri paramters
+    // Respond on GET request with uri parameters
     Router::get('hello/(:any)/(:num)', function ($any, $num) {
         return 'Hello ' . $any . ' ' . $num;
     });
@@ -167,8 +168,8 @@ App::respond([
 
 /** @var \Maduser\Minimal\Http\Request $request */
 /** @var \Maduser\Minimal\Http\Response $response */
-/** @var \Maduser\Minimal\Routers\Router $router */
-/** @var \Maduser\Minimal\Routers\Route $route */
+/** @var \Maduser\Minimal\Routing\Router $router */
+/** @var \Maduser\Minimal\Routing\Route $route */
 /** @var \Maduser\Minimal\Middlewares\Middleware $middleware */
 /** @var mixed $result */
 
@@ -176,7 +177,7 @@ $benchmark = new \Maduser\Minimal\Benchmark\Benchmark();
 
 $benchmark->mark('Start');
 
-$minimal = new \Maduser\Minimal\Apps\Minimal([
+$minimal = new \Maduser\Minimal\Framework\Minimal([
     'basepath' => realpath(__DIR__ . '/../'),
     'app' => 'app',
     'config' => 'config/env.php',
@@ -237,4 +238,4 @@ $response->setContent(
 
 $response->sendPrepared();
 
-$minimal->exit();
+$minimal->terminate();

@@ -3,11 +3,10 @@
 use Maduser\Minimal\Middlewares\AbstractMiddleware;
 use Maduser\Minimal\Middlewares\MiddlewareInterface;
 
-
 /**
  * Class ReportAccess
  *
- * @package Maduser\Minimal\Base\Middlewares
+ * @package App\Demo\Base\Middlewares
  */
 class ReportAccess extends AbstractMiddleware
 {

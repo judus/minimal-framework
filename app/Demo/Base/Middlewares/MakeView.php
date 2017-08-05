@@ -1,23 +1,23 @@
 <?php namespace App\Demo\Base\Middlewares;
 
-use Maduser\Minimal\Assets\AssetsInterface;
-use Maduser\Minimal\Config\ConfigInterface;
-use Maduser\Minimal\Facades\Assets;
-use Maduser\Minimal\Facades\View;
-use Maduser\Minimal\Http\RequestInterface;
+use Maduser\Minimal\Framework\Facades\Assets;
 use Maduser\Minimal\Middlewares\AbstractMiddleware;
-use Maduser\Minimal\Middlewares\MiddlewareInterface;
-use Maduser\Minimal\Views\ViewInterface;
+use Maduser\Minimal\Views\Contracts\ViewInterface;
 
+/**
+ * Class MakeView
+ *
+ * @package App\Demo\Base\Middlewares
+ */
 class MakeView extends AbstractMiddleware
 {
     /**
-     * @var
+     * @var ViewInterface
      */
     private $view;
 
     /**
-     * Cache constructor.
+     * MakeView constructor.
      *
      * @param ViewInterface $view
      */

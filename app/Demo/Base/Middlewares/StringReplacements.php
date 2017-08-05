@@ -5,12 +5,12 @@ use Maduser\Minimal\Middlewares\AbstractMiddleware;
 /**
  * Class Cache
  *
- * @package Maduser\Minimal\Middlewares
+ * @package App\Demo\Base\Middlewares
  */
 class StringReplacements extends AbstractMiddleware
 {
     /**
-     * @return mixed
+     *
      */
     public function after()
     {

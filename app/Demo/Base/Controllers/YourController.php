@@ -3,15 +3,24 @@
 /**
  * Class YourController
  *
- * @package App\Demo\Controllers
+ * @package App\Demo\Base\Controllers
  */
 class YourController
 {
+    /**
+     * @param $firstname
+     * @param $lastname
+     *
+     * @return string
+     */
     public function yourMethod($firstname, $lastname)
     {
         return 'Welcome ' . ucfirst($firstname) . ' ' . ucfirst($lastname);
     }
 
+    /**
+     * @return string
+     */
     public function timeConsumingAction()
     {
         $countTo = 1000000000;
@@ -33,6 +42,9 @@ class YourController
         return $html;
     }
 
+    /**
+     * @return string
+     */
     public function loremIpsum()
     {
         return 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, ' .

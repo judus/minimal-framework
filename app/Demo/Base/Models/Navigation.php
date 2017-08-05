@@ -1,6 +1,6 @@
 <?php namespace App\Demo\Base\Models;
 
-use Maduser\Minimal\Facades\Router;
+use Maduser\Minimal\Framework\Facades\Router;
 
 class Navigation
 {
@@ -8,7 +8,7 @@ class Navigation
     {
         $routes = Router::getRoutes();
         $html = '';
-        /** @var \Maduser\Minimal\Routers\Route $route */
+        /** @var \Maduser\Minimal\Routing\Route $route */
         foreach ($routes->get('GET') as $route) {
             $params = $route->getUriParameters();
             $args = [];

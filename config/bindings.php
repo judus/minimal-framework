@@ -1,36 +1,36 @@
 <?php
 
 return [
-    'Maduser\Minimal\Config\ConfigInterface' =>
-        Maduser\Minimal\Config\Config::class,
-
-    'Maduser\Minimal\Collections\CollectionFactoryInterface' =>
-        Maduser\Minimal\Collections\CollectionFactory::class,
-
-    'Maduser\Minimal\Collections\CollectionInterface' =>
-        Maduser\Minimal\Collections\Collection::class,
-
-    'Maduser\Minimal\Apps\ModuleFactoryInterface' =>
-        Maduser\Minimal\Apps\ModuleFactory::class,
-
-    'Maduser\Minimal\Apps\FactoryInterface' =>
-        Maduser\Minimal\Apps\Factory::class,
-
-    'Maduser\Minimal\Http\ResponseInterface' =>
-        Maduser\Minimal\Http\Response::class,
-
-    'Maduser\Minimal\Http\RequestInterface' =>
-        Maduser\Minimal\Http\Request::class,
-
-    'Maduser\Minimal\Routers\RouteInterface' =>
-        Maduser\Minimal\Routers\Route::class,
-
-    'Maduser\Minimal\Routers\RouterInterface' =>
-        Maduser\Minimal\Routers\Router::class,
-
-    'Maduser\Minimal\Assets\AssetsInterface' =>
+    Maduser\Minimal\Assets\Contracts\AssetsInterface::class =>
         Maduser\Minimal\Assets\Assets::class,
 
-    'Maduser\Minimal\Views\ViewInterface' =>
+    Maduser\Minimal\Collections\Contracts\CollectionInterface::class =>
+        Maduser\Minimal\Collections\Collection::class,
+
+    Maduser\Minimal\Config\Contracts\ConfigInterface::class =>
+        Maduser\Minimal\Config\Config::class,
+
+    Maduser\Minimal\Framework\Contracts\FactoryInterface::class =>
+        Maduser\Minimal\Framework\Factory::class,
+
+    Maduser\Minimal\Framework\Factories\Contracts\ModuleFactoryInterface::class =>
+        Maduser\Minimal\Framework\Factories\ModuleFactory::class,
+
+    Maduser\Minimal\Framework\Factories\Contracts\CollectionFactoryInterface::class =>
+        Maduser\Minimal\Framework\Factories\CollectionFactory::class,
+
+    Maduser\Minimal\Http\Contracts\ResponseInterface::class =>
+        Maduser\Minimal\Http\Response::class,
+
+    Maduser\Minimal\Http\Contracts\RequestInterface::class =>
+        Maduser\Minimal\Http\Request::class,
+
+    Maduser\Minimal\Routing\Contracts\RouteInterface::class =>
+        Maduser\Minimal\Routing\Route::class,
+
+    Maduser\Minimal\Routing\Contracts\RouterInterface::class =>
+        Maduser\Minimal\Routing\Router::class,
+
+    Maduser\Minimal\Views\Contracts\ViewInterface::class =>
         Maduser\Minimal\Views\View::class,
 ];

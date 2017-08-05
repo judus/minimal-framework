@@ -1,10 +1,10 @@
 <?php
 
-use Maduser\Minimal\Facades\App;
-use Maduser\Minimal\Facades\Config;
-use Maduser\Minimal\Facades\Path;
-use Maduser\Minimal\Facades\View;
-use Maduser\Minimal\Translation\Translation;
+use Maduser\Minimal\Framework\Facades\App;
+use Maduser\Minimal\Framework\Facades\Config;
+use Maduser\Minimal\Framework\Facades\Path;
+use Maduser\Minimal\Framework\Facades\View;
+use Maduser\Minimal\Translation\Translator;
 use Symfony\Component\VarDumper\VarDumper;
 
 
@@ -75,9 +75,9 @@ if (!function_exists('__')) {
      */
     function __($str, $lang = null)
     {
-        Translation::setFilePath(path('translations'));
+        Translator::setFilePath(path('translations'));
 
-        return Translation::get($str, $lang);
+        return Translator::get($str, $lang);
     }
 }
 
