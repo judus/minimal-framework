@@ -45,7 +45,6 @@ App::respond(function () {
 
     // Register all modules configs and routes within modules path
     Modules::register('Demo/*');
-    Modules::register('Downgrade');
 
     // Respond on GET request with uri parameters
     Router::get('hello/(:any)/(:num)', function ($any, $num) {
