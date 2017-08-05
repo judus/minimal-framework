@@ -25,7 +25,7 @@ $ composer create-project minimal/framework
 
 ## Usage
 
-[Facades](#alternate-usage-with-facades) | [Routing](#routing) | [Middlewares](#middlewares) | [Providers](#providers) | [Dependency Injection](#dependency-injection) | [Views](#views) | [Assets](#assets) | [Modules](#modules) | [CLI](#cli)
+[Routing](#routing) | [Middlewares](#middlewares) | [Providers](#providers) | [Dependency Injection](#dependency-injection) | [Views](#views) | [Assets](#assets) | [Modules](#modules) | [CLI](#cli)
 
 ### Routing
 
