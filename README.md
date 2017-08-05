@@ -7,7 +7,7 @@ Minimal is a web application framework.
 This is a skeleton for a new project. 
 Install the framework with composer.
 
-The framework core has its own repository:
+The framework package is here:
 https://github.com/judus/maduser-minimal
 
 ## Requirements
@@ -33,15 +33,15 @@ $ composer create-project minimal/framework
 ```php
 // in config/routes.php
 
-$router->get('hello/(:any)/(:any)', function($firstname, $lastname) {
+Router::get('hello/(:any)/(:any)', function($firstname, $lastname) {
     return 'Hello ' . ucfirst($firstname) . ' ' . ucfirst($lastname);
 });
 
-// $router->get() responds to GET requests
-// $router->post() responds to POST requests
-// $router->put() ...you get it
-// $router->patch()
-// $router->delete()
+// Router::get() responds to GET requests
+// Router::post() responds to POST requests
+// Router::put() ...you get it
+// Router::patch()
+// Router::delete()
 
 // (:any) match letters and integer
 // (:num) match integer only
@@ -53,12 +53,12 @@ http://localhost/hello/julien/duseyau
 ```php
 // in config/routes.php 
 
-$router->get('hello/(:any)/(:any)', 'Acme\\Controllers\\YourController@yourMethod')
+Router::get('hello/(:any)/(:any)', 'App\\Controllers\\YourController@yourMethod')
 ```
 ```php
 // in app/Controllers/YourController.php
 
-class Acme\Controllers\YourController
+class App\Controllers\YourController
 {
     public function yourMethod($name, $lastname)
     {
@@ -73,34 +73,34 @@ http://localhost/hello/julien/duseyau
 ```php
 // in config/routes.php
 
-$router->group([
+Router::group([
 
     // Prefixes all urls in the group with 'auth/'
     'uriPrefix' => 'auth',
 
     // Define the class namespace for all routes in this group
     // Will be prefixed to the controllers
-    'namespace' => 'Acme\\Controllers\\'
+    'namespace' => 'App\\Controllers\\'
 
 ], function () use ($route) {
 
     // GET request: 'auth/login'
-    // Controller 'Acme\\Controllers\AuthController
-    $router->get('login', [
+    // Controller 'App\\Controllers\AuthController
+    Router::get('login', [
         'controller' => 'AuthController',
         'action' => 'loginForm' // Show the login form
     ]);
 
     // POST request: 'auth/login'
-    // Controller 'Acme\\Controllers\AuthController
-    $router->post('login', [
+    // Controller 'App\\Controllers\AuthController
+    Router::post('login', [
         'controller' => 'AuthController',
         'action' => 'login' // Login the user
     ]);
 
     // GET request: 'auth/logout'
-    // Controller 'Acme\\Controllers\AuthController
-    $router->get('logout', [
+    // Controller 'App\\Controllers\AuthController
+    Router::get('logout', [
         'controller' => 'AuthController',
         'action' => 'logout' // Logout the user
     ]);
@@ -108,14 +108,14 @@ $router->group([
     /**
      * Subgroup with middlewares
      */
-    $router->group([
+    Router::group([
     
         // Middlewares apply to all route in this (sub)group
         'middlewares' => [
             // Check if the client is authorised to access these routes
-            'Acme\\Middlewares\\CheckPermission',
+            'App\\Middlewares\\CheckPermission',
             // Log or send a access report
-            'Acme\\Middlewares\\ReportAccess',
+            'App\\Middlewares\\ReportAccess',
         ]
     ], function () use ($route) {
 
@@ -123,22 +123,22 @@ $router->group([
         // Middleware ReportAccess reports all access to these routes
 
         // GET request: 'auth/users'
-        // Controller 'Acme\\Controllers\UserController
-        $router->get('users', [
+        // Controller 'App\\Controllers\UserController
+        Router::get('users', [
             'controller' => 'UserController',
             'action' => 'list' // Show a list of users
         ]);
 
         // GET request: 'auth/users/create'
-        // Controller 'Acme\\Controllers\UserController
-        $router->get('users/create', [
+        // Controller 'App\\Controllers\UserController
+        Router::get('users/create', [
             'controller' => 'UserController',
             'action' => 'createForm' // Show a empty user form
         ]);
 
         // GET request: 'auth/users/edit'
-        // Controller 'Acme\\Controllers\UserController
-        $router->get('users/edit/(:num)', [
+        // Controller 'App\\Controllers\UserController
+        Router::get('users/edit/(:num)', [
             'controller' => 'UserController',
             'action' => 'editForm' // Show a edit form for user (:num)
         ]);
@@ -149,9 +149,9 @@ $router->group([
 ```
 ##### File download
 ```php
-$router->get('download/pdf', function () use ($response) {
-    $response->header('Content-Type: application/pdf');
-    $response->header('Content-Disposition: attachment; filename="downloaded.pdf"');
+Router::get('download/pdf', function () use ($response) {
+    Response::header('Content-Type: application/pdf');
+    Response::header('Content-Disposition: attachment; filename="downloaded.pdf"');
     readfile('sample.pdf');
 });
 ```
@@ -160,16 +160,16 @@ $router->get('download/pdf', function () use ($response) {
 ```php
 // in config/routes.php
 
-$router->get('users', [
+Router::get('users', [
     'controller' => 'UsersController',
     'action' => 'list',
     'middlewares' => [
         // Check if the client is authorized to access this route
-        'Acme\\Middlewares\\checkPermission',
+        'App\\Middlewares\\checkPermission',
         // Send a email to the administrator
-        'Acme\\Middlewares\\ReportAccess',
+        'App\\Middlewares\\ReportAccess',
         // Cache for x seconds
-        'Acme\\Middlewares\\Cache' => [(1*1*10)]
+        'App\\Middlewares\\Cache' => [(1*1*10)]
     ]
 ]);
 ```
@@ -236,13 +236,13 @@ class Cache implements MiddlewareInterface
 ```php
 // Array of middlewares
 $middlewares = [
-    'Acme\\Middlewares\\checkPermission',
-    'Acme\\Middlewares\\ReportAccess',
-    'Acme\\Middlewares\\Cache' => [(1*1*10)]
+    'App\\Middlewares\\checkPermission',
+    'App\\Middlewares\\ReportAccess',
+    'App\\Middlewares\\Cache' => [(1*1*10)]
 ];
 
 // The middleware controller
-$middleware = new Maduser\Minimal\Core\Middleware($middlewares);
+$middleware = new Maduser\Minimal\Middlewares\Middleware($middlewares);
 
 // Wrap a task in middleware layers
 $response = $middleware->dispatch(function() {
@@ -259,9 +259,9 @@ $response = $middleware->dispatch(function() {
 // in config/providers.php
 
 return [
-    'Acme\\MyClass' => Acme\MyClassProvider::class, 
-    'Acme\\MyOtherClassA' => Acme\MyOtherClassAProvider::class, 
-    'Acme\\MyOtherClassB' => Acme\MyOtherClassBProvider::class, 
+    'App\\MyClass' => App\MyClassProvider::class, 
+    'App\\MyOtherClassA' => App\MyOtherClassAProvider::class, 
+    'App\\MyOtherClassB' => App\MyOtherClassBProvider::class, 
 ];
 ```
 
@@ -281,16 +281,16 @@ class MyClassProvider extends Provider
         /* return new MyClass($time, $settings); */ 
         
         // Make singleton and resolve dependencies
-        return $this->singleton('MyClass', new Acme\\MyClass(
-            IOC::resolve('Acme\\MyOtherClassA'),
-            IOC::resolve('Acme\\MyOtherClassB'),
+        return $this->singleton('MyClass', new App\\MyClass(
+            IOC::resolve('App\\MyOtherClassA'),
+            IOC::resolve('App\\MyOtherClassB'),
             $time,
             $settings
        ));
     }
 }
 
-// IOC::resolve('Acme\\MyOtherClassA')
+// IOC::resolve('App\\MyOtherClassA')
 // Resolves a class through a provider as defined in config/providers.php
 ```
 
@@ -301,8 +301,8 @@ Binding a interface implementation
 // in config/bindings.php
 
 return [
-    'Acme\\InterfaceA' => Acme\ClassA::class,
-    'Acme\\InterfaceB' => Acme\ClassB::class',
+    'App\\InterfaceA' => App\ClassA::class,
+    'App\\InterfaceB' => App\ClassB::class',
 ];
 ```
 
@@ -326,20 +326,19 @@ $MyClass = IOC::make(MyClass::class);
 ```php
 // anywhere in your code
 
-$view = new Maduser\Minimal\Libraries\View\View();
-$view->setBase('../resources/views/'); // Path from index.php
-$view->setTheme('my-theme'); // Set a subdir (optional)
-$view->setLayout('layouts/my-layout') // View wrapper
+View::setBase('../resources/views/'); // Path from index.php
+View::setTheme('my-theme'); // Set a subdir (optional)
+View::setLayout('layouts/my-layout') // View wrapper
 
 // Share a variable $title across all views
-$view->share('title', 'My title');  
+View::share('title', 'My title');  
 
 // Set variables only for this view
-$view->set('viewValue1', 'someValue1')
+View::set('viewValue1', 'someValue1')
 
-$view->render('pages/my-view', [
-    'viewValue2' => 'someValue2', // Same as $view->set()
-    'viewValue3' => 'someValue3'  // Same as $view->set()
+View::render('pages/my-view', [
+    'viewValue2' => 'someValue2', // Same as View::set()
+    'viewValue3' => 'someValue3'  // Same as View::set()
 ]);
 ```
 
@@ -353,7 +352,7 @@ $view->render('pages/my-view', [
 </head>
 <body>
     <!-- Get the view -->
-    <?=$this->view()?>    
+    <?= self::view() ?>    
 </body>
 </html>
 
@@ -383,19 +382,18 @@ class SomeController
 
 ### Assets
 ```php
-$assets = new Maduser\Minimal\Libraries\Assets\Assets();
-$assets->setBase('../app/Pages/resources/assets'); // Set base dir of assets
-$assets->setTheme('my-theme'); // Optional subdirectory
-$assets->setCssDir('css'); // Directory for the css
-$assets->setJsDir('js'); // Directory for the js
-$assets->addCss(['normalize.css', 'main.css']); // Register css files
-$assets->addJs(['vendor/modernizr-2.8.3.min.js'], 'top'); //Register js files with keyword
-$assets->addJs(['plugins.js', 'main.js'], 'bottom'); // Register more js files with another keyword
-$assets->addExternalJs(['https://code.jquery.com/jquery-3.1.0.min.js'], 'bottom'); // Js from CDN
+Assets::setBase('../app/Pages/resources/assets'); // Set base dir of assets
+Assets::setTheme('my-theme'); // Optional subdirectory
+Assets::setCssDir('css'); // Directory for the css
+Assets::setJsDir('js'); // Directory for the js
+Assets::addCss(['normalize.css', 'main.css']); // Register css files
+Assets::addJs(['vendor/modernizr-2.8.3.min.js'], 'top'); //Register js files with keyword
+Assets::addJs(['plugins.js', 'main.js'], 'bottom'); // Register more js files with another keyword
+Assets::addExternalJs(['https://code.jquery.com/jquery-3.1.0.min.js'], 'bottom'); // Js from CDN
 
 /** @var Maduser\Minimal\Libraries\View\View $view */
-$assets->addInlineScripts('jQueryFallback', function () use ($view) {
-    return $view->render('scripts/jquery-fallback', [], true);
+Assets::addInlineScripts('jQueryFallback', function () use ($view) {
+    return View::render('scripts/jquery-fallback', [], true);
 });
 ```
 
@@ -406,18 +404,18 @@ The Assets class injected into the View class
 <head>
     <title><?=$title?></title>
 
-    <?= $this->assets->getCss() ?>
-    <?= $this->assets->getJs('top') ?>
+    <?= Assets::getCss() ?>
+    <?= Assets::getJs('top') ?>
 </head>
 <body>
     <div class="content">
         ...
     </div>
 
-    <?= $this->assets->getExternalJs('bottom') ?>
-    <?= $this->assets->getInlineScripts('jQueryFallback') ?>
-    <?= $this->assets->getJs('bottom') ?>
-    <?= $this->assets->getInlineScripts() ?>
+    <?= Assets::getExternalJs('bottom') ?>
+    <?= Assets::getInlineScripts('jQueryFallback') ?>
+    <?= Assets::getJs('bottom') ?>
+    <?= Assets::getInlineScripts() ?>
 </body>
 </html>
 ```
@@ -455,7 +453,7 @@ See config/modules.php and example module in framework/app/Pages.
 ```php
 // in framework/config/modules.php
 
-$modules->register('your-module-dirname', [
+Modules::register('your-module-dirname', [
     // optional config array
     'path' => 'app', // location of the module dir
     'routes' => 'app/YourModule/Http/routes.php',
@@ -473,18 +471,18 @@ $ php minimal routes
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
 | GET  | /                       | <= Closure()                                         |                                                                 |
 | GET  | /hello/(:any)/(:any)    | <= Closure()                                         |                                                                 |
-| GET  | /welcome/(:any)/(:any)  | Acme\Controllers\YourController@yourMethod           |                                                                 |
-| GET  | /auth/login             | Acme\Controllers\AuthController@loginForm            |                                                                 |
-| POST | /auth/login             | Acme\Controllers\AuthController@login                |                                                                 |
-| GET  | /auth/logout            | Acme\Controllers\AuthController@logout               |                                                                 |
-| GET  | /auth/users             | Acme\Controllers\UserController@list                 | Acme\Middlewares\CheckPermission, Acme\Middlewares\ReportAccess |
-| GET  | /auth/users/create      | Acme\Controllers\UserController@createForm           | Acme\Middlewares\CheckPermission, Acme\Middlewares\ReportAccess |
-| GET  | /auth/users/edit/(:num) | Acme\Controllers\UserController@editForm             | Acme\Middlewares\CheckPermission, Acme\Middlewares\ReportAccess |
+| GET  | /welcome/(:any)/(:any)  | App\Controllers\YourController@yourMethod           |                                                                 |
+| GET  | /auth/login             | App\Controllers\AuthController@loginForm            |                                                                 |
+| POST | /auth/login             | App\Controllers\AuthController@login                |                                                                 |
+| GET  | /auth/logout            | App\Controllers\AuthController@logout               |                                                                 |
+| GET  | /auth/users             | App\Controllers\UserController@list                 | App\Middlewares\CheckPermission, App\Middlewares\ReportAccess |
+| GET  | /auth/users/create      | App\Controllers\UserController@createForm           | App\Middlewares\CheckPermission, App\Middlewares\ReportAccess |
+| GET  | /auth/users/edit/(:num) | App\Controllers\UserController@editForm             | App\Middlewares\CheckPermission, App\Middlewares\ReportAccess |
 | GET  | /download/pdf           | <= Closure()                                         |                                                                 |
-| GET  | /huge/data/table        | Acme\Controllers\YourController@timeConsumingAction  | Acme\Middlewares\Cache(10)                                      |
-| GET  | /pages/(:any)           | Acme\Pages\Controllers\PagesController@getStaticPage | Acme\Middlewares\Cache(10)                                      |
-| GET  | /pages/info             | Acme\Pages\Controllers\PagesController@info          | Acme\Middlewares\Cache(10)                                      |
-| GET  | /assets/(:any)          | Acme\Assets\Controllers\AssetsController@getAsset    |                                                                 |
+| GET  | /huge/data/table        | App\Controllers\YourController@timeConsumingAction  | App\Middlewares\Cache(10)                                      |
+| GET  | /pages/(:any)           | App\Pages\Controllers\PagesController@getStaticPage | App\Middlewares\Cache(10)                                      |
+| GET  | /pages/info             | App\Pages\Controllers\PagesController@info          | App\Middlewares\Cache(10)                                      |
+| GET  | /assets/(:any)          | App\Assets\Controllers\AssetsController@getAsset    |                                                                 |
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
 ```
 ##### List all registered modules
@@ -556,16 +554,16 @@ App::respond(function () {
     // Route group
     Router::group([
         'uriPrefix' => 'route-groups',
-        'namespace' => 'Acme\\Demo\\Base\\Controllers\\',
+        'namespace' => 'App\\Demo\\Base\\Controllers\\',
         'middlewares' => [
-            'Acme\\Demo\\Base\\Middlewares\\CheckPermission',
-            'Acme\\Demo\\Base\\Middlewares\\ReportAccess',
+            'App\\Demo\\Base\\Middlewares\\CheckPermission',
+            'App\\Demo\\Base\\Middlewares\\ReportAccess',
         ]
     ], function () {
 
         // Responds to GET route-groups/controller-action/with/middlewares'
         Router::get('controller-action/with/middlewares', [
-            'middlewares' => ['Acme\\Demo\\Base\\Middlewares\\Cache' => [10]],
+            'middlewares' => ['App\\Demo\\Base\\Middlewares\\Cache' => [10]],
             'controller' => 'YourController',
             'action' => 'timeConsumingAction'
         ]);
