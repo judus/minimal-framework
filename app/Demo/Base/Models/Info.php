@@ -4,7 +4,7 @@ namespace App\Demo\Base\Models;
 
 use Maduser\Minimal\Apps\Minimal;
 use Maduser\Minimal\Cli\Console;
-use Maduser\Minimal\Loaders\IOC;
+use Maduser\Minimal\Facades\IOC;
 
 class Info
 {
@@ -128,9 +128,9 @@ class Info
         $thead = [['Alias', 'Provider']];
         $tbody = [];
 
-        $items = IOC::config('providers');
+        $items = IOC::providers();
 
-        foreach ($items as $key => $value) {
+        foreach ($items->get() as $key => $value) {
             $tbody[] = [$key, $value];
         }
 
@@ -147,9 +147,9 @@ class Info
         $thead = [['Alias', 'Binding']];
         $tbody = [];
 
-        $items = IOC::config('bindings');
+        $items = IOC::bindings();
 
-        foreach ($items as $key => $value) {
+        foreach ($items->get() as $key => $value) {
             $tbody[] = [$key, $value];
         }
 

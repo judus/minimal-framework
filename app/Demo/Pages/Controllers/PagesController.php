@@ -241,7 +241,7 @@ class PagesController
 
     public function timeConsumingAction()
     {
-        $countTo = 1000000000;
+        $countTo = 100000000;
 
         $start = time();
         for ($i = 0; $i < $countTo; $i++) {
