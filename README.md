@@ -602,26 +602,6 @@ App::respond(function () {
 });
 ```
 
-## Components
-
-- [judus/minimal-assets](https://github.com/judus/minimal-assets)
-- [judus/minimal-benchmark](https://github.com/judus/minimal-benchmark)
-- [judus/minimal-cli](https://github.com/judus/minimal-cli)
-- [judus/minimal-collections](https://github.com/judus/minimal-collections)
-- [judus/minimal-config](https://github.com/judus/minimal-config)
-- [judus/minimal-controllers](https://github.com/judus/minimal-controllers)
-- [judus/minimal-database](https://github.com/judus/minimal-database)
-- [judus/minimal-html](https://github.com/judus/minimal-html)
-- [judus/minimal-http](https://github.com/judus/minimal-http)
-- [judus/minimal-middlewares](https://github.com/judus/minimal-middlewares)
-- [judus/minimal-minimal](https://github.com/judus/minimal-minimal)
-- [judus/minimal-paths](https://github.com/judus/minimal-paths)
-- [judus/minimal-presenters](https://github.com/judus/minimal-presenters)
-- [judus/minimal-provider](https://github.com/judus/minimal-provider)
-- [judus/minimal-routing](https://github.com/judus/minimal-routing)
-- [judus/minimal-translation](https://github.com/judus/minimal-translation)
-- [judus/minimal-views](https://github.com/judus/minimal-views)
-
 
 ### Frontend tools
 
@@ -651,7 +631,28 @@ See resources/npm/grunt for Grunt setup options
 
 See resources/npm/gulp for Gulp setup options (not implemented yet)
 
-   ---
+---
+## Components
+
+- [judus/minimal-assets](https://github.com/judus/minimal-assets)
+- [judus/minimal-benchmark](https://github.com/judus/minimal-benchmark)
+- [judus/minimal-cli](https://github.com/judus/minimal-cli)
+- [judus/minimal-collections](https://github.com/judus/minimal-collections)
+- [judus/minimal-config](https://github.com/judus/minimal-config)
+- [judus/minimal-controllers](https://github.com/judus/minimal-controllers)
+- [judus/minimal-database](https://github.com/judus/minimal-database)
+- [judus/minimal-html](https://github.com/judus/minimal-html)
+- [judus/minimal-http](https://github.com/judus/minimal-http)
+- [judus/minimal-middlewares](https://github.com/judus/minimal-middlewares)
+- [judus/minimal-minimal](https://github.com/judus/minimal-minimal)
+- [judus/minimal-paths](https://github.com/judus/minimal-paths)
+- [judus/minimal-presenters](https://github.com/judus/minimal-presenters)
+- [judus/minimal-provider](https://github.com/judus/minimal-provider)
+- [judus/minimal-routing](https://github.com/judus/minimal-routing)
+- [judus/minimal-translation](https://github.com/judus/minimal-translation)
+- [judus/minimal-views](https://github.com/judus/minimal-views)
+
+---
 #### TODOs
 - Unit tests
 - Api documentation
