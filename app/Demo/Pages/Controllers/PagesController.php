@@ -91,7 +91,6 @@ class PagesController
         $this->assets = $assets;
         /** @var \Maduser\Minimal\Framework\Factory $modules */
         $this->modules = $modules;
-        //show($this->assets, 'assests');
     }
 
     private function setupAssetsAndViews()
