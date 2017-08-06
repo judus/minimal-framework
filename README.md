@@ -1,4 +1,5 @@
-This is a (working) proof of concept.
+~~This is a (working) proof of concept.~~ 
+This is now a work in progress. Busy, busy...
 
 # Minimal PHP Framework
 
@@ -7,16 +8,10 @@ Minimal is a web application framework.
 This is a skeleton for a new project. 
 Install the framework with composer.
 
-The framework package is here:
-https://github.com/judus/maduser-minimal
-
 ## Requirements
 
 1. PHP version >= 7.0
 2. composer
-
-Optional:
-npm for bower, grunt and gulp
 
 ## Install
 ```bash
@@ -601,35 +596,6 @@ App::respond(function () {
     });
 });
 ```
-
-
-### Frontend tools
-
-Install packages
-```bash
-$ cd resources/npm
-$ npm install
-```
-Adjust paths.json
-```json
-{
-  "source": "../assets", 
-  "destination": "../../public/assets"
-}
-```
-Run grunt and grunt watch
-```bash
-$ grunt
-```
-Run gulp and gulp watch (not implemented yet)
-```bash
-$ gulp
-```
-Both Grunt and Gulp will compile (sass), concat, minify, uglify, copy from source to destination
-
-See resources/npm/grunt for Grunt setup options
-
-See resources/npm/gulp for Gulp setup options (not implemented yet)
 
 ---
 ## Components
