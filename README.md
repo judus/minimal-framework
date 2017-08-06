@@ -23,6 +23,26 @@ npm for bower, grunt and gulp
 $ composer create-project minimal/framework
 ```
 
+## Components
+
+- [judus/minimal-assets](https://github.com/judus/minimal-assets)
+- [judus/minimal-benchmark](https://github.com/judus/minimal-benchmark)
+- [judus/minimal-cli](https://github.com/judus/minimal-cli)
+- [judus/minimal-collections](https://github.com/judus/minimal-collections)
+- [judus/minimal-config](https://github.com/judus/minimal-config)
+- [judus/minimal-controllers](https://github.com/judus/minimal-controllers)
+- [judus/minimal-database](https://github.com/judus/minimal-database)
+- [judus/minimal-html](https://github.com/judus/minimal-html)
+- [judus/minimal-http](https://github.com/judus/minimal-http)
+- [judus/minimal-middlewares](https://github.com/judus/minimal-middlerwares)
+- [judus/minimal-minimal](https://github.com/judus/minimal-minimal)
+- [judus/minimal-paths](https://github.com/judus/minimal-paths)
+- [judus/minimal-presenters](https://github.com/judus/minimal-presenters)
+- [judus/minimal-provider](https://github.com/judus/minimal-provider)
+- [judus/minimal-routing](https://github.com/judus/minimal-routing)
+- [judus/minimal-translation](https://github.com/judus/minimal-translation)
+- [judus/minimal-views](https://github.com/judus/minimal-views)
+
 ## Usage
 
 [Routing](#routing) | [Middlewares](#middlewares) | [Providers](#providers) | [Dependency Injection](#dependency-injection) | [Views](#views) | [Assets](#assets) | [Modules](#modules) | [CLI](#cli)
