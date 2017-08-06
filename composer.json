@@ -17,9 +17,29 @@
   "minimum-stability": "dev",
   "require": {
     "php": ">=7.0.0",
-    "maduser/minimal": "v0.6.1"
+    "minimal/assets": "v0.1.0",
+    "minimal/benchmark": "v0.1.1",
+    "minimal/cli": "v0.1.0",
+    "minimal/collections": "v0.1.0",
+    "minimal/config": "v0.1.0",
+    "minimal/controllers": "v0.1.0",
+    "minimal/database": "v0.1.0",
+    "minimal/html": "v0.1.0",
+    "minimal/http": "v0.1.0",
+    "minimal/middlewares": "v0.1.0",
+    "minimal/minimal": "v0.1.0",
+    "minimal/paths": "v0.1.0",
+    "minimal/presenters": "v0.1.0",
+    "minimal/provider": "v0.1.0",
+    "minimal/routing": "v0.1.0",
+    "minimal/translation": "v0.1.0",
+    "minimal/views": "v0.1.0"
   },
   "require-dev": {
+    "phpunit/phpunit": "4.*",
+    "fzaninotto/faker": "^1.6",
+    "symfony/var-dumper": "3.4.x-dev",
+    "filp/whoops": "^2.1"
   },
   "autoload": {
     "psr-4": {
