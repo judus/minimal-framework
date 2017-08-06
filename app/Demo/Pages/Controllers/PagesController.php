@@ -52,7 +52,7 @@ class PagesController
     protected $assets;
 
     /**
-     * @var ModulesInterface
+     * @var FactoryInterface
      */
     protected $modules;
 
@@ -81,7 +81,7 @@ class PagesController
         $this->config = $config;
         /** @var \Maduser\Minimal\Http\Request $request */
         $this->request = $request;
-        /** @var \Maduser\Minimal\Routing\RouterProvider $router */
+        /** @var \Maduser\Minimal\Routing\Router $router */
         $this->router = $router;
         /** @var \Maduser\Minimal\Http\Response $response */
         $this->response = $response;
@@ -89,7 +89,7 @@ class PagesController
         $this->view = $view;
         /** @var \Maduser\Minimal\Assets\Assets $assets */
         $this->assets = $assets;
-        /** @var \Maduser\Minimal\Core\Modules $modules */
+        /** @var \Maduser\Minimal\Framework\Factory $modules */
         $this->modules = $modules;
         //show($this->assets, 'assests');
     }
@@ -184,18 +184,28 @@ class PagesController
         $this->setupAssetsAndViews();
 
         ob_start();
-        d($this->config, 'Config: $this->config');
-        d($this->request, 'Request');
-        d($this->router, 'Router');
-        d($this->router->getRoute(), 'Route');
-        d($this->modules, 'Modules');
-        d($this->response, 'Response');
-        d($this->view, 'View');
-        d($this->assets, 'Assets');
+        echo '<h3>Config</h3>';
+        d($this->config);
+        echo '<h3>Request</h3>';
+        d($this->request);
+        echo '<h3>Router</h3>';
+        d($this->router);
+        echo '<h3>Route</h3>';
+        d($this->router->getRoute());
+        echo '<h3>Modules</h3>';
+        d($this->modules);
+        echo '<h3>Response</h3>';
+        d($this->response);
+        echo '<h3>View</h3>';
+        d($this->view);
+        echo '<h3>Assets</h3>';
+        d($this->assets);
         $contents = ob_get_contents();
         ob_end_clean();
 
-        $result  = run('lorem');
+        $result = '<hr><h3>Nested route execution with middleware</h3>';
+
+        $result .= run('lorem');
         $result .= run('lorem');
         $result .= run('lorem');
         $result .= run('lorem');
