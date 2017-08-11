@@ -20,7 +20,7 @@
     "minimal/assets": "v0.1.1",
     "minimal/benchmark": "v0.1.2",
     "minimal/cli": "v0.1.1",
-    "minimal/collections": "v0.1.1",
+    "minimal/collections": "v0.1.2",
     "minimal/config": "v0.1.1",
     "minimal/controllers": "v0.1.1",
     "minimal/database": "v0.1.1",
@@ -31,7 +31,7 @@
     "minimal/paths": "v0.1.1",
     "minimal/presenters": "v0.1.1",
     "minimal/provider": "v0.1.1",
-    "minimal/routing": "v0.1.2",
+    "minimal/routing": "v0.1.3",
     "minimal/translation": "v0.1.1",
     "minimal/views": "v0.1.1"
   },

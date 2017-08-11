@@ -5,9 +5,6 @@ This is now a work in progress. Busy, busy...
 
 Minimal is a web application framework.
 
-This is a skeleton for a new project. 
-Install the framework with composer.
-
 ## Requirements
 
 1. PHP version >= 7.0
