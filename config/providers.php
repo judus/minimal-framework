@@ -11,7 +11,6 @@ return [
     'FormBuilder'       => FormProvider::class,
     'HtmlBuilder'       => HtmlProvider::class,
     'Middleware'        => MiddlewareProvider::class,
-    'ModelFactory'      => ModelFactoryProvider::class,
     'Module'            => ModuleProvider::class,
     'ModuleFactory'     => ModuleFactoryProvider::class,
     'Request'           => RequestProvider::class,

@@ -25,6 +25,9 @@ return [
     Maduser\Minimal\Http\Contracts\RequestInterface::class =>
         Maduser\Minimal\Http\Request::class,
 
+    Maduser\Minimal\Provider\Contracts\ProviderInterface::class =>
+        Maduser\Minimal\Provider\Provider::class,
+
     Maduser\Minimal\Routing\Contracts\RouteInterface::class =>
         Maduser\Minimal\Routing\Route::class,
 
