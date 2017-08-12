@@ -36,6 +36,7 @@ $minimal = new \Maduser\Minimal\Framework\Minimal([
  * If you don't want to use the routes config or modules config file and rather
  * start coding right away in the index.php:
  */
+
 App::respond(function () {
 
     // Respond on GET request
@@ -140,6 +141,7 @@ App::respond(function () {
  *
  * Same as before, but with a config array
  */
+/*
 App::respond([
     'path' => __DIR__,
     'config' => __DIR__ . '/../config/env.php',
@@ -156,7 +158,7 @@ App::respond([
     // ...
 
 });
-
+*/
 /**
  * Example 5
  *
