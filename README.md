@@ -383,16 +383,16 @@ Binding a interface to a implementation is straight forward:
 ```php
 App::addBindings([
     'App\\InterfaceA' => App\ClassA::class,
-    'App\\InterfaceB' => App\ClassB::class',
-    'App\\InterfaceC' => App\ClassC::class'
+    'App\\InterfaceB' => App\ClassB::class,
+    'App\\InterfaceC' => App\ClassC::class
 ]);
 ```
 or in config/bindings.php
 ```php
 return [
     'App\\InterfaceA' => App\ClassA::class,
-    'App\\InterfaceB' => App\ClassB::class',
-    'App\\InterfaceC' => App\ClassC::class'
+    'App\\InterfaceB' => App\ClassB::class,
+    'App\\InterfaceC' => App\ClassC::class
 ];
 ```
 
