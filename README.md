@@ -24,7 +24,7 @@ $ composer create-project minimal/framework
 
 ## Usage
 
-[Quickstart example](#quickstart) | [Routing](#routing) | [Dependency Injection](#dependency-injection) | [Providers](#providers) | [Middlewares](#middlewares) | [Controllers](#controllers) | [Views](#views) | [Assets](#assets) | [Modules](#modules) | [CLI](#cli)
+[Quickstart example](#quickstart-example) | [Routing](#routing) | [Dependency Injection](#dependency-injection) | [Providers](#providers) | [Middlewares](#middlewares) | [Controllers](#controllers) | [Views](#views) | [Assets](#assets) | [Modules](#modules) | [CLI](#cli)
 
 ### Quickstart example
 ```php
