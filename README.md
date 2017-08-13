@@ -528,7 +528,7 @@ Result:
 </body>
 </html>
 ```
-Where to do these View calls? Anywhere is fine. But one way could be:
+Where to do these View calls? Anywhere is fine. But one place could be:
 ```php
 App::register(MyController::class, MyControllerFactory::class);
 ```
