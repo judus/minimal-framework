@@ -8,6 +8,10 @@ Almost there...
 
 Minimal is a web application framework for PHP.
 
+##### NOTE 
+This is version v0.*, changes are to expect
+
+
 ## Requirements
 
 1. PHP version >= 7.0
