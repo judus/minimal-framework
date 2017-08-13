@@ -24,7 +24,7 @@ $ composer create-project minimal/framework
 
 ## Usage
 
-[Quickstart example](#quickstart) | [Routing](#routing) | [Dependency Injection](#dependency-injection) | [Providers](#providers) | [Middlewares](#middlewares) | [Views](#views) | [Assets](#assets) | [Modules](#modules) | [CLI](#cli)
+[Quickstart example](#quickstart) | [Routing](#routing) | [Dependency Injection](#dependency-injection) | [Providers](#providers) | [Middlewares](#middlewares) | [Controllers](#controllers) | [Views](#views) | [Assets](#assets) | [Modules](#modules) | [CLI](#cli)
 
 ### Quickstart example
 ```php
@@ -429,10 +429,10 @@ class MyController
     }
 }
 ```
-In order to use interfaces, bindings have to be registered. This can also be
-done in the config/bindings.php
+In order to use interfaces, bindings have to be registered. 
+See also config/bindings.php
 ```php
-App::addBindings([MyModelInterface::class => MyModel::class]);
+App::bind(MyModelInterface::class => MyModel::class);
 ```
 ```php
 class MyController
@@ -443,7 +443,7 @@ class MyController
     }
 }
 ```
-For a more control register a factory like so: 
+For a more control register a factory. See also config/providers.php 
 ```php
 App::register(MyController::class, MyControllerFactory::class);
 ```
@@ -456,7 +456,6 @@ class MyControllerFactory extends AbstractProvider
     }
 }
 ```
-
 ```php
 class MyController
 {
@@ -529,26 +528,75 @@ Result:
 </body>
 </html>
 ```
+Where to do these View calls? Anywhere is fine. But one way could be:
+```php
+App::register(MyController::class, MyControllerFactory::class);
+```
+```php
+class BaseController
+{
+    public function __construct()
+    {
+        View::setBase(__DIR__'/../views/');
+        View::setTheme('my-theme');
+        View::setLayout('layouts/my-layout');
+        
+        Assets::setBase(__DIR__'/../assets');
+        Assets::setTheme('my-theme');
+    }
+}
+```
+```php
+class MyController extends BaseController
+{
+	private $user;
+	
+    public function __construct(UserInterface $user)
+    {
+        parent::__construct();
+        
+        $this->user = $user;
+    }
+    
+    public function myAction()
+    {
+	    View::render('my-view', ['user' => $this->user->find(1)]);
+	}
+}
+```
 
 
 ### Assets
 ```php
-Assets::setBase('../app/Pages/resources/assets'); // Set base dir of assets
-Assets::setTheme('my-theme'); // Optional subdirectory
-Assets::setCssDir('css'); // Directory for the css
-Assets::setJsDir('js'); // Directory for the js
-Assets::addCss(['normalize.css', 'main.css']); // Register css files
-Assets::addJs(['vendor/modernizr-2.8.3.min.js'], 'top'); //Register js files with keyword
-Assets::addJs(['plugins.js', 'main.js'], 'bottom'); // Register more js files with another keyword
-Assets::addExternalJs(['https://code.jquery.com/jquery-3.1.0.min.js'], 'bottom'); // Js from CDN
+// The base directory to start from
+Assets::setBase('../app/Pages/resources/assets');
 
-/** @var Maduser\Minimal\Libraries\View\View $view */
+// The theme directory in base directory, is optional and can be ingored
+Assets::setTheme('my-theme');
+
+// Directory for css (default 'css')
+Assets::setCssDir('css');
+
+// Directory for js  (default 'js')
+Assets::setJsDir('js');
+
+// Register css files
+Assets::addCss(['normalize.css', 'main.css']); 
+ 
+//Register js files with keyword
+Assets::addJs(['vendor/modernizr-2.8.3.min.js'], 'top');
+
+// Register more js files with another keyword
+Assets::addJs(['plugins.js', 'main.js'], 'bottom'); 
+
+// Js from CDN
+Assets::addExternalJs(['https://code.jquery.com/jquery-3.1.0.min.js'], 'bottom');
+
+// Add inline javascript
 Assets::addInlineScripts('jQueryFallback', function () use ($view) {
     return View::render('scripts/jquery-fallback', [], true);
 });
 ```
-
-The Assets class injected into the View class
 ```html
 <!-- resources/views/my-theme/layouts/my-layout.php -->
 <html>
@@ -595,21 +643,45 @@ Outputs:
 ```
 
 ### Modules
-See config/modules.php and example module in framework/app/Pages.
 
-1. Create a folder your-module in the framework/app directory 
-2. Copy & Paste framework/config and framework/resources to framework/app/your-module
-3. Modify the config files accordingly or just empty them (you can't register the same route twice, it would throw a exception)
-4. Register the new module in framework/config/modules.php: 
+Modules are just directories with config files to be merged with the main config.
+They also are stored in a Collection and can be retrieved and executed. 
+
+To register a single module
 ```php
-// in framework/config/modules.php
-
+Modules::register('your-module-dirname');
+```
+or with options
+```php
 Modules::register('your-module-dirname', [
-    // optional config array
-    'path' => 'app', // location of the module dir
-    'routes' => 'app/YourModule/Http/routes.php',
-    // ...more options
+    // showing optional default values
+
+    // optional: base directory for the module
+    'basepath' => 'app/modules',
+
+    // optional: where to find the config file if any
+    'config' => 'config/config.php',
+	
+    // optional: where to find the routes config file if any
+    'routes' => 'config/routes.php',
+	
+    // optional: where to find the bindings config if any
+    'bindings' => 'config/bindings.php',
+
+    // optional: where to find the providers config if any
+    'providers' => 'config/providers.php'
 ]);
+```
+To register all modules withing configured modules.basepath
+```php
+Modules::register('Demo/*');
+```
+Execute a module
+```php
+// Not implemented yet
+Modules::execute('Demo/Pages');
+
+// Since run('some/route') work well at any time, Modules::execute() seems not necessary
 ```
 
 ### CLI
