@@ -1,9 +1,12 @@
-~~This is a (working) proof of concept.~~ 
-This is now a work in progress. Busy, busy...
+~~This is a (working) proof of concept.~~
+ 
+~~This is now a work in progress. Busy, busy...~~
 
-# Minimal PHP Framework
+Almost there...
 
-Minimal is a web application framework.
+# Minimal Framework
+
+Minimal is a web application framework for PHP.
 
 ## Requirements
 
@@ -597,29 +600,67 @@ App::respond(function () {
 ---
 ## Components
 
-- [judus/minimal-assets](https://github.com/judus/minimal-assets)
-- [judus/minimal-benchmark](https://github.com/judus/minimal-benchmark)
-- [judus/minimal-cli](https://github.com/judus/minimal-cli)
-- [judus/minimal-collections](https://github.com/judus/minimal-collections)
-- [judus/minimal-config](https://github.com/judus/minimal-config)
-- [judus/minimal-controllers](https://github.com/judus/minimal-controllers)
-- [judus/minimal-database](https://github.com/judus/minimal-database)
-- [judus/minimal-html](https://github.com/judus/minimal-html)
-- [judus/minimal-http](https://github.com/judus/minimal-http)
-- [judus/minimal-middlewares](https://github.com/judus/minimal-middlewares)
-- [judus/minimal-minimal](https://github.com/judus/minimal-minimal)
-- [judus/minimal-paths](https://github.com/judus/minimal-paths)
-- [judus/minimal-presenters](https://github.com/judus/minimal-presenters)
-- [judus/minimal-provider](https://github.com/judus/minimal-provider)
-- [judus/minimal-routing](https://github.com/judus/minimal-routing)
-- [judus/minimal-translation](https://github.com/judus/minimal-translation)
-- [judus/minimal-views](https://github.com/judus/minimal-views)
+Minimal requires at least these packages:
+- [![Build Status](https://travis-ci.org/judus/minimal-collections.svg?branch=master)](https://travis-ci.org/judus/minimal-collections)
+  [![Latest Version](http://img.shields.io/packagist/v/minimal/collections.svg)](https://packagist.org/packages/minimal/collections) 
+  [judus/minimal-collections](https://github.com/judus/minimal-collections) - a simple iterator
+- [![Build Status](https://travis-ci.org/judus/minimal-config.svg?branch=master)](https://travis-ci.org/judus/minimal-config)
+  [![Latest Version](http://img.shields.io/packagist/v/minimal/config.svg)](https://packagist.org/packages/minimal/config) 
+  [judus/minimal-config](https://github.com/judus/minimal-config) - handles a multidimensional array
+- [![Build Status](https://travis-ci.org/judus/minimal-controllers.svg?branch=master)](https://travis-ci.org/judus/minimal-controllers)
+  [![Latest Version](http://img.shields.io/packagist/v/minimal/controllers.svg)](https://packagist.org/packages/minimal/controllers)
+  [judus/minimal-controllers](https://github.com/judus/minimal-controllers) - the frontcontroller
+- [![Build Status](https://travis-ci.org/judus/minimal-http.svg?branch=master)](https://travis-ci.org/judus/minimal-http)
+  [![Latest Version](http://img.shields.io/packagist/v/minimal/http.svg)](https://packagist.org/packages/minimal/http)
+  [judus/minimal-http](https://github.com/judus/minimal-http) - request and response objects
+- [![Build Status](https://travis-ci.org/judus/minimal-middlewares.svg?branch=master)](https://travis-ci.org/judus/minimal-middlewares)
+  [![Latest Version](http://img.shields.io/packagist/v/minimal/middlewares.svg)](https://packagist.org/packages/minimal/middlewares)
+  [judus/minimal-middlewares](https://github.com/judus/minimal-middlewares) - a unconventional middleware implementation
+- [![Build Status](https://travis-ci.org/judus/minimal-minimal.svg?branch=master)](https://travis-ci.org/judus/minimal-minimal)
+  [![Latest Version](http://img.shields.io/packagist/v/minimal/minimal.svg)](https://packagist.org/packages/minimal/minimal)
+  [judus/minimal-minimal](https://github.com/judus/minimal-minimal) - the application object that binds all together
+- [![Build Status](https://travis-ci.org/judus/minimal-provider.svg?branch=master)](https://travis-ci.org/judus/minimal-provider)
+  [![Latest Version](http://img.shields.io/packagist/v/minimal/provider.svg)](https://packagist.org/packages/minimal/provider)
+  [judus/minimal-provider](https://github.com/judus/minimal-provider) - service provider and dependency injector
+- [![Build Status](https://travis-ci.org/judus/minimal-routing.svg?branch=master)](https://travis-ci.org/judus/minimal-routing)
+  [![Latest Version](http://img.shields.io/packagist/v/minimal/routing.svg)](https://packagist.org/packages/minimal/routing)
+  [judus/minimal-routing](https://github.com/judus/minimal-routing) - the router
+
+These packages are also included but are not necessary (and still need some work):
+- [![Build Status](https://travis-ci.org/judus/minimal-assets.svg?branch=master)](https://travis-ci.org/judus/minimal-assets)
+  [![Latest Version](http://img.shields.io/packagist/v/minimal/assets.svg)](https://packagist.org/packages/minimal/assets) 
+  [judus/minimal-assets](https://github.com/judus/minimal-assets) - register css and js during runtime, dump html link and script tags
+- [![Build Status](https://travis-ci.org/judus/minimal-benchmark.svg?branch=master)](https://travis-ci.org/judus/minimal-benchmark)
+  [![Latest Version](http://img.shields.io/packagist/v/minimal/benchmark.svg)](https://packagist.org/packages/minimal/benchmark) 
+  [judus/minimal-benchmark](https://github.com/judus/minimal-benchmark) - this "benchmarking" class is only used in the demo
+- [![Build Status](https://travis-ci.org/judus/minimal-cli.svg?branch=master)](https://travis-ci.org/judus/minimal-cli)
+  [![Latest Version](http://img.shields.io/packagist/v/minimal/cli.svg)](https://packagist.org/packages/minimal/cli) 
+  [judus/minimal-cli](https://github.com/judus/minimal-cli) - a command line interface, which will be completely redone asap
+- [![Build Status](https://travis-ci.org/judus/minimal-database.svg?branch=master)](https://travis-ci.org/judus/minimal-database)
+  [![Latest Version](http://img.shields.io/packagist/v/minimal/database.svg)](https://packagist.org/packages/minimal/database) 
+  [judus/minimal-database](https://github.com/judus/minimal-database) - a pdo connector, a mysql query builder and a ORM
+- [![Build Status](https://travis-ci.org/judus/minimal-html.svg?branch=master)](https://travis-ci.org/judus/minimal-html)
+  [![Latest Version](http://img.shields.io/packagist/v/minimal/html.svg)](https://packagist.org/packages/minimal/html) 
+  [judus/minimal-html](https://github.com/judus/minimal-html) - for now just a html table class
+- [![Build Status](https://travis-ci.org/judus/minimal-paths.svg?branch=master)](https://travis-ci.org/judus/minimal-paths)
+  [![Latest Version](http://img.shields.io/packagist/v/minimal/paths.svg)](https://packagist.org/packages/minimal/paths) 
+  [judus/minimal-paths](https://github.com/judus/minimal-paths) - might help creating paths and urls
+- [![Build Status](https://travis-ci.org/judus/minimal-translation.svg?branch=master)](https://travis-ci.org/judus/minimal-translation)
+  [![Latest Version](http://img.shields.io/packagist/v/minimal/translation.svg)](https://packagist.org/packages/minimal/translation) 
+  [judus/minimal-translation](https://github.com/judus/minimal-translation) - translations in a pretty printed json file
+- [![Build Status](https://travis-ci.org/judus/minimal-views.svg?branch=master)](https://travis-ci.org/judus/minimal-views)
+  [![Latest Version](http://img.shields.io/packagist/v/minimal/views.svg)](https://packagist.org/packages/minimal/views) 
+  [judus/minimal-views](https://github.com/judus/minimal-views) - simple php views and layouts
 
 ---
-#### TODOs
-- Unit tests
+#### TODOs until v1.0.0
+- Replace all IOC with Provider in application object (Minimal.php)
+- Test the complementary libraries
+- Write more testcases for the core packages
 - Api documentation
-
+- Update the README
+- Better demo application
+- Website
 ---
 
 ### About
