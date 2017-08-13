@@ -24,11 +24,9 @@ $ composer create-project minimal/framework
 
 ## Usage
 
-[Example](#example) | [Routing](#routing) | [Dependency Injection](#dependency-injection) | [Providers](#providers) | [Middlewares](#middlewares) | [Views](#views) | [Assets](#assets) | [Modules](#modules) | [CLI](#cli)
+[Quickstart example](#quickstart) | [Routing](#routing) | [Dependency Injection](#dependency-injection) | [Providers](#providers) | [Middlewares](#middlewares) | [Views](#views) | [Assets](#assets) | [Modules](#modules) | [CLI](#cli)
 
-### Example
-All together as a quick start
-
+### Quickstart example
 ```php
 App::respond(function () {
 
@@ -123,15 +121,12 @@ App::respond(function () {
 
 ##### Direct output:
 ```php
-// in config/routes.php
-
 Router::get('hello/(:any)/(:any)', function($firstname, $lastname) {
     return 'Hello ' . ucfirst($firstname) . ' ' . ucfirst($lastname);
 });
 
 // (:any) match letters and integer
 // (:num) match integer only
-
 ```
 http://localhost/hello/julien/duseyau
 -> Hello Julien Duseyau
@@ -155,16 +150,16 @@ http://localhost/hello/julien/duseyau
 
 ##### Using controllers
 ```php
-// in config/routes.php 
-
-Router::get(
-    'hello/(:any)/(:any)', 
-    'App\\Demo\\Base\\Controllers\\YourController@yourMethod'
-)
+Router::get(hello/(:any)/(:any)', 'App\\Demo\\Base\\Controllers\\YourController@yourMethod');
+```
+or
+```php
+Router::get(hello/(:any)/(:any), [
+    'controller' => YourController::class,
+    'action' => 'yourMethod'
+])
 ```
 ```php
-// in app/Demo/Base/Controllers/YourController.php
-
 class App\Demo\Base\Controllers\YourController
 {
     public function yourMethod($name, $lastname)
@@ -173,13 +168,10 @@ class App\Demo\Base\Controllers\YourController
     }
 }
 ```
-http://localhost/hello/julien/duseyau
--> Hello Julien Duseyau
+http://localhost/hello/julien/duseyau -> Hello Julien Duseyau
 
 ##### Route groups
 ```php
-// in config/routes.php
-
 Router::group([
 
     // Prefixes all urls in the group with 'auth/'
@@ -421,6 +413,59 @@ $result = Middleware::dispatch(function() {
 ]);
 ```
 
+### Controllers
+The controllers specified in the routes are instantiated through 
+Provider->make() (e.g. App::make()), which will always look for a singleton 
+first, then search the service container for a provider or factory or else just
+create a instance and inject dependencies. Which means there is nothing to do to 
+make this controller with concrete dependencies work:
+```php
+class MyController
+{
+    public function __construct(MyModelA $myModelA, MyModelB $myModelB)
+    {
+        $this->modelA = $myModelA;
+        $this->modelB = $myModelB;
+    }
+}
+```
+In order to use interfaces, bindings have to be registered. This can also be
+done in the config/bindings.php
+```php
+App::addBindings([MyModelInterface::class => MyModel::class]);
+```
+```php
+class MyController
+{
+    public function __construct(MyModelInterface $myModel)
+    {
+        $this->model = $myModel;
+    }
+}
+```
+For a more control register a factory like so: 
+```php
+App::register(MyController::class, MyControllerFactory::class);
+```
+```php
+class MyControllerFactory extends AbstractProvider
+{
+    public function resolve()
+    {
+        return new MyController('value1', 'value2');
+    }
+}
+```
+
+```php
+class MyController
+{
+    public function __construct($optionA, $optionB)
+    {
+        // $optionA is 'value1', $optionB is 'value2'
+    }
+}
+```
 
 ### Views
 ```php
