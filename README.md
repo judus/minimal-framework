@@ -31,9 +31,9 @@ App::respond(function () {
     // Register all modules configs and routes within directory app/Demo
     Modules::register('Demo/*');
 
-	// You can also register routes right here. The following, part or all of 
-	// it, is also what could be in one or several route config files at 
-	// app/[your-module]/Config/routes.php
+    // You can also register routes right here. The following, part or all of 
+    // it, is also what could be in one or several route config files at 
+    // app/[your-module]/Config/routes.php
 	
     // Respond on GET request
     Router::get('/', function () {
@@ -89,8 +89,6 @@ App::respond(function () {
             // Connect to database
             PDO::connection(Config::item('database'));
 
-            // Import namespaces of the models on top of file to make this work
-
             // Truncate tables
             Role::instance()->truncate();
             User::instance()->truncate();
@@ -127,28 +125,43 @@ Router::get('hello/(:any)/(:any)', function($firstname, $lastname) {
     return 'Hello ' . ucfirst($firstname) . ' ' . ucfirst($lastname);
 });
 
+// (:any) match letters and integer
+// (:num) match integer only
+
+```
+http://localhost/hello/julien/duseyau
+-> Hello Julien Duseyau
+
+```php
 // Router::get() responds to GET requests
 // Router::post() responds to POST requests
 // Router::put() ...you get it
 // Router::patch()
 // Router::delete()
 
-// (:any) match letters and integer
-// (:num) match integer only
+// 1st parameter: string uri pattern
+// 2nd parameter: a closure with return sends a response to the client, a array
+// of key/value pairs sets the attributes of the route object, which are:
+//     'controller': the controller class to load,
+//     'action':, the method to execute
+//     'uriPrefix': a string that prefixes the uri pattern
+//     'middlewares': a multidimensional array of middleware with optional params 
+//     'params': array of values that will be injected to the method 
 ```
-http://localhost/hello/julien/duseyau
--> Hello Julien Duseyau
 
 ##### Using controllers
 ```php
 // in config/routes.php 
 
-Router::get('hello/(:any)/(:any)', 'App\\Controllers\\YourController@yourMethod')
+Router::get(
+    'hello/(:any)/(:any)', 
+    'App\\Demo\\Base\\Controllers\\YourController@yourMethod'
+)
 ```
 ```php
-// in app/Controllers/YourController.php
+// in app/Demo/Base/Controllers/YourController.php
 
-class App\Controllers\YourController
+class App\Demo\Base\Controllers\YourController
 {
     public function yourMethod($name, $lastname)
     {
@@ -170,19 +183,19 @@ Router::group([
 
     // Define the class namespace for all routes in this group
     // Will be prefixed to the controllers
-    'namespace' => 'App\\Controllers\\'
+    'namespace' => 'App\\Demo\\Auth\\Controllers\\'
 
 ], function () use ($route) {
 
     // GET request: 'auth/login'
-    // Controller 'App\\Controllers\AuthController
+    // Controller 'App\\Demo\\Auth\\Controllers\AuthController
     Router::get('login', [
         'controller' => 'AuthController',
         'action' => 'loginForm' // Show the login form
     ]);
 
     // POST request: 'auth/login'
-    // Controller 'App\\Controllers\AuthController
+    // Controller 'App\\Demo\\Auth\\Controllers\AuthController
     Router::post('login', [
         'controller' => 'AuthController',
         'action' => 'login' // Login the user
@@ -196,17 +209,16 @@ Router::group([
         // Middlewares apply to all route in this (sub)group
         'middlewares' => [
             // Check if the client is authorised to access these routes
-            'App\\Middlewares\\CheckPermission',
+            'App\\Demo\\Auth\\Middlewares\\CheckPermission',
             // Log or send a access report
-            'App\\Middlewares\\ReportAccess',
+            'App\\Demo\\Auth\\Middlewares\\ReportAccess',
         ]
     ], function () use ($route) {
 
         // No access to these routes if middleware CheckPermission fails
-        // Middleware ReportAccess reports all access to these routes
 
         // GET request: 'auth/users'
-        // Controller 'App\\Controllers\UserController
+        // Controller 'App\\Demo\\Auth\\Controllers\UserController
         Router::get('users', [
             'controller' => 'UserController',
             'action' => 'list' // Show a list of users
@@ -304,42 +316,39 @@ class Cache implements MiddlewareInterface
 
 ##### Standalone example
 ```php
-// Array of middlewares
-$middlewares = [
+$result = Middleware::dispatch(function() {
+    return 'the task, for example FrontController::dispatch(Router::route())';
+}, [
     'App\\Middlewares\\checkPermission',
     'App\\Middlewares\\ReportAccess',
     'App\\Middlewares\\Cache' => [(1*1*10)]
-];
-
-$provider = new Maduser\Minimal\Provider\Provider()
-
-$middleware = new Maduser\Minimal\Middlewares\Middleware($provider, $middlewares);
-
-// Wrap a task in middleware layers
-$response = $middleware->dispatch(function() {
-    // executes before() on each middleware layer here
-    return 'the task, for example frontController->dispatch(),'
-    // executes after() on each middleware layer here (not really here, nevermind)
-});
-
+]);
 ```
 
 ### Providers
 
-```php
-// in config/providers.php
+A provider can be a concrete implementation of a object that will be 
+instantiated by the Provider/Resolver component. A provider can also be a 
+factory for a object if it implements the ProviderInterface or extends the
+AbstractProvider.
 
+```php
+App::register([
+    'App\\MyClass' => App\MyClass::class, 
+    'MyOtherClassA' => App\MyOtherClassAFactory::class, 
+    'any-key-name-will-do' => App\MyOtherClassB::class, 
+]);
+```
+or in config/providers.php
+```php
 return [
-    'App\\MyClass' => App\MyClassProvider::class, 
-    'App\\MyOtherClassA' => App\MyOtherClassAProvider::class, 
-    'App\\MyOtherClassB' => App\MyOtherClassBProvider::class, 
+    'App\\MyClass' => App\MyClass::class, 
+    'MyOtherClassA' => App\MyOtherClassAFactory::class, 
+    'any-key-name-will-do' => App\MyOtherClassB::class, 
 ];
 ```
-
 ```php
-// in app/MyClassProvider.php
-
-class MyClassProvider extends Provider
+class MyOtherClassAFactory extends AbstractProvider
 {
     public function resolve()
     {
@@ -349,67 +358,91 @@ class MyClassProvider extends Provider
         $settings = Config::item('settings');
         
         // return new instance
-        /* return new MyClass($time, $settings); */ 
+        return new MyOtherClassA($time, $settings); 
         
-        // Make singleton and resolve dependencies
-        return $this->singleton('MyClass', new App\\MyClass(
-            IOC::resolve('App\\MyOtherClassA'),
+        // ... or make singleton and resolve dependencies
+        return $this->singleton('MyOtherClassA', new App\\MyOtherClassA(
+            IOC::resolve('App\\MyClass'),
             IOC::resolve('App\\MyOtherClassB'),
             $time,
             $settings
-       ));
+        ));
+       
     }
 }
+```
 
-// IOC::resolve('App\\MyOtherClassA')
-// Resolves a class through a provider as defined in config/providers.php
+```php
+$myOtherClassA = App::resolve('App\\MyOtherClassA');
+$myOtherClassB = App::resolve('any-key-name-will-do');
 ```
 
 ### Dependency injection
 
-Binding a interface implementation
+Binding a interface to a implementation is straight forward:
 ```php
-// in config/bindings.php
-
+App::addBindings([
+    'App\\InterfaceA' => App\ClassA::class,
+    'App\\InterfaceB' => App\ClassB::class',
+    'App\\InterfaceC' => App\ClassC::class'
+]);
+```
+or in config/bindings.php
+```php
 return [
     'App\\InterfaceA' => App\ClassA::class,
     'App\\InterfaceB' => App\ClassB::class',
+    'App\\InterfaceC' => App\ClassC::class'
 ];
 ```
 
 ```php
-class MyClass
+class ClassA {}
+
+class ClassB {}
+
+class ClassC
 {
-    private $classA;
-    private $classB;
-    
-    public function __construct(InterfaceA $classA, InterfaceB $classB) {
-        $this->classA = $classA;
-        $this->classB = $classB;
-    }
+    public function __construct(InterfaceB $classB) {}
 }
 
-$MyClass = IOC::make(MyClass::class); 
-// Does a reflection and injects the dependencies as defined in config/bindings.php
+class MyClass
+{
+    public function __construct(InterfaceA $classA, InterfaceC $classC) {}
+}
+```
+
+```php
+$MyClass = App::make(MyClass::class); 
 ```
 
 ### Views
 ```php
-// anywhere in your code
 
-View::setBase('../resources/views/'); // Path from index.php
-View::setTheme('my-theme'); // Set a subdir (optional)
-View::setLayout('layouts/my-layout') // View wrapper
+// The base directory to start from
+View::setBase('../resources/views/');
 
-// Share a variable $title across all views
-View::share('title', 'My title');  
+// The theme directory in base directory, is optional and can be ingored
+View::setTheme('my-theme');
 
-// Set variables only for this view
+// The layout file without '.php' from the base/theme directory
+View::setLayout('layouts/my-layout');
+
+// Set variables for the view
 View::set('viewValue1', 'someValue1')
 
+// By default variables are only accessible in the current view
+// To share a variable $title across all layout and views
+View::share('title', 'My title');  
+
+// Render a view without layout
+View::view('pages/my-view', [
+    'viewValue2' => 'someValue2'  // Same as View::set()
+]);
+
+// Render a view with layout, but in case of ajax only the view
 View::render('pages/my-view', [
-    'viewValue2' => 'someValue2', // Same as View::set()
-    'viewValue3' => 'someValue3'  // Same as View::set()
+    'viewValue2' => 'someValue2'  // Same as View::set()
 ]);
 ```
 
@@ -422,34 +455,31 @@ View::render('pages/my-view', [
     <title><?=$title?></title>    
 </head>
 <body>
-    <!-- Get the view -->
     <?= self::view() ?>    
 </body>
 </html>
+```
 
-
+```html
 <!-- resources/views/my-theme/main/my-view.php -->
 
 <p><?= $viewValue1 ?></p>
 <p><?= $viewValue2 ?></p>
 ```
-```php
-// Example of injection
-
-class SomeController
-{
-    public function __construct(ViewInterface $view)
-    {
-        $this->view = $view;        
-        $this->view->setBaseDir('../resources/views');
-    }
-
-    public function someMethod()
-    {
-        return $this->view->render('my-view');
-    }
-}
+Result:
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My title</title>    
+</head>
+<body>
+    <p>someValue1</p>   
+    <p>someValue2</p>   
+</body>
+</html>
 ```
+
 
 ### Assets
 ```php
