@@ -20,7 +20,7 @@ $ composer create-project minimal/framework
 
 ## Usage
 
-[Example](#example) | [Routing](#routing) | [Middlewares](#middlewares) | [Providers](#providers) | [Dependency Injection](#dependency-injection) | [Views](#views) | [Assets](#assets) | [Modules](#modules) | [CLI](#cli)
+[Example](#example) | [Routing](#routing) | [Dependency Injection](#dependency-injection) | [Providers](#providers) | [Middlewares](#middlewares) | [Views](#views) | [Assets](#assets) | [Modules](#modules) | [CLI](#cli)
 
 ### Example
 All together as a quick start
@@ -237,6 +237,98 @@ Router::get('download/pdf', function () use ($response) {
     readfile('sample.pdf');
 });
 ```
+
+### Dependency injection
+
+Binding a interface to a implementation is straight forward:
+```php
+App::addBindings([
+    'App\\InterfaceA' => App\ClassA::class,
+    'App\\InterfaceB' => App\ClassB::class,
+    'App\\InterfaceC' => App\ClassC::class
+]);
+```
+or in config/bindings.php
+```php
+return [
+    'App\\InterfaceA' => App\ClassA::class,
+    'App\\InterfaceB' => App\ClassB::class,
+    'App\\InterfaceC' => App\ClassC::class
+];
+```
+
+```php
+class ClassA {}
+
+class ClassB {}
+
+class ClassC
+{
+    public function __construct(InterfaceB $classB) {}
+}
+
+class MyClass
+{
+    public function __construct(InterfaceA $classA, InterfaceC $classC) {}
+}
+```
+
+```php
+$MyClass = App::make(MyClass::class); 
+```
+
+### Providers
+
+A provider can be a concrete implementation of a object that will be 
+instantiated by the Provider/Resolver component. A provider can also be a 
+factory for a object if it implements the ProviderInterface or extends the
+AbstractProvider.
+
+```php
+App::register([
+    'App\\MyClass' => App\MyClass::class, 
+    'MyOtherClassA' => App\MyOtherClassAFactory::class, 
+    'any-key-name-will-do' => App\MyOtherClassB::class, 
+]);
+```
+or in config/providers.php
+```php
+return [
+    'App\\MyClass' => App\MyClass::class, 
+    'MyOtherClassA' => App\MyOtherClassAFactory::class, 
+    'any-key-name-will-do' => App\MyOtherClassB::class, 
+];
+```
+```php
+class MyOtherClassAFactory extends AbstractProvider
+{
+    public function resolve()
+    {
+        // Do something before the class is instantiated
+        $time = time();
+        Assets::setPath()
+        $settings = Config::item('settings');
+        
+        // return new instance
+        return new MyClass($time, $settings); 
+        
+        // ... or make singleton and resolve dependencies
+        return $this->singleton('MyClass', new App\\MyClass(s
+            IOC::resolve('App\\MyOtherClassA'),
+            IOC::resolve('App\\MyOtherClassB'),
+            $time,
+            $settings
+        ));
+       
+    }
+}
+```
+
+```php
+$myClass = App::resolve('MyOtherClassA');
+$myOtherClassB = App::resolve('any-key-name-will-do');
+```
+
 ### Middlewares
 
 ```php
@@ -325,100 +417,9 @@ $result = Middleware::dispatch(function() {
 ]);
 ```
 
-### Providers
-
-A provider can be a concrete implementation of a object that will be 
-instantiated by the Provider/Resolver component. A provider can also be a 
-factory for a object if it implements the ProviderInterface or extends the
-AbstractProvider.
-
-```php
-App::register([
-    'App\\MyClass' => App\MyClass::class, 
-    'MyOtherClassA' => App\MyOtherClassAFactory::class, 
-    'any-key-name-will-do' => App\MyOtherClassB::class, 
-]);
-```
-or in config/providers.php
-```php
-return [
-    'App\\MyClass' => App\MyClass::class, 
-    'MyOtherClassA' => App\MyOtherClassAFactory::class, 
-    'any-key-name-will-do' => App\MyOtherClassB::class, 
-];
-```
-```php
-class MyOtherClassAFactory extends AbstractProvider
-{
-    public function resolve()
-    {
-        // Do something before the class is instantiated
-        $time = time();
-        Assets::setPath()
-        $settings = Config::item('settings');
-        
-        // return new instance
-        return new MyOtherClassA($time, $settings); 
-        
-        // ... or make singleton and resolve dependencies
-        return $this->singleton('MyOtherClassA', new App\\MyOtherClassA(
-            IOC::resolve('App\\MyClass'),
-            IOC::resolve('App\\MyOtherClassB'),
-            $time,
-            $settings
-        ));
-       
-    }
-}
-```
-
-```php
-$myOtherClassA = App::resolve('App\\MyOtherClassA');
-$myOtherClassB = App::resolve('any-key-name-will-do');
-```
-
-### Dependency injection
-
-Binding a interface to a implementation is straight forward:
-```php
-App::addBindings([
-    'App\\InterfaceA' => App\ClassA::class,
-    'App\\InterfaceB' => App\ClassB::class,
-    'App\\InterfaceC' => App\ClassC::class
-]);
-```
-or in config/bindings.php
-```php
-return [
-    'App\\InterfaceA' => App\ClassA::class,
-    'App\\InterfaceB' => App\ClassB::class,
-    'App\\InterfaceC' => App\ClassC::class
-];
-```
-
-```php
-class ClassA {}
-
-class ClassB {}
-
-class ClassC
-{
-    public function __construct(InterfaceB $classB) {}
-}
-
-class MyClass
-{
-    public function __construct(InterfaceA $classA, InterfaceC $classC) {}
-}
-```
-
-```php
-$MyClass = App::make(MyClass::class); 
-```
 
 ### Views
 ```php
-
 // The base directory to start from
 View::setBase('../resources/views/');
 
