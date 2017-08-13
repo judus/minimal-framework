@@ -24,7 +24,7 @@ $ composer create-project minimal/framework
 
 ## Usage
 
-[Quickstart example](#quickstart-example) | [Routing](#routing) | [Dependency Injection](#dependency-injection) | [Providers](#providers) | [Middlewares](#middlewares) | [Controllers](#controllers) | [Views](#views) | [Assets](#assets) | [Modules](#modules) | [CLI](#cli)
+<sub>[Quickstart example](#quickstart-example) | [Routing](#routing) | [Dependency Injection](#dependency-injection) | [Providers](#providers) | [Middlewares](#middlewares) | [Controllers](#controllers) | [Views](#views) | [Assets](#assets) | [Modules](#modules) | [CLI](#cli)</sub>
 
 ### Quickstart example
 ```php
@@ -116,6 +116,9 @@ App::respond(function () {
     });
 });
 ```
+
+<sub>[Quickstart example](#quickstart-example) | [Routing](#routing) | [Dependency Injection](#dependency-injection) | [Providers](#providers) | [Middlewares](#middlewares) | [Controllers](#controllers) | [Views](#views) | [Assets](#assets) | [Modules](#modules) | [CLI](#cli)</sub>
+
 
 ### Routing
 
@@ -234,6 +237,8 @@ Router::get('download/pdf', function () use ($response) {
 });
 ```
 
+<sub>[Quickstart example](#quickstart-example) | [Routing](#routing) | [Dependency Injection](#dependency-injection) | [Providers](#providers) | [Middlewares](#middlewares) | [Controllers](#controllers) | [Views](#views) | [Assets](#assets) | [Modules](#modules) | [CLI](#cli)</sub>
+
 ### Dependency injection
 
 Binding a interface to a implementation is straight forward:
@@ -272,6 +277,8 @@ class MyClass
 ```php
 $MyClass = App::make(MyClass::class); 
 ```
+
+<sub>[Quickstart example](#quickstart-example) | [Routing](#routing) | [Dependency Injection](#dependency-injection) | [Providers](#providers) | [Middlewares](#middlewares) | [Controllers](#controllers) | [Views](#views) | [Assets](#assets) | [Modules](#modules) | [CLI](#cli)</sub>
 
 ### Providers
 
@@ -324,6 +331,8 @@ class MyOtherClassAFactory extends AbstractProvider
 $myClass = App::resolve('MyOtherClassA');
 $myOtherClassB = App::resolve('any-key-name-will-do');
 ```
+
+<sub>[Quickstart example](#quickstart-example) | [Routing](#routing) | [Dependency Injection](#dependency-injection) | [Providers](#providers) | [Middlewares](#middlewares) | [Controllers](#controllers) | [Views](#views) | [Assets](#assets) | [Modules](#modules) | [CLI](#cli)</sub>
 
 ### Middlewares
 
@@ -413,6 +422,8 @@ $result = Middleware::dispatch(function() {
 ]);
 ```
 
+<sub>[Quickstart example](#quickstart-example) | [Routing](#routing) | [Dependency Injection](#dependency-injection) | [Providers](#providers) | [Middlewares](#middlewares) | [Controllers](#controllers) | [Views](#views) | [Assets](#assets) | [Modules](#modules) | [CLI](#cli)</sub>
+
 ### Controllers
 The controllers specified in the routes are instantiated through 
 Provider->make() (e.g. App::make()), which will always look for a singleton 
@@ -465,6 +476,8 @@ class MyController
     }
 }
 ```
+
+<sub>[Quickstart example](#quickstart-example) | [Routing](#routing) | [Dependency Injection](#dependency-injection) | [Providers](#providers) | [Middlewares](#middlewares) | [Controllers](#controllers) | [Views](#views) | [Assets](#assets) | [Modules](#modules) | [CLI](#cli)</sub>
 
 ### Views
 ```php
@@ -563,6 +576,7 @@ class MyController extends BaseController
 }
 ```
 
+<sub>[Quickstart example](#quickstart-example) | [Routing](#routing) | [Dependency Injection](#dependency-injection) | [Providers](#providers) | [Middlewares](#middlewares) | [Controllers](#controllers) | [Views](#views) | [Assets](#assets) | [Modules](#modules) | [CLI](#cli)</sub>
 
 ### Assets
 ```php
@@ -640,6 +654,8 @@ Outputs:
 </html>
 ```
 
+<sub>[Quickstart example](#quickstart-example) | [Routing](#routing) | [Dependency Injection](#dependency-injection) | [Providers](#providers) | [Middlewares](#middlewares) | [Controllers](#controllers) | [Views](#views) | [Assets](#assets) | [Modules](#modules) | [CLI](#cli)</sub>
+
 ### Modules
 
 Modules are just directories with config files to be merged with the main config.
@@ -681,6 +697,8 @@ Modules::execute('Demo/Pages');
 
 // Since run('some/route') work well at any time, Modules::execute() seems not necessary
 ```
+
+<sub>[Quickstart example](#quickstart-example) | [Routing](#routing) | [Dependency Injection](#dependency-injection) | [Providers](#providers) | [Middlewares](#middlewares) | [Controllers](#controllers) | [Views](#views) | [Assets](#assets) | [Modules](#modules) | [CLI](#cli)</sub>
 
 ### CLI
 ##### List all registered routes
@@ -732,6 +750,7 @@ $ php minimal providers
 $ php minimal config
 ```
 
+<sub>[Quickstart example](#quickstart-example) | [Routing](#routing) | [Dependency Injection](#dependency-injection) | [Providers](#providers) | [Middlewares](#middlewares) | [Controllers](#controllers) | [Views](#views) | [Assets](#assets) | [Modules](#modules) | [CLI](#cli)</sub>
 
 ---
 ## Components
