@@ -20,7 +20,102 @@ $ composer create-project minimal/framework
 
 ## Usage
 
-[Routing](#routing) | [Middlewares](#middlewares) | [Providers](#providers) | [Dependency Injection](#dependency-injection) | [Views](#views) | [Assets](#assets) | [Modules](#modules) | [CLI](#cli)
+[Example](#example) | [Routing](#routing) | [Middlewares](#middlewares) | [Providers](#providers) | [Dependency Injection](#dependency-injection) | [Views](#views) | [Assets](#assets) | [Modules](#modules) | [CLI](#cli)
+
+### Example
+All together as a quick start
+
+```php
+App::respond(function () {
+
+    // Register all modules configs and routes within directory app/Demo
+    Modules::register('Demo/*');
+
+	// You can also register routes right here. The following, part or all of 
+	// it, is also what could be in one or several route config files at 
+	// app/[your-module]/Config/routes.php
+	
+    // Respond on GET request
+    Router::get('/', function () {
+        return 'Hello from Minimal!';
+    });
+
+    // Respond on GET request with uri paramters
+    Router::get('hello/(:any)/(:num)', function ($any, $num) {
+        return 'Hello ' . $any . ' ' . $num ;
+    });
+
+    // Respond on POST request
+    Router::post('/', function () {
+        return Request::post();
+    });
+
+    // Respond with HTTP location
+    Router::get('redirection', function () {
+        Response::redirect('/');
+    });
+
+    // Respond with a view
+    Router::get('view', function () {
+        return View::render('fancy-html', ['param' => 'value']);
+    });
+
+    // Test the database connection
+    Router::get('database', function () {
+        PDO::connection(Config::item('database'));
+        return 'Successfully connected to database';
+    });
+
+    // Route group
+    Router::group([
+        'uriPrefix' => 'route-groups',
+        'namespace' => 'App\\Demo\\Base\\Controllers\\',
+        'middlewares' => [
+            'App\\Demo\\Base\\Middlewares\\CheckPermission',
+            'App\\Demo\\Base\\Middlewares\\ReportAccess',
+        ]
+    ], function () {
+
+        // Responds to GET route-groups/controller-action/with/middlewares'
+        Router::get('controller-action/with/middlewares', [
+            'middlewares' => ['App\\Demo\\Base\\Middlewares\\Cache' => [10]],
+            'controller' => 'YourController',
+            'action' => 'timeConsumingAction'
+        ]);
+
+        // Do database stuff
+        Router::get('users', function () {
+
+            // Connect to database
+            PDO::connection(Config::item('database'));
+
+            // Import namespaces of the models on top of file to make this work
+
+            // Truncate tables
+            Role::instance()->truncate();
+            User::instance()->truncate();
+
+            // Create 2 new roles
+            Role::create([['name' => 'admin'], ['name' => 'member']]);
+
+            // Get all the roles
+            $roles = Role::all();
+
+            // Create a user
+            $user = User::create(['username' => 'john']);
+
+            // Assign all roles to this user
+            $user->roles()->attach($roles);
+
+            // Get the first username 'john' with his roles
+            return $user->with('roles')->where(['username', 'john'])->first();
+        });
+
+        // ... subgroups are possible ...
+
+    });
+});
+```
 
 ### Routing
 
@@ -93,13 +188,6 @@ Router::group([
         'action' => 'login' // Login the user
     ]);
 
-    // GET request: 'auth/logout'
-    // Controller 'App\\Controllers\AuthController
-    Router::get('logout', [
-        'controller' => 'AuthController',
-        'action' => 'logout' // Logout the user
-    ]);
-
     /**
      * Subgroup with middlewares
      */
@@ -124,21 +212,8 @@ Router::group([
             'action' => 'list' // Show a list of users
         ]);
 
-        // GET request: 'auth/users/create'
-        // Controller 'App\\Controllers\UserController
-        Router::get('users/create', [
-            'controller' => 'UserController',
-            'action' => 'createForm' // Show a empty user form
-        ]);
-
-        // GET request: 'auth/users/edit'
-        // Controller 'App\\Controllers\UserController
-        Router::get('users/edit/(:num)', [
-            'controller' => 'UserController',
-            'action' => 'editForm' // Show a edit form for user (:num)
-        ]);
-
         // etc...
+
     });
 });
 ```
@@ -236,14 +311,15 @@ $middlewares = [
     'App\\Middlewares\\Cache' => [(1*1*10)]
 ];
 
-// The middleware controller
-$middleware = new Maduser\Minimal\Middlewares\Middleware($middlewares);
+$provider = new Maduser\Minimal\Provider\Provider()
+
+$middleware = new Maduser\Minimal\Middlewares\Middleware($provider, $middlewares);
 
 // Wrap a task in middleware layers
 $response = $middleware->dispatch(function() {
     // executes before() on each middleware layer here
     return 'the task, for example frontController->dispatch(),'
-    // executes after() on each middleware layer here
+    // executes after() on each middleware layer here (not really here, nevermind)
 });
 
 ```
@@ -506,96 +582,6 @@ $ php minimal providers
 $ php minimal config
 ```
 
-### Alternate usage with facades
-```php
-// in public/index.php
-
-App::respond(function () {
-
-    // Register all modules configs and routes within path
-    Modules::register('Demo/*');
-
-    // Respond on GET request
-    Router::get('/', function () {
-        return 'Hello from Minimal!';
-    });
-
-    // Respond on GET request with uri paramters
-    Router::get('hello/(:any)/(:num)', function ($any, $num) {
-        return 'Hello ' . $any . ' ' . $num ;
-    });
-
-    // Respond on POST request
-    Router::post('/', function () {
-        return Request::post();
-    });
-
-    // Respond with HTTP location
-    Router::get('redirection', function () {
-        Response::redirect('/');
-    });
-
-    // Respond with a view
-    Router::get('view', function () {
-        return View::render('fancy-html', ['param' => 'value']);
-    });
-
-    // Test the database connection
-    Router::get('database', function () {
-        PDO::connection(Config::item('database'));
-        return 'Successfully connected to database';
-    });
-
-    // Route group
-    Router::group([
-        'uriPrefix' => 'route-groups',
-        'namespace' => 'App\\Demo\\Base\\Controllers\\',
-        'middlewares' => [
-            'App\\Demo\\Base\\Middlewares\\CheckPermission',
-            'App\\Demo\\Base\\Middlewares\\ReportAccess',
-        ]
-    ], function () {
-
-        // Responds to GET route-groups/controller-action/with/middlewares'
-        Router::get('controller-action/with/middlewares', [
-            'middlewares' => ['App\\Demo\\Base\\Middlewares\\Cache' => [10]],
-            'controller' => 'YourController',
-            'action' => 'timeConsumingAction'
-        ]);
-
-        // Do database stuff
-        Router::get('users', function () {
-
-            // Connect to database
-            PDO::connection(Config::item('database'));
-
-            // Import namespaces of the models on top of file to make this work
-
-            // Truncate tables
-            Role::instance()->truncate();
-            User::instance()->truncate();
-
-            // Create 2 new roles
-            Role::create([['name' => 'admin'], ['name' => 'member']]);
-
-            // Get all the roles
-            $roles = Role::all();
-
-            // Create a user
-            $user = User::create(['username' => 'john']);
-
-            // Assign all roles to this user
-            $user->roles()->attach($roles);
-
-            // Get the first username 'john' with his roles
-            return $user->with('roles')->where(['username', 'john'])->first();
-        });
-
-        // ... subgroups are possible ...
-
-    });
-});
-```
 
 ---
 ## Components
@@ -626,7 +612,7 @@ Minimal requires at least these packages:
   [![Latest Version](http://img.shields.io/packagist/v/minimal/routing.svg)](https://packagist.org/packages/minimal/routing)
   [judus/minimal-routing](https://github.com/judus/minimal-routing) - the router
 
-These packages are also included but are not necessary (and still need some work):
+These packages are also included but are not necessary:
 - [![Build Status](https://travis-ci.org/judus/minimal-assets.svg?branch=master)](https://travis-ci.org/judus/minimal-assets)
   [![Latest Version](http://img.shields.io/packagist/v/minimal/assets.svg)](https://packagist.org/packages/minimal/assets) 
   [judus/minimal-assets](https://github.com/judus/minimal-assets) - register css and js during runtime, dump html link and script tags
@@ -667,7 +653,6 @@ These packages are also included but are not necessary (and still need some work
 
 - It was too cold for outdoor activities. (Winter 2016)
 - It was too warm for physical activities. (Summer 2017)
-
 
 ### License
 
