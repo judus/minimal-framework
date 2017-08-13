@@ -530,9 +530,6 @@ Result:
 ```
 Where to do these View calls? Anywhere is fine. But one place could be:
 ```php
-App::register(MyController::class, MyControllerFactory::class);
-```
-```php
 class BaseController
 {
     public function __construct()
@@ -546,6 +543,7 @@ class BaseController
     }
 }
 ```
+then
 ```php
 class MyController extends BaseController
 {
