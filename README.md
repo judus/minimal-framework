@@ -184,7 +184,7 @@ Router::group([
     // Will be prefixed to the controllers
     'namespace' => 'App\\Demo\\Auth\\Controllers\\'
 
-], function () use ($route) {
+], function () {
 
     // GET request: 'auth/login'
     // Controller 'App\\Demo\\Auth\\Controllers\AuthController
@@ -212,7 +212,7 @@ Router::group([
             // Log or send a access report
             'App\\Demo\\Auth\\Middlewares\\ReportAccess',
         ]
-    ], function () use ($route) {
+    ], function () {
 
         // No access to these routes if middleware CheckPermission fails
 
@@ -230,7 +230,7 @@ Router::group([
 ```
 ##### File download
 ```php
-Router::get('download/pdf', function () use ($response) {
+Router::get('download/pdf', function () {
     Response::header('Content-Type: application/pdf');
     Response::header('Content-Disposition: attachment; filename="downloaded.pdf"');
     readfile('sample.pdf');
@@ -806,7 +806,7 @@ These packages are also included but are not necessary:
 - [![Build Status](https://travis-ci.org/judus/minimal-views.svg?branch=master)](https://travis-ci.org/judus/minimal-views)
   [![Latest Version](http://img.shields.io/packagist/v/minimal/views.svg)](https://packagist.org/packages/minimal/views) 
   [judus/minimal-views](https://github.com/judus/minimal-views) - simple php views and layouts
-
+  
 ---
 #### TODOs until v1.0.0
 - Replace all IOC with Provider in application object (Minimal.php)
