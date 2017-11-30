@@ -9,7 +9,7 @@ Almost there...
 Minimal is a web application framework for PHP.
 
 ##### NOTE 
-This is version v0.*, changes are to expect
+This is version v0.*, changes are to be expected
 
 
 ## Requirements
@@ -443,7 +443,7 @@ class MyController
 In order to use interfaces, bindings have to be registered. 
 See also config/bindings.php
 ```php
-App::bind(MyModelInterface::class => MyModel::class);
+App::bind(MyModelInterface::class, MyModel::class);
 ```
 ```php
 class MyController
