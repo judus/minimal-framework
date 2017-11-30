@@ -810,6 +810,7 @@ These packages are also included but are not necessary:
 ---
 #### TODOs until v1.0.0
 - Replace all IOC with Provider in application object (Minimal.php)
+- Finish the ORM, some methods don't use prepared statement IMPORTANT! 
 - Test the complementary libraries
 - Write more testcases for the core packages
 - Api documentation
