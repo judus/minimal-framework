@@ -9,7 +9,7 @@ Almost there...
 Minimal is a web application framework for PHP.
 
 ##### NOTE 
-This is version v0.*, changes are to expect
+This is version v0.*, changes are to be expected
 
 
 ## Requirements
@@ -184,7 +184,7 @@ Router::group([
     // Will be prefixed to the controllers
     'namespace' => 'App\\Demo\\Auth\\Controllers\\'
 
-], function () use ($route) {
+], function () {
 
     // GET request: 'auth/login'
     // Controller 'App\\Demo\\Auth\\Controllers\AuthController
@@ -212,7 +212,7 @@ Router::group([
             // Log or send a access report
             'App\\Demo\\Auth\\Middlewares\\ReportAccess',
         ]
-    ], function () use ($route) {
+    ], function () {
 
         // No access to these routes if middleware CheckPermission fails
 
@@ -230,7 +230,7 @@ Router::group([
 ```
 ##### File download
 ```php
-Router::get('download/pdf', function () use ($response) {
+Router::get('download/pdf', function () {
     Response::header('Content-Type: application/pdf');
     Response::header('Content-Disposition: attachment; filename="downloaded.pdf"');
     readfile('sample.pdf');
@@ -443,7 +443,7 @@ class MyController
 In order to use interfaces, bindings have to be registered. 
 See also config/bindings.php
 ```php
-App::bind(MyModelInterface::class => MyModel::class);
+App::bind(MyModelInterface::class, MyModel::class);
 ```
 ```php
 class MyController
@@ -806,10 +806,11 @@ These packages are also included but are not necessary:
 - [![Build Status](https://travis-ci.org/judus/minimal-views.svg?branch=master)](https://travis-ci.org/judus/minimal-views)
   [![Latest Version](http://img.shields.io/packagist/v/minimal/views.svg)](https://packagist.org/packages/minimal/views) 
   [judus/minimal-views](https://github.com/judus/minimal-views) - simple php views and layouts
-
+  
 ---
 #### TODOs until v1.0.0
 - Replace all IOC with Provider in application object (Minimal.php)
+- Finish the ORM, some methods don't use prepared statement IMPORTANT! 
 - Test the complementary libraries
 - Write more testcases for the core packages
 - Api documentation
