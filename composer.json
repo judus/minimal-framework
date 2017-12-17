@@ -25,7 +25,7 @@
     "minimal/minimal": "v0.1.7",
     "minimal/paths": "v0.1.1",
     "minimal/presenters": "v0.1.1",
-    "minimal/translation": "v0.1.1",
+    "minimal/translation": "v0.1.2",
     "minimal/views": "v0.1.1"
   },
   "require-dev": {
