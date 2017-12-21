@@ -13,7 +13,7 @@ Minimal is a web application framework for PHP.
 - Don't be fooled by the static classes, these are facades: 
   https://en.wikipedia.org/wiki/Facade_pattern
   For example: 
-  Router::post() basically means $app->container('Router')->register('POST').
+  Router::post() basically means $app->container('Router')->post().
   So if you don't like the Minimal-Router, go to config/providers.php and change 
   'Router' => Maduser\Minimal\Routing\Router::class to whatever Router class you like, 
   just mind the RouterInterface and update the config/bindings.php. Cool huh?!
