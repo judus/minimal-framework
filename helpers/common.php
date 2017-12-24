@@ -19,7 +19,7 @@ if (!function_exists('view')) {
      */
     function view($viewPath, Array $data = null)
     {
-        return View::render($viewPath, $data);
+        return View::partial($viewPath, $data);
     }
 }
 
