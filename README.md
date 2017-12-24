@@ -9,8 +9,14 @@ Almost there...
 Minimal is a web application framework for PHP.
 
 ##### NOTE 
-This is version v0.*, changes are to be expected
-
+- This is version v0.*, changes are to be expected
+- Don't be fooled by the static classes, these are facades: 
+  https://en.wikipedia.org/wiki/Facade_pattern
+  For example: 
+  Router::post() basically means $app->container('Router')->post().
+  So if you don't like the Minimal-Router, go to config/providers.php and change 
+  'Router' => Maduser\Minimal\Routing\Router::class to whatever Router class you like, 
+  just mind the RouterInterface and update the config/bindings.php. Cool huh?!
 
 ## Requirements
 
@@ -695,7 +701,7 @@ Execute a module
 // Not implemented yet
 Modules::execute('Demo/Pages');
 
-// Since run('some/route') work well at any time, Modules::execute() seems not necessary
+Allthough run('some/route) works perfectly
 ```
 
 <sub>[Quickstart example](#quickstart-example) | [Routing](#routing) | [Dependency Injection](#dependency-injection) | [Providers](#providers) | [Middlewares](#middlewares) | [Controllers](#controllers) | [Views](#views) | [Assets](#assets) | [Modules](#modules) | [CLI](#cli)</sub>
