@@ -13,6 +13,15 @@ return [
     Maduser\Minimal\Framework\Contracts\FactoryInterface::class =>
         Maduser\Minimal\Framework\Factory::class,
 
+    Maduser\Minimal\Controllers\Factories\Contracts\ControllerFactoryInterface::class =>
+        Maduser\Minimal\Controllers\Factories\ControllerFactory::class,
+
+    Maduser\Minimal\Controllers\Factories\Contracts\ModelFactoryInterface::class =>
+        Maduser\Minimal\Controllers\Factories\ModelFactory::class,
+
+    Maduser\Minimal\Framework\Factories\Contracts\ModuleFactoryInterface::class =>
+        Maduser\Minimal\Framework\Factories\ModuleFactory::class,
+
     Maduser\Minimal\Framework\Factories\Contracts\ModuleFactoryInterface::class =>
         Maduser\Minimal\Framework\Factories\ModuleFactory::class,
 

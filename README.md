@@ -10,13 +10,10 @@ Minimal is a web application framework for PHP.
 
 ##### NOTE 
 - This is version v0.*, changes are to be expected
-- Don't be fooled by the static classes, these are facades: 
+- The static classes in these examples are facades: 
   https://en.wikipedia.org/wiki/Facade_pattern
   For example: 
-  Router::post() basically means $app->container('Router')->post().
-  So if you don't like the Minimal-Router, go to config/providers.php and change 
-  'Router' => Maduser\Minimal\Routing\Router::class to whatever Router class you like, 
-  just mind the RouterInterface and update the config/bindings.php. Cool huh?!
+  Router::post() basically means $app->getRouter()->post().
 
 ## Requirements
 
@@ -761,6 +758,8 @@ $ php minimal config
 ---
 ## Components
 
+Note about failing builds: These packages have no tests (yet?). This is a free time project and since I don't have much free time, for now the less important packages will have to do without tests.         
+
 Minimal requires at least these packages:
 - [![Build Status](https://travis-ci.org/judus/minimal-collections.svg?branch=master)](https://travis-ci.org/judus/minimal-collections)
   [![Latest Version](http://img.shields.io/packagist/v/minimal/collections.svg)](https://packagist.org/packages/minimal/collections) 
@@ -816,7 +815,6 @@ These packages are also included but are not necessary:
 ---
 #### TODOs until v1.0.0
 - Replace all IOC with Provider in application object (Minimal.php)
-- Finish the ORM, some methods don't use prepared statement IMPORTANT! 
 - Test the complementary libraries
 - Write more testcases for the core packages
 - Api documentation
