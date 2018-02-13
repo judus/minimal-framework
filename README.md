@@ -9,8 +9,8 @@ App::respond(function () {
     
     Router::get('space-game-data/(:num)/(:num)', function ($characterId, $levelId) {
        return [
-          PlayerCharacter::with(['sprite', 'trait'])->getById($characterId),
-          LevelSpec::with('sprite', 'enemy.trait')->getById($levelId)
+          Character::with('sprite', 'trait')->getById($characterId),
+          LevelSpec::with('sprite', 'entity.trait')->getById($levelId)
        ];
     });
 }
