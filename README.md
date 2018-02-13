@@ -1,20 +1,55 @@
-~~This is a (working) proof of concept.~~
- 
-~~This is now a work in progress. Busy, busy...~~
-
-Almost there...
 
 # Minimal Framework
 
-Minimal is a web application framework for PHP.
+Minimal is a MVC web application framework for PHP.
 
+```php
+App::respond(function () {
+    PDO::connection(Config::item('space-game-db'));
+    
+    Router::get('space-game-data/(:num)/(:num)', function ($characterId, $levelId) {
+       return [
+          PlayerCharacter::with(['sprite', 'trait'])->getById($characterId),
+          LevelSpec::with('sprite', 'enemy.trait')->getById($levelId)
+       ];
+    });
+}
+```
+<sub>The code above sends data about a space game in JSON format.</sub>
+
+---
+
+<sub>[Quickstart example](#quickstart-example) | [Routing](#routing) | [Dependency Injection](#dependency-injection) | [Providers](#providers) | [Middlewares](#middlewares) | [Controllers](#controllers) | [Views](#views) | [Assets](#assets) | [Modules](#modules) | [CLI](#cli)</sub>
+
+### Introduction
+
+The goal is of this framework is to provide basic and easy extensible functionality and to display basic architectural concepts. If you need a full featured and rock solid framework for business application, let me save your time, go to one of these: [Laravel](https://laravel.com/), [Symfony](https://symfony.com/), [Zend Framework](https://framework.zend.com/), ['Yii Framework'](http://www.yiiframework.com/), [CodeIgniter](https://codeigniter.com/)
+
+So what is it then and what can you do with it?
+
+- Build MVC-, REST-, CLI-APIs and apps and query databases with a ORM
+- It is very easy to use and very easy to extend
+- It takes advantage of inversion of control and facades, which makes it easy to swap components or extend the system with your own libraries
+- It uses plain and simple PHP in the views
+- It installs very fast through command line and works out of the box (the way I like)
+- It has no dependencies to third party libraries except in development mode (PHPUnit, Symfony VarDumper)
+- It supports a modular structure, where each module can behave like a standalone app
+- Most of its core components work standalone 
+- Because it is such a lightweight, it is also ridiculously fast.
+
+But first of all, it was build for fun and to suit my personal minimal requirements for extra small server side tasks.
+It scales nice and fits for the more complex apps as well. See [Minimal-CMS](https://github.com/judus/minimal-cms). 
+Though, if you are going to build business apps, I again strongly recommend to go for a more established framework with long time support..
+  
 ##### NOTE 
-- This is version v0.*, changes are to be expected
-- The static classes in these examples are facades: 
-  https://en.wikipedia.org/wiki/Facade_pattern
-  For example: 
-  Router::post() basically means $app->getRouter()->post().
-
+- This is version v0.* changes are to be expected
+- The static classes in these examples are facades:<br> 
+  https://en.wikipedia.org/wiki/Facade_pattern<br> 
+  For example: Router::post() basically means $app->getRouter()->post().
+  
+##### Know bugs
+- None that I am aware of, but the documentation might be out of date from time to time
+   
 ## Requirements
 
 1. PHP version >= 7.0
@@ -23,6 +58,14 @@ Minimal is a web application framework for PHP.
 ## Install
 ```bash
 $ composer create-project minimal/framework
+```
+
+Then point your server's document root to the public directory. 
+
+If you use the PHP-builtin webserver then do:
+```bash
+$ cd public
+$ php -S 0.0.0.0:8000 server.php
 ```
 
 ## Usage
@@ -120,7 +163,7 @@ App::respond(function () {
 });
 ```
 
-<sub>[Quickstart example](#quickstart-example) | [Routing](#routing) | [Dependency Injection](#dependency-injection) | [Providers](#providers) | [Middlewares](#middlewares) | [Controllers](#controllers) | [Views](#views) | [Assets](#assets) | [Modules](#modules) | [CLI](#cli)</sub>
+<sub>[Intro](#introduction) | [Quickstart example](#quickstart-example) | [Routing](#routing) | [Dependency Injection](#dependency-injection) | [Providers](#providers) | [Middlewares](#middlewares) | [Controllers](#controllers) | [Views](#views) | [Assets](#assets) | [Modules](#modules) | [CLI](#cli)</sub>
 
 
 ### Routing
@@ -240,7 +283,7 @@ Router::get('download/pdf', function () {
 });
 ```
 
-<sub>[Quickstart example](#quickstart-example) | [Routing](#routing) | [Dependency Injection](#dependency-injection) | [Providers](#providers) | [Middlewares](#middlewares) | [Controllers](#controllers) | [Views](#views) | [Assets](#assets) | [Modules](#modules) | [CLI](#cli)</sub>
+<sub>[Intro](#introduction) | [Quickstart example](#quickstart-example) | [Routing](#routing) | [Dependency Injection](#dependency-injection) | [Providers](#providers) | [Middlewares](#middlewares) | [Controllers](#controllers) | [Views](#views) | [Assets](#assets) | [Modules](#modules) | [CLI](#cli)</sub>
 
 ### Dependency injection
 
@@ -281,7 +324,7 @@ class MyClass
 $MyClass = App::make(MyClass::class); 
 ```
 
-<sub>[Quickstart example](#quickstart-example) | [Routing](#routing) | [Dependency Injection](#dependency-injection) | [Providers](#providers) | [Middlewares](#middlewares) | [Controllers](#controllers) | [Views](#views) | [Assets](#assets) | [Modules](#modules) | [CLI](#cli)</sub>
+<sub>[Intro](#introduction) | [Quickstart example](#quickstart-example) | [Routing](#routing) | [Dependency Injection](#dependency-injection) | [Providers](#providers) | [Middlewares](#middlewares) | [Controllers](#controllers) | [Views](#views) | [Assets](#assets) | [Modules](#modules) | [CLI](#cli)</sub>
 
 ### Providers
 
@@ -335,7 +378,7 @@ $myClass = App::resolve('MyOtherClassA');
 $myOtherClassB = App::resolve('any-key-name-will-do');
 ```
 
-<sub>[Quickstart example](#quickstart-example) | [Routing](#routing) | [Dependency Injection](#dependency-injection) | [Providers](#providers) | [Middlewares](#middlewares) | [Controllers](#controllers) | [Views](#views) | [Assets](#assets) | [Modules](#modules) | [CLI](#cli)</sub>
+<sub>[Intro](#introduction) | [Quickstart example](#quickstart-example) | [Routing](#routing) | [Dependency Injection](#dependency-injection) | [Providers](#providers) | [Middlewares](#middlewares) | [Controllers](#controllers) | [Views](#views) | [Assets](#assets) | [Modules](#modules) | [CLI](#cli)</sub>
 
 ### Middlewares
 
@@ -425,7 +468,7 @@ $result = Middleware::dispatch(function() {
 ]);
 ```
 
-<sub>[Quickstart example](#quickstart-example) | [Routing](#routing) | [Dependency Injection](#dependency-injection) | [Providers](#providers) | [Middlewares](#middlewares) | [Controllers](#controllers) | [Views](#views) | [Assets](#assets) | [Modules](#modules) | [CLI](#cli)</sub>
+<sub>[Intro](#introduction) | [Quickstart example](#quickstart-example) | [Routing](#routing) | [Dependency Injection](#dependency-injection) | [Providers](#providers) | [Middlewares](#middlewares) | [Controllers](#controllers) | [Views](#views) | [Assets](#assets) | [Modules](#modules) | [CLI](#cli)</sub>
 
 ### Controllers
 The controllers specified in the routes are instantiated through 
@@ -811,6 +854,12 @@ These packages are also included but are not necessary:
 - [![Build Status](https://travis-ci.org/judus/minimal-views.svg?branch=master)](https://travis-ci.org/judus/minimal-views)
   [![Latest Version](http://img.shields.io/packagist/v/minimal/views.svg)](https://packagist.org/packages/minimal/views) 
   [judus/minimal-views](https://github.com/judus/minimal-views) - simple php views and layouts
+
+I am missing two features:
+- A event dispatcher
+- Some sort of command pattern
+
+I don't know how I want to implement these or if I should at all. "Minimal" is already quite a understatement. 
   
 ---
 #### TODOs until v1.0.0
@@ -831,3 +880,5 @@ These packages are also included but are not necessary:
 ### License
 
 The Minimal framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+
+<sub>[Quickstart example](#quickstart-example) | [Routing](#routing) | [Dependency Injection](#dependency-injection) | [Providers](#providers) | [Middlewares](#middlewares) | [Controllers](#controllers) | [Views](#views) | [Assets](#assets) | [Modules](#modules) | [CLI](#cli)</sub>
