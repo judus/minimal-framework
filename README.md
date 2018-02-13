@@ -7,7 +7,7 @@ Minimal is a MVC web application framework for PHP.
 App::respond(function () {
     PDO::connection(Config::item('space-game-db'));
     
-    Router::get('space-game-data/(:num)/(:num)', function ($characterId, $levelId) {
+    Router::get('space-game/(:num)/(:num)', function ($characterId, $levelId) {
        return [
           Character::with('sprite', 'trait')->getById($characterId),
           LevelSpec::with('sprite', 'entity.trait')->getById($levelId)
