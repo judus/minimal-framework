@@ -23,7 +23,9 @@ App::respond(function () {
 
 ### Introduction
 
-The goal is of this framework is to provide basic and easy extensible functionality and to display basic architectural concepts. If you need a full featured and rock solid framework for business application, let me save your time, go to one of these: [Laravel](https://laravel.com/), [Symfony](https://symfony.com/), [Zend Framework](https://framework.zend.com/), ['Yii Framework'](http://www.yiiframework.com/), [CodeIgniter](https://codeigniter.com/)
+The goal is of this framework is to provide basic and easy extensible functionality and to display basic architectural concepts. 
+If you need a full featured and rock solid framework for business application, let me save your time, go for one of these: 
+[Laravel](https://laravel.com/), [Symfony](https://symfony.com/), [Zend Framework](https://framework.zend.com/), ['Yii Framework'](http://www.yiiframework.com/), [CodeIgniter](https://codeigniter.com/)
 
 So what is it then and what can you do with it?
 
@@ -47,7 +49,7 @@ Though, if you are going to build business apps, I again strongly recommend to g
   https://en.wikipedia.org/wiki/Facade_pattern<br> 
   For example: Router::post() basically means $app->getRouter()->post().
   
-##### Know bugs
+##### Known bugs
 - None that I am aware of, but the documentation might be out of date from time to time
    
 ## Requirements
@@ -206,7 +208,7 @@ or
 Router::get(hello/(:any)/(:any), [
     'controller' => YourController::class,
     'action' => 'yourMethod'
-])
+]);
 ```
 ```php
 class App\Demo\Base\Controllers\YourController
