@@ -81,8 +81,7 @@ App::respond(function () {
 
     // Test the database connection
     Router::get('database', function () {
-        PDO::connection(Config::item('database'));
-
+        DB::connections(Config::database());
         return 'Successfully connected to database';
     });
 

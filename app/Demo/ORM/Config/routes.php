@@ -5,14 +5,14 @@ use App\Demo\ORM\Entities\Profile;
 use App\Demo\ORM\Entities\Role;
 use App\Demo\ORM\Entities\User;
 use App\Demo\ORM\Entities\Usertype;
-use Maduser\Minimal\Database\Connectors\PDO;
 use Maduser\Minimal\Framework\Facades\Config;
+use Maduser\Minimal\Database\DB;
 
 /** @var \Maduser\Minimal\Routing\Router $router */
 
 $router->get('orm', function () {
 
-    PDO::connection(Config::item('database'));
+    DB::connections(Config::database());
 
     // Getting instances
     $user = User::instance();
@@ -115,5 +115,7 @@ $router->get('orm', function () {
     // Eager loading relationships
     $user->with(['type', 'profile', 'roles', 'posts', 'comments'])->getAll();
 
-    return count(PDO::getExecutedQueries()) . ' queries have been executed.';
+    return 'Connector \'' . DB::connector()->getName() . '\' has executed ' .
+        count(DB::connector()->getExecutedQueries()) . ' queries in database \''
+        . DB::connector()->getDatabase() . '\' ' . show(DB::connector()->getExecutedQueries(), null, true);
 });
