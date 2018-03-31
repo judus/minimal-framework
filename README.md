@@ -5,7 +5,7 @@ Minimal is a MVC web application framework for PHP.
 
 ```php
 App::respond(function () {
-    PDO::connection(Config::item('space-game-db'));
+    DB::connections(Config::database());
     
     Router::get('space-game/(:num)/(:num)', function ($characterId, $levelId) {
        return [
@@ -112,7 +112,7 @@ App::respond(function () {
 
     // Test the database connection
     Router::get('database', function () {
-        PDO::connection(Config::item('database'));
+        DB::connections(Config::database());
         return 'Successfully connected to database';
     });
 
@@ -137,7 +137,7 @@ App::respond(function () {
         Router::get('users', function () {
 
             // Connect to database
-            PDO::connection(Config::item('database'));
+            DB::connections(Config::database());
 
             // Truncate tables
             Role::instance()->truncate();
