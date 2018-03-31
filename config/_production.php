@@ -14,9 +14,10 @@ return [
 // DATABASE
 
     'database' => [
-        'user' => '',
-        'password' => '',
-        'database' => '',
+        'default' => [
+            'user' => '',
+            'password' => '',
+            'database' => ''
+        ]
     ],
-
 ];

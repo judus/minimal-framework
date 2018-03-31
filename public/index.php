@@ -1,5 +1,6 @@
 <?php namespace Maduser\Minimal\Framework\Facades;
 
+use Maduser\Minimal\Database\DB;
 use App\Demo\ORM\Entities\Role;
 use App\Demo\ORM\Entities\User;
 

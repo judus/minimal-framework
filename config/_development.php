@@ -14,11 +14,10 @@ return [
 // DATABASE
 
     'database' => [
-        'user' => '',
-        'password' => '',
-        'database' => '',
-        'handlerOptions' => [
-            \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION
+        'default' => [
+            'user' => '',
+            'password' => '',
+            'database' => ''
         ]
     ],
 
