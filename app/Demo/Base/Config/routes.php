@@ -2,6 +2,8 @@
 
 /** @var \Maduser\Minimal\Routing\Router $router */
 
+use Maduser\Minimal\Framework\Facades\App;
+
 /**
  * Direct output
  *
@@ -41,6 +43,10 @@ $router->get('lorem', [
     'controller' => 'App\\Demo\\Base\\Controllers\\YourController',
     'action' => 'loremIpsum'
 ]);
+
+$router->get('route-execution', function() {
+    return App::execute('lorem');
+});
 
 if (!$router->exists('demos', 'GET')) {
     $router->get('demos', function () {
