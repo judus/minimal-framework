@@ -9,8 +9,8 @@ App::respond(function () {
     
     Router::get('space-game/(:num)/(:num)', function ($characterId, $levelId) {
        return [
-          Character::with('sprite', 'trait')->getById($characterId),
-          LevelSpec::with('sprite', 'entity.trait')->getById($levelId)
+          Character::with('sprite', 'trait')->getById($characterId)->toArray(),
+          LevelSpec::with('sprite', 'entity.trait')->getById($levelId)->toArray()
        ];
     });
 }
@@ -285,6 +285,11 @@ Router::get('download/pdf', function () {
 });
 ```
 
+##### Single route execution from anywhere
+```php
+$widget = App::execute('route/of/widget')
+```
+
 <sub>[Intro](#introduction) | [Quickstart example](#quickstart-example) | [Routing](#routing) | [Dependency Injection](#dependency-injection) | [Providers](#providers) | [Middlewares](#middlewares) | [Controllers](#controllers) | [Views](#views) | [Assets](#assets) | [Modules](#modules) | [CLI](#cli)</sub>
 
 ### Dependency injection
@@ -300,9 +305,9 @@ App::addBindings([
 or in config/bindings.php
 ```php
 return [
-    'App\\InterfaceA' => App\ClassA::class,
-    'App\\InterfaceB' => App\ClassB::class,
-    'App\\InterfaceC' => App\ClassC::class
+    'App\\InterfaceA' => \App\ClassA::class,
+    'App\\InterfaceB' => \App\ClassB::class,
+    'App\\InterfaceC' => \App\ClassC::class
 ];
 ```
 
@@ -337,17 +342,17 @@ AbstractProvider.
 
 ```php
 App::register([
-    'App\\MyClass' => App\MyClass::class, 
-    'MyOtherClassA' => App\MyOtherClassAFactory::class, 
-    'any-key-name-will-do' => App\MyOtherClassB::class, 
+    'App\MyClass' => \App\MyClass::class, 
+    'MyOtherClassA' => \App\MyOtherClassAFactory::class, 
+    'any-key-name-will-do' => \App\MyOtherClassB::class, 
 ]);
 ```
 or in config/providers.php
 ```php
 return [
-    'App\\MyClass' => App\MyClass::class, 
-    'MyOtherClassA' => App\MyOtherClassAFactory::class, 
-    'any-key-name-will-do' => App\MyOtherClassB::class, 
+    'App\\MyClass' => \App\MyClass::class, 
+    'MyOtherClassA' => \App\MyOtherClassAFactory::class, 
+    'any-key-name-will-do' => \App\MyOtherClassB::class, 
 ];
 ```
 ```php
@@ -357,14 +362,13 @@ class MyOtherClassAFactory extends AbstractProvider
     {
         // Do something before the class is instantiated
         $time = time();
-        Assets::setPath()
         $settings = Config::item('settings');
         
         // return new instance
         return new MyClass($time, $settings); 
         
         // ... or make singleton and resolve dependencies
-        return $this->singleton('MyClass', new App\\MyClass(s
+        return $this->singleton('MyClass', new App\\MyClass(
             IOC::resolve('App\\MyOtherClassA'),
             IOC::resolve('App\\MyOtherClassB'),
             $time,
@@ -737,13 +741,6 @@ Modules::register('your-module-dirname', [
 To register all modules withing configured modules.basepath
 ```php
 Modules::register('Demo/*');
-```
-Execute a module
-```php
-// Not implemented yet
-Modules::execute('Demo/Pages');
-
-Allthough run('some/route) works perfectly
 ```
 
 <sub>[Quickstart example](#quickstart-example) | [Routing](#routing) | [Dependency Injection](#dependency-injection) | [Providers](#providers) | [Middlewares](#middlewares) | [Controllers](#controllers) | [Views](#views) | [Assets](#assets) | [Modules](#modules) | [CLI](#cli)</sub>
