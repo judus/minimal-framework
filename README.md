@@ -860,12 +860,6 @@ These packages are also included but are not necessary:
   [![Latest Version](http://img.shields.io/packagist/v/minimal/views.svg)](https://packagist.org/packages/minimal/views) 
   [judus/minimal-views](https://github.com/judus/minimal-views) - simple php views and layouts
 
-I am missing two features:
-- A event dispatcher
-- Some sort of command pattern
-
-I don't know how I want to implement these or if I should at all. "Minimal" is already quite a understatement. 
-  
 ---
 #### TODOs until v1.0.0
 - Replace all IOC with Provider in application object (Minimal.php)
