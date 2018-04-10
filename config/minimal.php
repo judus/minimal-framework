@@ -14,6 +14,7 @@ return [
         'public' => 'public',
         'resources' => 'resources',
         'storage' => 'storage',
+        'logs' => 'storage/logs',
         'system' => realpath(__DIR__ . '/../'),
         'translations' => 'storage/lang/lang.json',
         'views' => 'resources/views/my-theme'
@@ -36,6 +37,7 @@ return [
         'bindingsFile' => 'Config/bindings.php',
         'configFile' => 'Config/config.php',
         'providersFile' => 'Config/providers.php',
+        'subscribersFile' => 'Config/subscribers.php',
         'routesFile' => 'Config/routes.php',
     ],
 
@@ -65,6 +67,14 @@ return [
     'errors' => [
         'error_reporting' => 0,
         'display_errors' => 0
+    ],
+
+// ----------------------------------------------------------------------------
+// LOGGING
+
+    'log' => [
+        'level' => 5,
+        'benchmarks' => false
     ],
 
 // ----------------------------------------------------------------------------

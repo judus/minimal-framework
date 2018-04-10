@@ -2,6 +2,8 @@
 
 namespace App\Demo\Base\Models;
 
+use Maduser\Minimal\Event\Subscriber;
+use Maduser\Minimal\Framework\Facades\Event;
 use Maduser\Minimal\Framework\Minimal;
 use Maduser\Minimal\Cli\Console;
 use Maduser\Minimal\Framework\Facades\IOC;
@@ -158,6 +160,37 @@ class Info
         return $content;
     }
 
+    public function events()
+    {
+        $thead = [['Events', 'Actions']];
+        $tbody = [];
+
+        foreach (Event::events() as $event => $subscribers)
+        {
+            $array = [];
+            foreach ($subscribers as $subscriber)
+            {
+                /** @var $subscriber Subscriber */
+                $actions = $subscriber->getEventActions($event);
+
+                foreach ($actions as $action)
+                {
+                    $array[] = get_class($subscriber) . '::' . $action;
+                }
+
+            }
+
+            $tbody[] = [$event, implode(', ', $array)];
+        }
+
+        ob_start();
+        $this->console->table($tbody, $thead);
+        $content = ob_get_contents();
+        ob_end_clean();
+
+        return $content;
+    }
+
     public function array_flat($array, $prefix = '')
     {
         $result = array();
@@ -184,6 +217,7 @@ class Info
         $contents.= '</br><pre style="display: table; width: auto; margin: 0 auto;">MODULES' . $this->modules() .'</pre>';
         $contents.= '</br><pre style="display: table; width: auto; margin: 0 auto;">PROVIDERS' . $this->providers() .'</pre>';
         $contents.= '</br><pre style="display: table; width: auto; margin: 0 auto;">BINDINGS' . $this->bindings() .'</pre>';
+        $contents.= '</br><pre style="display: table; width: auto; margin: 0 auto;">EVENTS' . $this->events() .'</pre>';
 
         return $contents;
     }

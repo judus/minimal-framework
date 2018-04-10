@@ -812,9 +812,15 @@ Minimal requires at least these packages:
 - [![Build Status](https://travis-ci.org/judus/minimal-controllers.svg?branch=master)](https://travis-ci.org/judus/minimal-controllers)
   [![Latest Version](http://img.shields.io/packagist/v/minimal/controllers.svg)](https://packagist.org/packages/minimal/controllers)
   [judus/minimal-controllers](https://github.com/judus/minimal-controllers) - the frontcontroller
+- [![Build Status](https://travis-ci.org/judus/minimal-event.svg?branch=master)](https://travis-ci.org/judus/minimal-event)
+  [![Latest Version](http://img.shields.io/packagist/v/minimal/event.svg)](https://packagist.org/packages/minimal/event) 
+  [judus/minimal-event](https://github.com/judus/minimal-event) - a simple event dispatcher
 - [![Build Status](https://travis-ci.org/judus/minimal-http.svg?branch=master)](https://travis-ci.org/judus/minimal-http)
   [![Latest Version](http://img.shields.io/packagist/v/minimal/http.svg)](https://packagist.org/packages/minimal/http)
   [judus/minimal-http](https://github.com/judus/minimal-http) - request and response objects
+- [![Build Status](https://travis-ci.org/judus/minimal-log.svg?branch=master)](https://travis-ci.org/judus/minimal-log)
+  [![Latest Version](http://img.shields.io/packagist/v/minimal/log.svg)](https://packagist.org/packages/minimal/log) 
+  [judus/minimal-event](https://github.com/judus/minimal-event) - a simple logger
 - [![Build Status](https://travis-ci.org/judus/minimal-middlewares.svg?branch=master)](https://travis-ci.org/judus/minimal-middlewares)
   [![Latest Version](http://img.shields.io/packagist/v/minimal/middlewares.svg)](https://packagist.org/packages/minimal/middlewares)
   [judus/minimal-middlewares](https://github.com/judus/minimal-middlewares) - a unconventional middleware implementation

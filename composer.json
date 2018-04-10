@@ -22,8 +22,8 @@
     "minimal/cli": "v0.1.1",
     "minimal/database": "v0.1.4",
     "minimal/html": "v0.1.2",
-    "minimal/minimal": "v0.1.14",
-    "minimal/paths": "v0.1.4",
+    "minimal/minimal": "v0.2.1",
+    "minimal/paths": "v0.1.5",
     "minimal/presenters": "v0.1.1",
     "minimal/translation": "v0.1.2",
     "minimal/views": "v0.1.3"
