@@ -1,10 +1,11 @@
 <?php namespace App\Demo\Pages\Controllers;
 
 use Maduser\Minimal\Assets\Contracts\AssetsInterface;
-use Maduser\Minimal\Framework\Contracts\FactoryInterface;
+//use Maduser\Minimal\Framework\Contracts\FactoryInterface;
 use Maduser\Minimal\Config\Contracts\ConfigInterface;
 use Maduser\Minimal\Http\Contracts\RequestInterface;
 use Maduser\Minimal\Http\Contracts\ResponseInterface;
+use Maduser\Minimal\Modules\Contracts\ModulesInterface;
 use Maduser\Minimal\Routing\Contracts\RouterInterface;
 use Maduser\Minimal\Routing\Contracts\RouteInterface;
 use Maduser\Minimal\Views\Contracts\ViewInterface;
@@ -52,7 +53,7 @@ class PagesController
     protected $assets;
 
     /**
-     * @var FactoryInterface
+     * @var ModulesInterface
      */
     protected $modules;
 
@@ -65,7 +66,7 @@ class PagesController
      * @param ResponseInterface $response
      * @param ViewInterface     $view
      * @param AssetsInterface   $assets
-     * @param FactoryInterface  $modules
+     * @param ModulesInterface  $modules
      */
     public function __construct(
         ConfigInterface $config,
@@ -74,7 +75,7 @@ class PagesController
         ResponseInterface $response,
         ViewInterface $view,
         AssetsInterface $assets,
-        FactoryInterface $modules
+        ModulesInterface $modules
     ) {
 
         /** @var \Maduser\Minimal\Config\Config $config */
@@ -89,7 +90,7 @@ class PagesController
         $this->view = $view;
         /** @var \Maduser\Minimal\Assets\Assets $assets */
         $this->assets = $assets;
-        /** @var \Maduser\Minimal\Framework\Factory $modules */
+        /** @var \Maduser\Minimal\Modules\Modules $modules */
         $this->modules = $modules;
     }
 

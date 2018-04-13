@@ -10,23 +10,14 @@ return [
     Maduser\Minimal\Config\Contracts\ConfigInterface::class =>
         Maduser\Minimal\Config\Config::class,
 
-    Maduser\Minimal\Framework\Contracts\FactoryInterface::class =>
-        Maduser\Minimal\Framework\Factory::class,
-
     Maduser\Minimal\Controllers\Factories\Contracts\ControllerFactoryInterface::class =>
         Maduser\Minimal\Controllers\Factories\ControllerFactory::class,
 
     Maduser\Minimal\Controllers\Factories\Contracts\ModelFactoryInterface::class =>
         Maduser\Minimal\Controllers\Factories\ModelFactory::class,
 
-    Maduser\Minimal\Framework\Factories\Contracts\ModuleFactoryInterface::class =>
-        Maduser\Minimal\Framework\Factories\ModuleFactory::class,
-
-    Maduser\Minimal\Framework\Factories\Contracts\ModuleFactoryInterface::class =>
-        Maduser\Minimal\Framework\Factories\ModuleFactory::class,
-
-    Maduser\Minimal\Framework\Factories\Contracts\CollectionFactoryInterface::class =>
-        Maduser\Minimal\Framework\Factories\CollectionFactory::class,
+    Maduser\Minimal\Modules\Contracts\ModulesInterface::class =>
+        Maduser\Minimal\Modules\Modules::class,
 
     Maduser\Minimal\Http\Contracts\ResponseInterface::class =>
         Maduser\Minimal\Http\Response::class,

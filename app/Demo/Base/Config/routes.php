@@ -4,6 +4,7 @@
 
 use Maduser\Minimal\Framework\Facades\App;
 
+
 /**
  * Direct output
  *
@@ -49,6 +50,7 @@ $router->get('route-execution', function() {
 });
 
 if (!$router->exists('demos', 'GET')) {
+
     $router->get('demos', function () {
         return (string) new \App\Demo\Base\Models\Info($this);
     });

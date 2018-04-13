@@ -73,7 +73,7 @@ return [
 // LOGGING
 
     'log' => [
-        'level' => 5,
+        'level' => 0,
         'benchmarks' => false
     ],
 

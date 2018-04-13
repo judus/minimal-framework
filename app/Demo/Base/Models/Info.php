@@ -94,7 +94,7 @@ class Info
 
     public function modules()
     {
-        $modules = $this->minimal->getFactory()->getModules()->getArray();
+        $modules = $this->minimal->getModules()->all();
 
         $array = [];
 
@@ -102,11 +102,11 @@ class Info
             /** @var \Maduser\Minimal\Framework\Module $module */
             $array[] = [
                 'name' => $module->getName(),
-                'path' => $module->getBasePath(),
-                'config' => $module->getConfigFile(),
-                'routes' => $module->getRoutesFile(),
-                'providers' => $module->getProvidersFile(),
-                'bindings' => $module->getBindingsFile()
+                'path' => $module->getPath(),
+                'config' => $module->getConfig(),
+                'routes' => $module->getRoutes(),
+                'providers' => $module->getProviders(),
+                'bindings' => $module->getBindings()
             ];
 
         }

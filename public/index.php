@@ -11,9 +11,9 @@ require __DIR__ . "/../vendor/autoload.php";
  *
  * If you're happy with the defaults, then you're in luck.
  */
-/*
-new \Maduser\Minimal\Framework\Minimal();
-*/
+//new \Maduser\Minimal\Framework\Minimal();
+//App::respond();
+
 
 /**
  * Example 2
@@ -46,7 +46,7 @@ App::respond(function () {
     });
 
     // Register all modules configs and routes within modules path
-    Modules::register('Demo/*');
+    //Modules::register('Demo/*');
 
     // Respond on GET request with uri parameters
     Router::get('hello/(:any)/(:num)', function ($any, $num) {
