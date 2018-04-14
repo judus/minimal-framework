@@ -818,9 +818,6 @@ Minimal requires at least these packages:
 - [![Build Status](https://travis-ci.org/judus/minimal-http.svg?branch=master)](https://travis-ci.org/judus/minimal-http)
   [![Latest Version](http://img.shields.io/packagist/v/minimal/http.svg)](https://packagist.org/packages/minimal/http)
   [judus/minimal-http](https://github.com/judus/minimal-http) - request and response objects
-- [![Build Status](https://travis-ci.org/judus/minimal-log.svg?branch=master)](https://travis-ci.org/judus/minimal-log)
-  [![Latest Version](http://img.shields.io/packagist/v/minimal/log.svg)](https://packagist.org/packages/minimal/log) 
-  [judus/minimal-log](https://github.com/judus/minimal-log) - a simple logger
 - [![Build Status](https://travis-ci.org/judus/minimal-middlewares.svg?branch=master)](https://travis-ci.org/judus/minimal-middlewares)
   [![Latest Version](http://img.shields.io/packagist/v/minimal/middlewares.svg)](https://packagist.org/packages/minimal/middlewares)
   [judus/minimal-middlewares](https://github.com/judus/minimal-middlewares) - a unconventional middleware implementation
@@ -850,6 +847,12 @@ These packages are also included but are not necessary:
 - [![Build Status](https://travis-ci.org/judus/minimal-html.svg?branch=master)](https://travis-ci.org/judus/minimal-html)
   [![Latest Version](http://img.shields.io/packagist/v/minimal/html.svg)](https://packagist.org/packages/minimal/html) 
   [judus/minimal-html](https://github.com/judus/minimal-html) - for now just a html table class
+- [![Build Status](https://travis-ci.org/judus/minimal-log.svg?branch=master)](https://travis-ci.org/judus/minimal-log)
+  [![Latest Version](http://img.shields.io/packagist/v/minimal/log.svg)](https://packagist.org/packages/minimal/log) 
+  [judus/minimal-log](https://github.com/judus/minimal-log) - a simple logger
+- [![Build Status](https://travis-ci.org/judus/minimal-modules.svg?branch=master)](https://travis-ci.org/judus/minimal-modules)
+  [![Latest Version](http://img.shields.io/packagist/v/minimal/modules.svg)](https://packagist.org/packages/minimal/modules)
+  [judus/minimal-modules](https://github.com/judus/minimal-modules) - modules, whatever these are, see docs
 - [![Build Status](https://travis-ci.org/judus/minimal-paths.svg?branch=master)](https://travis-ci.org/judus/minimal-paths)
   [![Latest Version](http://img.shields.io/packagist/v/minimal/paths.svg)](https://packagist.org/packages/minimal/paths) 
   [judus/minimal-paths](https://github.com/judus/minimal-paths) - might help creating paths and urls
@@ -862,19 +865,24 @@ These packages are also included but are not necessary:
 
 ---
 #### TODOs until v1.0.0
-- Replace all IOC with Provider in application object (Minimal.php)
-- Test the complementary libraries
-- Write more testcases for the core packages
+- Restructure for a event based system
+- It should not be necessary to require anything else than IOC and events
+- More tests for the core packages
+- Test all the complementary libraries
 - Api documentation
-- Update the README
 - Better demo application
+- Update the README
 - Website
 ---
 
-### About
+### Excuse me...
 
 - It was too cold for outdoor activities. (Winter 2016)
 - It was too warm for physical activities. (Summer 2017)
+- I was too cranky for social interactions. (Early Winter 2018)
+- It was too rainy for outdoor activities. (Late Winter 2018)
+- Outdoor activities would have been too expensive. (Early Spring 2018)
+- Summer 2018... no valid excuse yet.
 
 ### License
 

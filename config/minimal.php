@@ -21,27 +21,6 @@ return [
     ],
 
 // ----------------------------------------------------------------------------
-// APPLICATION
-/*
-    'app' => [
-        'bindingsFile' => 'config/bindings.php',
-        'configFile' => 'config/config.php',
-        'providersFile' => 'config/providers.php',
-        'routesFile' => 'config/routes.php',
-    ],
-*/
-// ----------------------------------------------------------------------------
-// MODULES
-
-    'modules' => [
-        'bindingsFile' => 'Config/bindings.php',
-        'configFile' => 'Config/config.php',
-        'providersFile' => 'Config/providers.php',
-        'subscribersFile' => 'Config/subscribers.php',
-        'routesFile' => 'Config/routes.php',
-    ],
-
-// ----------------------------------------------------------------------------
 // DATABASE
 
     'database' => [
