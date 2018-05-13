@@ -1,7 +1,7 @@
 <?php
 
-/** @var \Maduser\Minimal\Routing\RouterProvider $route */
+use Maduser\Minimal\Framework\Facades\Router;
 
-$router->get('/', function () {
+Router::get('/', function () {
     return 'Hello from Minimal!';
 });

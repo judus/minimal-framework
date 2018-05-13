@@ -4,7 +4,7 @@
 Minimal is a MVC web application framework for PHP.
 
 ```php
-App::respond(function () {
+App::dispatch(function () {
     DB::connections(Config::database());
     
     Router::get('space-game/(:num)/(:num)', function ($characterId, $levelId) {
@@ -15,7 +15,7 @@ App::respond(function () {
     });
 }
 ```
-<sub>The code above sends data about a space game in JSON format.</sub>
+
 
 ---
 
@@ -76,7 +76,7 @@ $ php -S 0.0.0.0:8000 server.php
 
 ### Quickstart example
 ```php
-App::respond(function () {
+App::dispatch(function () {
 
     // Register all modules configs and routes within directory app/Demo
     Modules::register('Demo/*');

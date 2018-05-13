@@ -1,52 +1,60 @@
 <?php namespace Maduser\Minimal\Framework\Facades;
 
-use Maduser\Minimal\Database\DB;
-use App\Demo\ORM\Entities\Role;
-use App\Demo\ORM\Entities\User;
-
 require __DIR__ . "/../vendor/autoload.php";
 
 /**
  * Example 1
  *
- * If you're happy with the defaults, then you're in luck.
+ * If you're happy with the defaults
  */
-//new \Maduser\Minimal\Framework\Minimal();
-//App::respond();
-
+App::dispatch();
 
 /**
- * Example 2
+ * Example 2 - OBSOLETE SINCE MINIMAL v.0.4.0 !!
+ * TODO: re-implement if possible
  *
- * Same as Example 1, but with a config array
+ * Same as before, but with a config array
  */
 /*
-$minimal = new \Maduser\Minimal\Framework\Minimal([
-    'basepath' => realpath(__DIR__ . '/../'),
-    'app' => 'app',
-    'config' => 'config/environment.php',
-    'bindings' => 'config/bindings.php',
-    'providers' => 'config/providers.php',
-    'routes' => 'config/routes.php',
-]);
+App::dispatch([
+    'path' => __DIR__,
+    'config' => __DIR__ . '/../config/env.php',
+    'bindings' => __DIR__ . '/../config/bindings.php',
+    'providers' => __DIR__ . '/../config/providers.php',
+    'routes' => __DIR__ . '/../config/routes.php',
+    'modules' => __DIR__ . '/../config/modules.php',
+], function () {
+
+    Router::get('array', function () {
+        return Config::items();
+    });
+
+    // ...
+
+});
 */
 
 /**
  * Example 3
  *
- * If you don't want to use the routes config or modules config file and rather
- * start coding right away in the index.php:
+ * If you are in a hurry and you don't want to use the routes config or other
+ * config file, although they still will be loaded if they exists, you could
+ * start coding like so:
  */
+use Maduser\Minimal\Database\DB;
+use App\Demo\ORM\Entities\Role;
+use App\Demo\ORM\Entities\User;
 
-App::respond(function () {
+App::dispatch(function () {
 
-    // Respond on GET request
+    // Respond on GET / request with a header location
     Router::get('/', function () {
         Response::redirect(http() . 'demos');
     });
 
+
     // Register all modules configs and routes within modules path
-    //Modules::register('Demo/*');
+    Modules::register('Demo/*');
 
     // Respond on GET request with uri parameters
     Router::get('hello/(:any)/(:num)', function ($any, $num) {
@@ -69,7 +77,6 @@ App::respond(function () {
         $str .= '<br>"Guete Morge" => (rm) ' . __('Guete Morge', 'rm');
 
         return $str;
-
     });
 
     // Respond with a view
@@ -107,7 +114,7 @@ App::respond(function () {
         Router::get('users', function () {
 
             // Database connection for all the routes in this group
-            PDO::connection(Config::item('database'));
+            DB::connections(Config::database());
 
             // Import namespaces of the models on top of file to make this work
 
@@ -137,30 +144,38 @@ App::respond(function () {
 });
 
 /**
- * Example 4
+ * Example 4 - OBSOLETE SINCE MINIMAL v.0.4.0 !!
+ * TODO: re-implement if possible
  *
- * Same as before, but with a config array
+ * Same as example 1 but without facade
+ * If you're happy with the defaults.
+ */
+//new \Maduser\Minimal\Framework\Minimal();
+
+/**
+ * Example 5 - OBSOLETE SINCE MINIMAL v.0.4.0 !!
+ * TODO: re-implement if possible
+ *
+ * Same as example 2 but without facade
+ * Same as Example 1, but with a config array
  */
 /*
-App::respond([
-    'path' => __DIR__,
-    'config' => __DIR__ . '/../config/env.php',
-    'bindings' => __DIR__ . '/../config/bindings.php',
-    'providers' => __DIR__ . '/../config/providers.php',
-    'routes' => __DIR__ . '/../config/routes.php',
-    'modules' => __DIR__ . '/../config/modules.php',
-], function () {
-
-    Router::get('array', function () {
-        return Config::items();
-    });
-
-    // ...
-
-});
+$minimal = new \Maduser\Minimal\Framework\Minimal([
+    'basepath' => realpath(__DIR__ . '/../'),
+    'app' => 'app',
+    'config' => 'config/environment.php',
+    'bindings' => 'config/bindings.php',
+    'providers' => 'config/providers.php',
+    'routes' => 'config/routes.php',
+]);
 */
+
 /**
- * Example 5
+ * Example 6 - OBSOLETE SINCE MINIMAL v.0.4.0 !!
+ * Since the event based system, the following could be achieved with event
+ * subscribers. For even more control define a custom applicationProvider and
+ * load it with: App::use('MyCustomAppProvider::class');
+ * TODO: re-implement if possible
  *
  * You want full control over the order of things and to stuff in between.
  * Mind the second parameter in new Minimal($config, true), which tells

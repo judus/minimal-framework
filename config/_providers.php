@@ -1,6 +1,7 @@
 <?php namespace Maduser\Minimal\Framework\Providers;
 
 return [
+    'App'               => ApplicationProvider::class,
     'Assets'            => AssetsProvider::class,
     'Collection'        => CollectionProvider::class,
     'Config'            => ConfigProvider::class,
