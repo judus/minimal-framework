@@ -7,7 +7,7 @@ require __DIR__ . "/../vendor/autoload.php";
  *
  * If you're happy with the defaults
  */
-App::dispatch();
+//App::dispatch();
 
 /**
  * Example 2 - OBSOLETE SINCE MINIMAL v.0.4.0 !!
