@@ -1,8 +1,8 @@
 <?php
 
-/** @var \Maduser\Minimal\Routing\Router $router */
+use Maduser\Minimal\Framework\Facades\Router;
 
-$router->get('assets/(:any)', [
+Router::get('assets/(:any)', [
     'controller' => 'App\\Demo\\Assets\\Controllers\\AssetsController',
     'action' => 'getAsset'
 ]);

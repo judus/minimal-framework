@@ -1,9 +1,8 @@
 <?php
 
-/** @var \Maduser\Minimal\Routing\Router $router */
-
 use Maduser\Minimal\Framework\Facades\App;
-
+use Maduser\Minimal\Framework\Facades\Response;
+use Maduser\Minimal\Framework\Facades\Router;
 
 /**
  * Direct output
@@ -11,47 +10,46 @@ use Maduser\Minimal\Framework\Facades\App;
  * Routes with closure are executed instantly if method and uri match, further
  * application logic is discarded
  */
-$router->get('hello/(:any)/(:any)', function ($firstname, $lastname) {
+Router::get('hello/(:any)/(:any)', function ($firstname, $lastname) {
     return 'Hello ' . ucfirst($firstname) . ' ' . ucfirst($lastname);
 });
 
 /**
  * Using controllers
  */
-$router->get('welcome/(:any)/(:any)',
+Router::get('welcome/(:any)/(:any)',
     'App\\Demo\\Base\\Controllers\\YourController@yourMethod');
 
 
 // Example: file download
 /** @var \Maduser\Minimal\Http\Response $response */
-$router->get('download/pdf', function () use ($response) {
-    $response->header('Content-Type: application/pdf');
-    $response->header('Content-Disposition: attachment; filename="downloaded.pdf"');
+Router::get('download/pdf', function() {
+    Response::header('Content-Type: application/pdf');
+    Response::header('Content-Disposition: attachment; filename="downloaded.pdf"');
     readfile('sample.pdf');
 });
 
 // Example: caching
-$router->get('huge/data/table', [
+Router::get('huge/data/table', [
     'middlewares' => ['App\\Demo\\Base\\Middlewares\\Cache' => [10]],
     // Cache for 10sec
     'controller' => 'App\\Demo\\Base\\Controllers\\YourController',
     'action' => 'timeConsumingAction'
 ]);
 
-
-$router->get('lorem', [
+Router::get('lorem', [
     'middlewares' => ['App\\Demo\\Base\\Middlewares\\StringReplacements'],
     'controller' => 'App\\Demo\\Base\\Controllers\\YourController',
     'action' => 'loremIpsum'
 ]);
 
-$router->get('route-execution', function() {
+Router::get('route-execution', function() {
     return App::execute('lorem');
 });
 
-if (!$router->exists('demos', 'GET')) {
+if (!Router::exists('demos', 'GET')) {
 
-    $router->get('demos', function () {
-        return (string) new \App\Demo\Base\Models\Info($this);
+    Router::get('demos', function () {
+        return (string) new \App\Demo\Base\Models\Info(App::getInstance());
     });
 }

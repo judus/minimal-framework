@@ -3,7 +3,9 @@
 namespace App\Demo\Base\Models;
 
 use Maduser\Minimal\Event\Subscriber;
+use Maduser\Minimal\Framework\Facades\Config;
 use Maduser\Minimal\Framework\Facades\Event;
+use Maduser\Minimal\Framework\Facades\Router;
 use Maduser\Minimal\Framework\Minimal;
 use Maduser\Minimal\Cli\Console;
 use Maduser\Minimal\Framework\Facades\IOC;
@@ -14,9 +16,8 @@ class Info
 
     private $console;
 
-    public function __construct(Minimal $minimal)
+    public function __construct()
     {
-        $this->minimal = $minimal;
         $this->console = new Console();
     }
 
@@ -25,7 +26,7 @@ class Info
         $thead = [['Alias', 'Value']];
         $tbody = [];
 
-        $items = $this->array_flat($this->minimal->getConfig()->getItems());
+        $items = $this->array_flat(Config::items());
 
         foreach ($items as $key => $value) {
             $tbody[] = [$key, $value];
@@ -41,10 +42,8 @@ class Info
 
     public function routes()
     {
-        $router = $this->minimal->getRouter();
-
         /** @var \Maduser\Minimal\Collections\Contracts\CollectionInterface $routes */
-        $routes = $router->getRoutes();
+        $routes = Router::getRoutes();
 
         $routesAll = $routes->get('ALL');
 
@@ -94,7 +93,7 @@ class Info
 
     public function modules()
     {
-        $modules = $this->minimal->getModules()->all();
+        $modules = IOC::resolve('Modules')->all();
 
         $array = [];
 

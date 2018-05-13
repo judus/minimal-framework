@@ -1,16 +1,14 @@
 <?php
 
-/** @var \Maduser\Minimal\Routing\Router $router */
 
-use Maduser\Minimal\Framework\Events\Subscribers\SystemLog;
-use Maduser\Minimal\Framework\Facades\Event;
 use Maduser\Minimal\Framework\Facades\Log;
+use Maduser\Minimal\Framework\Facades\Router;
 
-$router->group([
+Router::group([
     'middlewares' => []
-], function() use ($router) {
+], function() {
 
-    $router->get('logger', function() {
+    Router::get('logger', function() {
         Log::info('Hello');
     });
 

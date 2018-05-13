@@ -1,24 +1,24 @@
 <?php
 
-/** @var \Maduser\Minimal\Routing\Router $router */
+use Maduser\Minimal\Framework\Facades\Router;
 
-$router->group([
+Router::group([
     'middlewares' => [
         'App\\Demo\\Base\\Middlewares\\Cache' => [(5)],
     ]
-], function() use ($router) {
+], function() {
 
-    $router->get('pages/(:any)', [
+    Router::get('pages/(:any)', [
         'controller' => \App\Demo\Pages\Controllers\PagesController::class,
         'action' => 'getStaticPage',
     ]);
 
-    $router->get('pages/info', [
+    Router::get('pages/info', [
         'controller' => \App\Demo\Pages\Controllers\PagesController::class,
         'action' => 'info',
     ]);
 
-    $router->get('pages/front', [
+    Router::get('pages/front', [
         'middlewares' => [
             'App\\Demo\\Base\\Middlewares\\StringReplacements' => [(5)],
             'App\\Demo\\Base\\Middlewares\\MakeView',

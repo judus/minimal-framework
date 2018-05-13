@@ -1,13 +1,14 @@
 <?php
 
 use Maduser\Minimal\Framework\Facades\App;
+use Maduser\Minimal\Framework\Facades\Router;
 
 /** @var \Maduser\Minimal\Routing\Router $router */
 
-$router->group([
+Router::group([
     'middlewares' => [
     ]
-], function() use ($router) {
+], function() {
 
     App::bind([
         \App\Demo\DI\Contracts\InterfaceA::class => \App\Demo\DI\Models\ClassA::class,
@@ -22,15 +23,15 @@ $router->group([
         'MySingleton' => \App\Demo\DI\Models\MySingletonFactory::class
     ]);
 
-    $router->get('di/bindings', function () {
+    Router::get('di/bindings', function () {
         return App::bindings();
     });
 
-    $router->get('di/providers', function () {
+    Router::get('di/providers', function () {
         return App::providers();
     });
 
-    $router->get('di/singleton', function () {
+    Router::get('di/singleton', function () {
         App::resolve('MySingleton')->setTime(123);
 
         return
@@ -43,19 +44,19 @@ $router->group([
             "</pre>";
     });
 
-    $router->get('di/make', function () {
+    Router::get('di/make', function () {
         return App::make(\App\Demo\DI\Models\MyClass::class);
     });
 
-    $router->get('di/resolve/my-class', function () {
+    Router::get('di/resolve/my-class', function () {
         return App::resolve('App\\Demo\\DI\\Models\\MyClass');
     });
 
-    $router->get('di/resolve/my-other-class', function () {
+    Router::get('di/resolve/my-other-class', function () {
         return App::resolve('MyOtherClass');
     });
 
-    $router->get('di/resolve/any-key-name-will-do', function () {
+    Router::get('di/resolve/any-key-name-will-do', function () {
         return App::resolve('any-key-name-will-do');
     });
 

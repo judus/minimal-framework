@@ -7,10 +7,11 @@ use App\Demo\ORM\Entities\User;
 use App\Demo\ORM\Entities\Usertype;
 use Maduser\Minimal\Framework\Facades\Config;
 use Maduser\Minimal\Database\DB;
+use Maduser\Minimal\Framework\Facades\Router;
 
 /** @var \Maduser\Minimal\Routing\Router $router */
 
-$router->get('orm', function () {
+Router::get('orm', function () {
 
     DB::connections(Config::database());
 

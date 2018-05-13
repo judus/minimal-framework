@@ -1,16 +1,13 @@
 <?php
 
-/** @var \Maduser\Minimal\Routing\Router $router */
-
-use App\Demo\Events\SubscriberA;
-use App\Demo\Events\SubscriberB;
 use Maduser\Minimal\Framework\Facades\Event;
+use Maduser\Minimal\Framework\Facades\Router;
 
-$router->group([
+Router::group([
     'middlewares' => []
-], function() use ($router) {
+], function() {
 
-    $router->get('events', function() {
+    Router::get('events', function() {
         Event::dispatch('event.a', 'Some message');
         Event::dispatch('event.b', ['some' => 'data']);
         Event::dispatch('event.c');
