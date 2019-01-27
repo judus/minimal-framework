@@ -52,7 +52,6 @@ App::dispatch(function () {
         Response::redirect(http() . 'demos');
     });
 
-
     // Register all modules configs and routes within modules path
     Modules::register('Demo/*');
 
@@ -188,7 +187,7 @@ $minimal = new \Maduser\Minimal\Framework\Minimal([
 /** @var \Maduser\Minimal\Routing\Route $route */
 /** @var \Maduser\Minimal\Middlewares\Middleware $middleware */
 /** @var mixed $result */
-
+/*
 $benchmark = new \Maduser\Minimal\Benchmark\Benchmark();
 
 $benchmark->mark('Start');
@@ -255,3 +254,4 @@ $response->setContent(
 $response->sendPrepared();
 
 $minimal->terminate();
+*/
