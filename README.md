@@ -22,7 +22,7 @@ App::dispatch(function () {
 
 ### Introduction
 
-The goal is of this framework is to provide basic and easy extensible functionality and to illustrate some architectural concepts. 
+The goal is of this framework is to provide basic and easy extensible functionality and to demonstrate some architectural concepts. 
 If you need a full featured and rock solid framework for business application, go for another more established framework.
 
 Key features:
