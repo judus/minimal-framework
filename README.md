@@ -1,4 +1,3 @@
-
 # Minimal Framework
 
 Minimal is a MVC web application framework for PHP.
@@ -23,31 +22,19 @@ App::dispatch(function () {
 
 ### Introduction
 
-The goal is of this framework is to provide basic and easy extensible functionality and to display basic architectural concepts. 
-If you need a full featured and rock solid framework for business application, let me save your time, go for one of these: 
-[Laravel](https://laravel.com/), [Symfony](https://symfony.com/), [Zend Framework](https://framework.zend.com/), ['Yii Framework'](http://www.yiiframework.com/), [CodeIgniter](https://codeigniter.com/)
+The goal is of this framework is to provide basic and easy extensible functionality and to illustrate some architectural concepts. 
+If you need a full featured and rock solid framework for business application, go for another more established framework.
 
-So what is it then and what can you do with it?
-
+Key features:
 - Build MVC-, REST-, CLI-APIs and apps and query databases with a ORM
-- It is very easy to use and very easy to extend
-- It takes advantage of inversion of control and facades, which makes it easy to swap components or extend the system with your own libraries
-- It uses plain and simple PHP in the views
-- It installs very fast through command line and works out of the box (the way I like)
-- It has no dependencies to third party libraries except in development mode (PHPUnit, Symfony VarDumper)
-- It supports a modular structure, where each module can behave like a standalone app
-- Most of its core components work standalone 
-- Because it is such a lightweight, it is also ridiculously fast.
-
-But first of all, it was build for fun and to suit my personal minimal requirements for extra small server side tasks.
-It scales nice and fits for the more complex apps as well. See [Minimal-CMS](https://github.com/judus/minimal-cms). 
-Though, if you are going to build business apps, I again strongly recommend to go for a more established framework with long time support..
+- Take advantage of inversion of control and facades
+- Easy install via command line and work out of the box
+- No dependencies to third party libraries (except in development mode: PHPUnit, Symfony VarDumper)
+- Most of the core components work standalone 
+- Use plain PHP in the views/templates
   
 ##### NOTE 
 - This is version v0.* changes are to be expected
-- The static classes in these examples are facades:<br> 
-  https://en.wikipedia.org/wiki/Facade_pattern<br> 
-  For example: Router::post() basically means $app->getRouter()->post().
   
 ##### Known bugs
 - None that I am aware of, but the documentation might be out of date from time to time
@@ -865,8 +852,6 @@ These packages are also included but are not necessary:
 
 ---
 #### TODOs until v1.0.0
-- Restructure for a event based system
-- It should not be necessary to require anything else than IOC and events
 - More tests for the core packages
 - Test all the complementary libraries
 - Api documentation
@@ -874,15 +859,6 @@ These packages are also included but are not necessary:
 - Update the README
 - Website
 ---
-
-### Excuse me...
-
-- It was too cold for outdoor activities. (Winter 2016)
-- It was too warm for physical activities. (Summer 2017)
-- I was too cranky for social interactions. (Early Winter 2018)
-- It was too rainy for outdoor activities. (Late Winter 2018)
-- Outdoor activities would have been too expensive. (Early Spring 2018)
-- Summer 2018... no valid excuse yet.
 
 ### License
 
