@@ -1,6 +1,5 @@
 <?php
 
-
 use Maduser\Minimal\Framework\Facades\Log;
 use Maduser\Minimal\Framework\Facades\Router;
 

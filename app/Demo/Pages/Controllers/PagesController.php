@@ -66,7 +66,6 @@ class PagesController
      * @param ResponseInterface $response
      * @param ViewInterface     $view
      * @param AssetsInterface   $assets
-     * @param ModulesInterface  $modules
      */
     public function __construct(
         ConfigInterface $config,
@@ -74,10 +73,8 @@ class PagesController
         RouterInterface $router,
         ResponseInterface $response,
         ViewInterface $view,
-        AssetsInterface $assets,
-        ModulesInterface $modules
+        AssetsInterface $assets
     ) {
-
         /** @var \Maduser\Minimal\Config\Config $config */
         $this->config = $config;
         /** @var \Maduser\Minimal\Http\Request $request */
@@ -90,8 +87,6 @@ class PagesController
         $this->view = $view;
         /** @var \Maduser\Minimal\Assets\Assets $assets */
         $this->assets = $assets;
-        /** @var \Maduser\Minimal\Modules\Modules $modules */
-        $this->modules = $modules;
     }
 
     private function setupAssetsAndViews()
@@ -105,7 +100,7 @@ class PagesController
 
         // Setup assets
         $this->assets->setSource(path('modules') . 'Demo/Pages/public/build');
-        $this->assets->setBase(http().'assets/demo/pages/public/build');
+        $this->assets->setBase(http().'assets/demo-pages/public/build');
         $this->assets->setTheme('my-theme');
         $this->assets->setCssDir('css');
         $this->assets->setJsDir('js');
@@ -192,8 +187,6 @@ class PagesController
         d($this->router);
         echo '<h3>Route</h3>';
         d($this->router->getRoute());
-        echo '<h3>Modules</h3>';
-        d($this->modules);
         echo '<h3>Response</h3>';
         d($this->response);
         echo '<h3>View</h3>';
@@ -212,6 +205,7 @@ class PagesController
         $result .= run('lorem');
         $result .= run('lorem');
 
+
         return $this->view->render('pages/my-view', [
             'content' => $contents . $result
         ]);
@@ -220,14 +214,14 @@ class PagesController
 
     public function frontController()
     {
+        $this->setupAssetsAndViews();
         $html = $this->timeConsumingAction();
 
         ob_start();
-        d($this->config, 'Config: $this->config');
+        d($this->config, 'Config');
         d($this->request, 'Request');
         d($this->router, 'Router');
         d($this->router->getRoute(), 'Route');
-        d($this->modules, 'Modules');
         d($this->response, 'Response');
         d($this->view, 'View');
         d($this->assets, 'Assets');

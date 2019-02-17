@@ -91,36 +91,6 @@ class Info
         return $content;
     }
 
-    public function modules()
-    {
-        $modules = IOC::resolve('Modules')->all();
-
-        $array = [];
-
-        foreach ($modules as $module) {
-            /** @var \Maduser\Minimal\Framework\Module $module */
-            $array[] = [
-                'name' => $module->getName(),
-                'path' => $module->getPath(),
-                'config' => $module->getConfig(),
-                'routes' => $module->getRoutes(),
-                'providers' => $module->getProviders(),
-                'bindings' => $module->getBindings()
-            ];
-
-        }
-
-        ob_start();
-        $this->console->table(
-            $array,
-            [['Name', 'BasePath', 'Config', 'Routes', 'Providers', 'Bindings']]
-        );
-        $content = ob_get_contents();
-        ob_end_clean();
-
-        return $content;
-    }
-
     public function providers()
     {
         $thead = [['Alias', 'Provider']];
@@ -213,7 +183,6 @@ class Info
         $contents = (string) new Navigation() . '</br>';
         $contents .= '</br><pre style="display: table; width: auto; margin: 0 auto;">CONFIG' . $this->config() . '</pre>';
         $contents.= '</br><pre style="display: table; width: auto; margin: 0 auto;">ROUTES' . $this->routes() . '</pre>';
-        $contents.= '</br><pre style="display: table; width: auto; margin: 0 auto;">MODULES' . $this->modules() .'</pre>';
         $contents.= '</br><pre style="display: table; width: auto; margin: 0 auto;">PROVIDERS' . $this->providers() .'</pre>';
         $contents.= '</br><pre style="display: table; width: auto; margin: 0 auto;">BINDINGS' . $this->bindings() .'</pre>';
         $contents.= '</br><pre style="display: table; width: auto; margin: 0 auto;">EVENTS' . $this->events() .'</pre>';

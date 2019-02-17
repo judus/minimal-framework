@@ -2,7 +2,7 @@
 
 use Maduser\Minimal\Framework\Facades\Router;
 
-Router::get('assets/(:any)', [
+Router::get('assets/(:segment)/(:any)', [
     'controller' => 'App\\Demo\\Assets\\Controllers\\AssetsController',
-    'action' => 'getAsset'
+    'action' => 'serve'
 ]);
