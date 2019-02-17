@@ -59,7 +59,7 @@ $ php -S 0.0.0.0:8000 server.php
 
 ## Usage
 
-<sub>[Quickstart example](#quickstart-example) | [Routing](#routing) | [Dependency Injection](#dependency-injection) | [Providers](#providers) | [Middlewares](#middlewares) | [Controllers](#controllers) | [Views](#views) | [Assets](#assets) | [Modules](#modules) | [CLI](#cli)</sub>
+<sub>[Quickstart example](#quickstart-example) | [Routing](#routing) | [Dependency Injection](#dependency-injection) | [Providers](#providers) | [Middlewares](#middlewares) | [Controllers](#controllers) | [Views](#views) | [Assets](#assets) | [CLI](#cli)</sub>
 
 ### Quickstart example
 ```php
@@ -152,7 +152,7 @@ App::dispatch(function () {
 });
 ```
 
-<sub>[Intro](#introduction) | [Quickstart example](#quickstart-example) | [Routing](#routing) | [Dependency Injection](#dependency-injection) | [Providers](#providers) | [Middlewares](#middlewares) | [Controllers](#controllers) | [Views](#views) | [Assets](#assets) | [Modules](#modules) | [CLI](#cli)</sub>
+<sub>[Quickstart example](#quickstart-example) | [Routing](#routing) | [Dependency Injection](#dependency-injection) | [Providers](#providers) | [Middlewares](#middlewares) | [Controllers](#controllers) | [Views](#views) | [Assets](#assets) | [CLI](#cli)</sub>
 
 
 ### Routing
@@ -277,7 +277,7 @@ Router::get('download/pdf', function () {
 $widget = App::execute('route/of/widget')
 ```
 
-<sub>[Intro](#introduction) | [Quickstart example](#quickstart-example) | [Routing](#routing) | [Dependency Injection](#dependency-injection) | [Providers](#providers) | [Middlewares](#middlewares) | [Controllers](#controllers) | [Views](#views) | [Assets](#assets) | [Modules](#modules) | [CLI](#cli)</sub>
+<sub>[Quickstart example](#quickstart-example) | [Routing](#routing) | [Dependency Injection](#dependency-injection) | [Providers](#providers) | [Middlewares](#middlewares) | [Controllers](#controllers) | [Views](#views) | [Assets](#assets) | [CLI](#cli)</sub>
 
 ### Dependency injection
 
@@ -318,7 +318,7 @@ class MyClass
 $MyClass = App::make(MyClass::class); 
 ```
 
-<sub>[Intro](#introduction) | [Quickstart example](#quickstart-example) | [Routing](#routing) | [Dependency Injection](#dependency-injection) | [Providers](#providers) | [Middlewares](#middlewares) | [Controllers](#controllers) | [Views](#views) | [Assets](#assets) | [Modules](#modules) | [CLI](#cli)</sub>
+<sub>[Quickstart example](#quickstart-example) | [Routing](#routing) | [Dependency Injection](#dependency-injection) | [Providers](#providers) | [Middlewares](#middlewares) | [Controllers](#controllers) | [Views](#views) | [Assets](#assets) | [CLI](#cli)</sub>
 
 ### Providers
 
@@ -371,7 +371,7 @@ $myClass = App::resolve('MyOtherClassA');
 $myOtherClassB = App::resolve('any-key-name-will-do');
 ```
 
-<sub>[Intro](#introduction) | [Quickstart example](#quickstart-example) | [Routing](#routing) | [Dependency Injection](#dependency-injection) | [Providers](#providers) | [Middlewares](#middlewares) | [Controllers](#controllers) | [Views](#views) | [Assets](#assets) | [Modules](#modules) | [CLI](#cli)</sub>
+<sub>[Quickstart example](#quickstart-example) | [Routing](#routing) | [Dependency Injection](#dependency-injection) | [Providers](#providers) | [Middlewares](#middlewares) | [Controllers](#controllers) | [Views](#views) | [Assets](#assets) | [CLI](#cli)</sub>
 
 ### Middlewares
 
@@ -461,7 +461,7 @@ $result = Middleware::dispatch(function() {
 ]);
 ```
 
-<sub>[Intro](#introduction) | [Quickstart example](#quickstart-example) | [Routing](#routing) | [Dependency Injection](#dependency-injection) | [Providers](#providers) | [Middlewares](#middlewares) | [Controllers](#controllers) | [Views](#views) | [Assets](#assets) | [Modules](#modules) | [CLI](#cli)</sub>
+<sub>[Quickstart example](#quickstart-example) | [Routing](#routing) | [Dependency Injection](#dependency-injection) | [Providers](#providers) | [Middlewares](#middlewares) | [Controllers](#controllers) | [Views](#views) | [Assets](#assets) | [CLI](#cli)</sub>
 
 ### Controllers
 The controllers specified in the routes are instantiated through 
@@ -516,7 +516,7 @@ class MyController
 }
 ```
 
-<sub>[Quickstart example](#quickstart-example) | [Routing](#routing) | [Dependency Injection](#dependency-injection) | [Providers](#providers) | [Middlewares](#middlewares) | [Controllers](#controllers) | [Views](#views) | [Assets](#assets) | [Modules](#modules) | [CLI](#cli)</sub>
+<sub>[Quickstart example](#quickstart-example) | [Routing](#routing) | [Dependency Injection](#dependency-injection) | [Providers](#providers) | [Middlewares](#middlewares) | [Controllers](#controllers) | [Views](#views) | [Assets](#assets) | [CLI](#cli)</sub>
 
 ### Views
 ```php
@@ -615,7 +615,7 @@ class MyController extends BaseController
 }
 ```
 
-<sub>[Quickstart example](#quickstart-example) | [Routing](#routing) | [Dependency Injection](#dependency-injection) | [Providers](#providers) | [Middlewares](#middlewares) | [Controllers](#controllers) | [Views](#views) | [Assets](#assets) | [Modules](#modules) | [CLI](#cli)</sub>
+<sub>[Quickstart example](#quickstart-example) | [Routing](#routing) | [Dependency Injection](#dependency-injection) | [Providers](#providers) | [Middlewares](#middlewares) | [Controllers](#controllers) | [Views](#views) | [Assets](#assets) | [CLI](#cli)</sub>
 
 ### Assets
 ```php
@@ -693,44 +693,8 @@ Outputs:
 </html>
 ```
 
-<sub>[Quickstart example](#quickstart-example) | [Routing](#routing) | [Dependency Injection](#dependency-injection) | [Providers](#providers) | [Middlewares](#middlewares) | [Controllers](#controllers) | [Views](#views) | [Assets](#assets) | [Modules](#modules) | [CLI](#cli)</sub>
 
-### Modules
-
-Modules are just directories with config files to be merged with the main config.
-They also are stored in a Collection and can be retrieved and executed. 
-
-To register a single module
-```php
-Modules::register('your-module-dirname');
-```
-or with options
-```php
-Modules::register('your-module-dirname', [
-    // showing optional default values
-
-    // optional: base directory for the module
-    'basepath' => 'app/modules',
-
-    // optional: where to find the config file if any
-    'config' => 'config/config.php',
-	
-    // optional: where to find the routes config file if any
-    'routes' => 'config/routes.php',
-	
-    // optional: where to find the bindings config if any
-    'bindings' => 'config/bindings.php',
-
-    // optional: where to find the providers config if any
-    'providers' => 'config/providers.php'
-]);
-```
-To register all modules withing configured modules.basepath
-```php
-Modules::register('Demo/*');
-```
-
-<sub>[Quickstart example](#quickstart-example) | [Routing](#routing) | [Dependency Injection](#dependency-injection) | [Providers](#providers) | [Middlewares](#middlewares) | [Controllers](#controllers) | [Views](#views) | [Assets](#assets) | [Modules](#modules) | [CLI](#cli)</sub>
+<sub>[Quickstart example](#quickstart-example) | [Routing](#routing) | [Dependency Injection](#dependency-injection) | [Providers](#providers) | [Middlewares](#middlewares) | [Controllers](#controllers) | [Views](#views) | [Assets](#assets) | [CLI](#cli)</sub>
 
 ### CLI
 ##### List all registered routes
@@ -777,12 +741,17 @@ $ php minimal bindings
 $ php minimal providers
 ```
 
+##### List all events and subscribers
+```bash
+$ php minimal events
+```
+
 ##### List all registered config
 ```bash
 $ php minimal config
 ```
 
-<sub>[Quickstart example](#quickstart-example) | [Routing](#routing) | [Dependency Injection](#dependency-injection) | [Providers](#providers) | [Middlewares](#middlewares) | [Controllers](#controllers) | [Views](#views) | [Assets](#assets) | [Modules](#modules) | [CLI](#cli)</sub>
+<sub>[Quickstart example](#quickstart-example) | [Routing](#routing) | [Dependency Injection](#dependency-injection) | [Providers](#providers) | [Middlewares](#middlewares) | [Controllers](#controllers) | [Views](#views) | [Assets](#assets) | [CLI](#cli)</sub>
 
 ---
 ## Components
@@ -837,9 +806,6 @@ These packages are also included but are not necessary:
 - [![Build Status](https://travis-ci.org/judus/minimal-log.svg?branch=master)](https://travis-ci.org/judus/minimal-log)
   [![Latest Version](http://img.shields.io/packagist/v/minimal/log.svg)](https://packagist.org/packages/minimal/log) 
   [judus/minimal-log](https://github.com/judus/minimal-log) - a simple logger
-- [![Build Status](https://travis-ci.org/judus/minimal-modules.svg?branch=master)](https://travis-ci.org/judus/minimal-modules)
-  [![Latest Version](http://img.shields.io/packagist/v/minimal/modules.svg)](https://packagist.org/packages/minimal/modules)
-  [judus/minimal-modules](https://github.com/judus/minimal-modules) - modules, whatever these are, see docs
 - [![Build Status](https://travis-ci.org/judus/minimal-paths.svg?branch=master)](https://travis-ci.org/judus/minimal-paths)
   [![Latest Version](http://img.shields.io/packagist/v/minimal/paths.svg)](https://packagist.org/packages/minimal/paths) 
   [judus/minimal-paths](https://github.com/judus/minimal-paths) - might help creating paths and urls
@@ -864,4 +830,4 @@ These packages are also included but are not necessary:
 
 The Minimal framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
 
-<sub>[Quickstart example](#quickstart-example) | [Routing](#routing) | [Dependency Injection](#dependency-injection) | [Providers](#providers) | [Middlewares](#middlewares) | [Controllers](#controllers) | [Views](#views) | [Assets](#assets) | [Modules](#modules) | [CLI](#cli)</sub>
+<sub>[Quickstart example](#quickstart-example) | [Routing](#routing) | [Dependency Injection](#dependency-injection) | [Providers](#providers) | [Middlewares](#middlewares) | [Controllers](#controllers) | [Views](#views) | [Assets](#assets) | [CLI](#cli)</sub>
