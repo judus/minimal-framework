@@ -41,19 +41,25 @@ App::dispatch([
  * config file, although they still will be loaded if they exists, you could
  * start coding like so:
  */
+
+use App\Demo\DemoServiceProvider;
 use Maduser\Minimal\Database\DB;
 use App\Demo\ORM\Entities\Role;
 use App\Demo\ORM\Entities\User;
 
+use Maduser\Minimal\Framework\Apps\Eventual\EventualApplicationProvider;
+use Maduser\Minimal\Framework\Apps\Maximal\MaximalApplicationProvider;
+use Maduser\Minimal\Framework\Apps\Micro\MicroApplicationProvider;
+use Maduser\Minimal\Framework\Apps\Minimal\MinimalApplicationProvider;
+
+//App::use(MicroApplicationProvider::class);
+//App::use(MinimalApplicationProvider::class);
+App::use(MaximalApplicationProvider::class);
+//App::use(EventualApplicationProvider::class);
+
 App::dispatch(function () {
 
-    // Respond on GET / request with a header location
-    Router::get('/', function () {
-        Response::redirect(http() . 'demos');
-    });
-
-    // Register all modules configs and routes within modules path
-    Modules::register('Demo/*');
+    App::register(['DemoModule' => DemoServiceProvider::class]);
 
     // Respond on GET request with uri parameters
     Router::get('hello/(:any)/(:num)', function ($any, $num) {
@@ -89,6 +95,7 @@ App::dispatch(function () {
     // Test the database connection
     Router::get('database', function () {
         DB::connections(Config::database());
+
         return 'Successfully connected to database';
     });
 
