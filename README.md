@@ -15,7 +15,6 @@ App::dispatch(function () {
 }
 ```
 
-
 ---
 
 <sub>[Quickstart example](#quickstart-example) | [Routing](#routing) | [Dependency Injection](#dependency-injection) | [Providers](#providers) | [Middlewares](#middlewares) | [Controllers](#controllers) | [Views](#views) | [Assets](#assets) | [CLI](#cli)</sub>
@@ -28,33 +27,38 @@ If you need a full featured and rock solid framework for business application, g
 Key features:
 - Build MVC-, REST-, CLI-APIs and apps and query databases with a ORM
 - Take advantage of inversion of control and facades
-- Easy install via command line and work out of the box
+- Easy install via command line and works out of the box
 - No dependencies to third party libraries (except in development mode: PHPUnit, Symfony VarDumper)
 - Most of the core components work standalone 
-- Use plain PHP in the views/templates
+- Plain PHP in the views/templates
   
 ##### NOTE 
 - This is version v0.* changes are to be expected
   
-##### Known bugs
-- None that I am aware of, but the documentation might be out of date from time to time
-   
 ## Requirements
 
 1. PHP version >= 7.0
 2. composer
 
 ## Install
+With the default directory structure:
 ```bash
 $ composer create-project minimal/framework
 ```
-
 Then point your server's document root to the public directory. 
 
 If you use the PHP-builtin webserver then do:
 ```bash
 $ cd public
 $ php -S 0.0.0.0:8000 server.php
+```
+Vendor libraries only:
+```bash
+$ composer require minimal/framework
+```
+Minimal installation for code style like in the introduction above:
+```bash
+$ composer require minimal/minimal
 ```
 
 ## Usage
