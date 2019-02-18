@@ -801,8 +801,6 @@ $ php minimal config
 ---
 ## Components
 
-Note about failing builds: These packages have no tests (yet?). This is a free time project and since I don't have much free time, for now the less important packages will have to do without tests.         
-
 Minimal requires at least these packages:
 - [![Build Status](https://travis-ci.org/judus/minimal-collections.svg?branch=master)](https://travis-ci.org/judus/minimal-collections)
   [![Latest Version](http://img.shields.io/packagist/v/minimal/collections.svg)](https://packagist.org/packages/minimal/collections) 
