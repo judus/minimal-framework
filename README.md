@@ -65,13 +65,9 @@ $ php -S 0.0.0.0:8000 server.php
 ```php
 App::dispatch(function () {
 
-    // Register all modules configs and routes within directory app/Demo
-    Modules::register('Demo/*');
+    // Register additional services
+    App::register(['Demo' => DemoServiceProvider::class]);
 
-    // You can also register routes right here. The following, part or all of 
-    // it, is also what could be in one or several route config files at 
-    // app/[your-module]/Config/routes.php
-	
     // Respond on GET request
     Router::get('/', function () {
         return 'Hello from Minimal!';
@@ -163,7 +159,8 @@ Router::get('hello/(:any)/(:any)', function($firstname, $lastname) {
     return 'Hello ' . ucfirst($firstname) . ' ' . ucfirst($lastname);
 });
 
-// (:any) match letters and integer
+// (:segment) match anything between two slashes
+// (:any) match anything until next wildcard or end of uri
 // (:num) match integer only
 ```
 http://localhost/hello/julien/duseyau
@@ -322,13 +319,9 @@ $MyClass = App::make(MyClass::class);
 
 ### Providers
 
-A provider can be a concrete implementation of a object that will be 
-instantiated by the Provider/Resolver component. A provider can also be a 
-factory for a object if it implements the ProviderInterface or extends the
-AbstractProvider.
-
 ```php
 App::register([
+  'MyService' => \App\MyService::class,
     'App\MyClass' => \App\MyClass::class, 
     'MyOtherClassA' => \App\MyOtherClassAFactory::class, 
     'any-key-name-will-do' => \App\MyOtherClassB::class, 
@@ -337,14 +330,18 @@ App::register([
 or in config/providers.php
 ```php
 return [
+  'MyService' => \App\MyServiceProvider::class,
     'App\\MyClass' => \App\MyClass::class, 
-    'MyOtherClassA' => \App\MyOtherClassAFactory::class, 
+    'MyOtherClassA' => \App\MyOtherClassA::class, 
     'any-key-name-will-do' => \App\MyOtherClassB::class, 
 ];
 ```
 ```php
-class MyOtherClassAFactory extends AbstractProvider
+class MyServiceProvider extends AbstractProvider
 {
+  /**
+   * This is what happens when we call App::resolve('MyService')
+   */
     public function resolve()
     {
         // Do something before the class is instantiated
@@ -352,23 +349,61 @@ class MyOtherClassAFactory extends AbstractProvider
         $settings = Config::item('settings');
         
         // return new instance
-        return new MyClass($time, $settings); 
+        return App::make(MyService::class, [$time, $settings]); 
         
         // ... or make singleton and resolve dependencies
-        return $this->singleton('MyClass', new App\\MyClass(
-            IOC::resolve('App\\MyOtherClassA'),
-            IOC::resolve('App\\MyOtherClassB'),
+        return $this->singleton('MySingleton', App::make(App\\MyService::class, [
+            App::resolve('App\\MyOtherClassA'),
+            App::resolve('App\\MyOtherClassB'),
             $time,
             $settings
-        ));
-       
+        ]);   
+    }
+    
+    /**
+     * Optional: Register more config if needed
+     */
+    public function config()
+    {
+        return [
+            'key' => 'value'
+        ];
+    }
+  
+    /**
+     * Optional: Register more bindings if needed
+     */
+    public function bindings()
+    {
+        return [
+           'SomeInterface' => SomeClass::class
+        ];
+    }
+  
+    /**
+     * Optional: Register more services if needed
+     */
+    public function providers()
+    {
+        return [
+            'SomeService' => SomeServiceProvider:class
+        ];
+    }
+  
+    /**
+     * Optional: Register event subscribers if needed
+     */
+    public function subscribers()
+    {
+        return [
+            'event.name' => EventSubscriber::Class
+        ];
     }
 }
 ```
 
 ```php
-$myClass = App::resolve('MyOtherClassA');
-$myOtherClassB = App::resolve('any-key-name-will-do');
+$myService = App::resolve('MyService');
 ```
 
 <sub>[Quickstart example](#quickstart-example) | [Routing](#routing) | [Dependency Injection](#dependency-injection) | [Providers](#providers) | [Middlewares](#middlewares) | [Controllers](#controllers) | [Views](#views) | [Assets](#assets) | [CLI](#cli)</sub>
@@ -599,8 +634,8 @@ then
 ```php
 class MyController extends BaseController
 {
-	private $user;
-	
+  private $user;
+  
     public function __construct(UserInterface $user)
     {
         parent::__construct();
@@ -610,8 +645,8 @@ class MyController extends BaseController
     
     public function myAction()
     {
-	    View::render('my-view', ['user' => $this->user->find(1)]);
-	}
+      View::render('my-view', ['user' => $this->user->find(1)]);
+  }
 }
 ```
 
