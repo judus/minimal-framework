@@ -319,6 +319,8 @@ $MyClass = App::make(MyClass::class);
 
 ### Providers
 
+Providers are service providers
+
 ```php
 App::register([
     'MyService' => \App\MyService::class,
@@ -361,9 +363,9 @@ class MyServiceProvider extends AbstractProvider
     }
     
     /**
-     * Optional: Register more config if needed
+     * Optional: Register additional config if needed
      */
-    public function config()
+    public function config(): array
     {
         return [
             'key' => 'value'
@@ -371,9 +373,9 @@ class MyServiceProvider extends AbstractProvider
     }
   
     /**
-     * Optional: Register more bindings if needed
+     * Optional: Register additional bindings if needed
      */
-    public function bindings()
+    public function bindings(): array
     {
         return [
            'SomeInterface' => SomeClass::class
@@ -381,9 +383,9 @@ class MyServiceProvider extends AbstractProvider
     }
   
     /**
-     * Optional: Register more services if needed
+     * Optional: Register additional services if needed
      */
-    public function providers()
+    public function providers(): array
     {
         return [
             'SomeService' => SomeServiceProvider:class
@@ -391,13 +393,21 @@ class MyServiceProvider extends AbstractProvider
     }
   
     /**
-     * Optional: Register event subscribers if needed
+     * Optional: Register additional event subscribers
      */
-    public function subscribers()
+    public function subscribers(): array
     {
         return [
             'event.name' => EventSubscriber::Class
         ];
+    }
+
+    /**
+     * Optional: Register additional routes
+     */
+    public function routes(): array
+    {
+        Router::get('my-service', MySerciceController::class . '@myControllerMethod')
     }
 }
 ```
