@@ -405,7 +405,7 @@ class MyServiceProvider extends AbstractProvider
     /**
      * Optional: Register additional routes
      */
-    public function routes(): array
+    public function routes()
     {
         Router::get('my-service', MySerciceController::class . '@myControllerMethod')
     }
