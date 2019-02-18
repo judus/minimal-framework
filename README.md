@@ -280,7 +280,7 @@ $widget = App::execute('route/of/widget')
 
 Binding a interface to a implementation is straight forward:
 ```php
-App::addBindings([
+App::bind([
     'App\\InterfaceA' => App\ClassA::class,
     'App\\InterfaceB' => App\ClassB::class,
     'App\\InterfaceC' => App\ClassC::class
