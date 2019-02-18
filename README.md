@@ -321,7 +321,7 @@ $MyClass = App::make(MyClass::class);
 
 ```php
 App::register([
-  'MyService' => \App\MyService::class,
+    'MyService' => \App\MyService::class,
     'App\MyClass' => \App\MyClass::class, 
     'MyOtherClassA' => \App\MyOtherClassAFactory::class, 
     'any-key-name-will-do' => \App\MyOtherClassB::class, 
@@ -330,7 +330,7 @@ App::register([
 or in config/providers.php
 ```php
 return [
-  'MyService' => \App\MyServiceProvider::class,
+    'MyService' => \App\MyServiceProvider::class,
     'App\\MyClass' => \App\MyClass::class, 
     'MyOtherClassA' => \App\MyOtherClassA::class, 
     'any-key-name-will-do' => \App\MyOtherClassB::class, 
