@@ -867,14 +867,6 @@ These packages are also included but are not necessary:
   [judus/minimal-views](https://github.com/judus/minimal-views) - simple php views and layouts
 
 ---
-#### TODOs until v1.0.0
-- More tests for the core packages
-- Test all the complementary libraries
-- Api documentation
-- Better demo application
-- Update the README
-- Website
----
 
 ### License
 
