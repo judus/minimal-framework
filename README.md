@@ -1,6 +1,6 @@
 # Minimal Framework
 
-*Please acknowledge that this is solely a Tech/Skill Demo. It is not intended for use in actual projects, although it is fully functional under PHP 7.*
+*Please acknowledge that this is solely a Tech/Skill Demo. It is not intended for use in actual projects, although it is fully functional and tested under PHP 7.*
 
 
 Minimal is a MVC web application framework for PHP.
