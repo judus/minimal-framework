@@ -33,13 +33,10 @@ Key features:
 - No dependencies to third party libraries (except in development mode: PHPUnit, Symfony VarDumper)
 - Most of the core components work standalone 
 - Plain PHP in the views/templates
-  
-##### NOTE 
-- This is version v0.* changes are to be expected
-  
+   
 ## Requirements
 
-1. PHP version >= 7.0
+1. PHP version 7.x
 2. composer
 
 ## Install
