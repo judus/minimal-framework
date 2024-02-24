@@ -18,6 +18,8 @@ App::dispatch(function () {
 }
 ```
 
+<sub>The code snippet demonstrates a monolithic approach to the framework, employing a facade to define a single-function web application endpoint. It is an efficient solution for developing small REST APIs. The framework automatically converts ORM returned data into JSON, streamlining the API response process. Conversely, the framework accommodates alternative configurations familiar in other frameworks, supporting a traditional modular MVC architecture for more complex, larger-scale projects.</sub>
+
 ---
 
 <sub>[Quickstart example](#quickstart-example) | [Routing](#routing) | [Dependency Injection](#dependency-injection) | [Providers](#providers) | [Middlewares](#middlewares) | [Controllers](#controllers) | [Views](#views) | [Assets](#assets) | [CLI](#cli)</sub>
