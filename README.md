@@ -24,6 +24,7 @@ App::dispatch(function () {
 ```php
 App::bind(RouterInterface::class, MyCustomRouter::class);
 ```
+...yup, SOLID principles.
 
 ---
 
