@@ -2,7 +2,6 @@
 
 *Please acknowledge that this is solely a Tech/Skill Demo. It is not intended for use in actual projects, although it is fully functional and tested under PHP 7.*
 
-
 Minimal is a MVC web application framework for PHP.
 
 ```php
@@ -18,7 +17,13 @@ App::dispatch(function () {
 }
 ```
 
-<sub>The code snippet demonstrates a monolithic approach to the framework, employing a facade to define a single-function web application endpoint. It is an efficient solution for developing small REST APIs. The framework automatically converts ORM returned data into JSON, streamlining the API response process. Conversely, the framework accommodates alternative configurations familiar in other frameworks, supporting a traditional modular MVC architecture for more complex, larger-scale projects.</sub>
+<sub>The code snippet demonstrates a monolithic approach to the framework, employing facades to define a single-function web application endpoint. There is much more than static classes under the hood!  It is an efficient solution for developing small REST APIs. The framework automatically converts ORM returned data into JSON, streamlining the API response process. Conversely, the framework accommodates alternative configurations familiar in other frameworks, supporting a traditional modular MVC architecture for more complex, larger-scale projects.</sub>
+
+...and if you're not happy with the Router or any other component, you could do:
+
+```php
+App::bind(RouterInterface::class, MyCustomRouter::class);
+```
 
 ---
 
