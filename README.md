@@ -19,7 +19,7 @@ App::dispatch(function () {
 
 <sub>The code snippet demonstrates a monolithic approach to the framework, employing [facades](https://en.wikipedia.org/wiki/Facade_pattern) to define a single-function web application endpoint. There is much more than static classes under the hood! It is an efficient solution for developing small REST APIs. The framework automatically converts ORM returned data (models implementing the JsonableInterface) into JSON, streamlining the API response process. Conversely, the framework accommodates alternative setup familiar in other frameworks, supporting a traditional modular MVC architecture for more complex, larger-scale projects.</sub>
 
-...and if you're not happy with the Router or any other component, you could do:
+...and if you're not happy with the Router (or any other component), you could do:
 
 ```php
 App::bind(RouterInterface::class, MyCustomRouter::class);
